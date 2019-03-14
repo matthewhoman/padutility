@@ -1,0 +1,38 @@
+{
+  "name": "padutility",
+  "version": "1.0.0",
+  "description": "Utility for puzzles and dragons, monster look up etc...",
+  "author": {
+    "name": "Matthew Homan"
+  },
+  "license": "MIT",
+  "scripts": {
+    "client": "cd client && npm run start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "dev:server": "cd client && npm build && cd .. && npm run start",
+    "start-server": "node server.js",
+    "start": "concurrently \"npm run start-server\"",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "dependencies": {
+    "base-64": "^0.1.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "node-sass": "^4.11.0",
+    "nodemon": "^1.18.9",
+    "request": "^2.88.0",
+    "webpack": "4.19.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matthewhoman/padutility.git"
+  },
+  "keywords": [
+    "pad",
+    "puzzlesanddragons"
+  ]
+}

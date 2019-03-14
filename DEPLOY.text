@@ -1,0 +1,28 @@
+--------------- HEROKU -----------------
+
+Dashboard:
+https://dashboard.heroku.com/apps/padutility
+
+APP URL: 
+https://padutility.herokuapp.com/
+
+Install:
+https://devcenter.heroku.com/articles/heroku-cli
+
+
+From GIT repo location:
+--------------------
+
+LOGIN:
+heroku login
+
+//CLONE IF NOT CLONED YET
+heroku git:clone -a padutility
+
+
+DEPLOY CHANGE -- the force overwrites the current deployment
+*** add - will add new files ***
+
+git add . 
+git commit -am "make it better"
+git push heroku master --force
