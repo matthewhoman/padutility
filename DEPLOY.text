@@ -10,6 +10,11 @@ Install:
 https://devcenter.heroku.com/articles/heroku-cli
 
 
+---- KILL PROCESS ----
+sudo lsof -i tcp:3000
+kill PID
+
+
 From GIT repo location:
 --------------------
 
