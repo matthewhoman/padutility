@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -68,11 +67,11 @@ class ReturnNav extends Component {
 
         return (
             <div id="navBarContainer" style={headerStyle}>
-                <Navbar expand="true" fixed="sticky-top" bg="dark" variant="dark">
+                <Navbar expand="true" fixed="sticky-top" bg="dark" variant="dark" style={{padding:"10px"}}>
                     <Navbar.Brand style={{textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"normal", flexGrow:1}}>
                         {this.props.suppressBack ?  headerComp : 
                             <span><FontAwesomeIcon icon={faArrowLeft} onClick={this.handleButtonClick} /> 
-                                   headerComp &nbsp;&nbsp;
+                                   &nbsp;&nbsp;{headerComp}&nbsp;&nbsp;
                             </span>}
                     </Navbar.Brand>
                     <Navbar.Text style={{textOverflow:"ellipsis", overflow:"hidden", marginLeft:"auto", paddingRight:"3px", paddingLeft:"3px"}}>

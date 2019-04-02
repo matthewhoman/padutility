@@ -372,12 +372,15 @@ function createEvoObjects(evoArray, monster) {
         evoObj.childId = monster.id;
         evoObj.childPic = monster.img;
         evoObj.evopics = [];
+        evoObj.evoIds = [];
         for(let material of evo.materials) {
             evoObj.evopics.push(getMonsterByNumber(material[0]).img);
+            evoObj.evoIds.push(material[0]);
         }
         if(evoObj.evopics.length < 5) {
             for(let i = evoObj.evopics.length; i < 5; i++) {
                 evoObj.evopics.push("/images/transparent.png");
+                evoObj.evoIds.push(-i);
             }
         }
        
