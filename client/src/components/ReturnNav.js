@@ -12,7 +12,9 @@ class ReturnNav extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {fixedHeader: true};
+        this.state = {
+            
+        };
         this.handleButtonClick = this.handleButtonClick.bind(this);
     }
 
@@ -61,13 +63,12 @@ class ReturnNav extends Component {
         }   
 
         sessionStorage.setItem('breadCrumbs', JSON.stringify(breadCrumbs));
-        
-        let headerStyle = this.state.fixedHeader ? {position:"sticky", top:"0px", zIndex:"1"} : {};
+    
         let headerComp = <span fontSize={18}>{this.props.header}</span>;
 
         return (
-            <div id="navBarContainer" style={headerStyle}>
-                <Navbar expand="true" fixed="sticky-top" bg="dark" variant="dark" style={{padding:"10px"}}>
+            <div className="fixedHeader">
+                <Navbar expand="true" bg="dark" variant="dark" style={{padding:"10px"}}>
                     <Navbar.Brand style={{textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"normal", flexGrow:1}}>
                         {this.props.suppressBack ?  headerComp : 
                             <span><FontAwesomeIcon icon={faArrowLeft} onClick={this.handleButtonClick} /> 

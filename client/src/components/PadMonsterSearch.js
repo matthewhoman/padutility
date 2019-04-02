@@ -88,7 +88,7 @@ class PadMonsterSearch extends Component {
 
         const inputComponent = inputProps => (
             <div>
-              <input {...inputProps} onClick={(event) => event.target.select()}/>
+              <input {...inputProps} style={{cursor:"pointer"}} onClick={(event) => event.target.select()}/>
             </div>
         );
 
@@ -99,7 +99,7 @@ class PadMonsterSearch extends Component {
             onChange: this.onChange
         };
         const loading = (
-            <div> <FontAwesomeIcon icon={faSpinner}/> loading ...</div>
+            <div> <FontAwesomeIcon icon={faSpinner} style={{color:"white"}}/> loading ...</div>
         )
         return (
             <div style={{id:"PadSearchBar", width: "100%"}}>

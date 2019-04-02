@@ -81,21 +81,38 @@ input[type=submit] {
 }
 
 .evoContainer {
-    width: 100%;
     display: table;
-    vertical-align:middle;
+	vertical-align:middle;
+	padding-bottom: 25px;
 }
 
 .evoImageWrap {
     vertical-align: middle;
     display: table-cell;
-    text-align: center;
+	text-align: center;
+	width: 60px;
 }
 
 .monsterImageSearch {
 	max-width: 80%;
 	min-width: 60px;
 	cursor: pointer;
+}
+
+.fixedHeader{
+	position: -webkit-sticky; 
+	position: sticky;
+	top: 0px;
+	z-index: 1;
+}
+
+.fixedHeaderContainer {
+	display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+
+  border: 2px dashed rgba(114, 186, 94, 0.35);
+  background: rgba(114, 186, 94, 0.05);
 }
 
 html,body,header,h1,h2,h3,h4,h5 {font-family: "Montserrat", sans-serif}

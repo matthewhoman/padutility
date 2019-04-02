@@ -165,8 +165,8 @@ function parseDictionaryForClient(dictionary) {
     monstersJson.element = monster.element;
     monstersJson.element2 = monster.element2;
     monstersJson.mp = monster.monster_points;
-    monstersJson.leaderSkill = monster.leader_skill;
-    monstersJson.activeSkill = monster.active_skill;
+    monstersJson.leaderSkill = monster.leader_skill ? monster.leader_skill : 'N/A';
+    monstersJson.activeSkill = monster.active_skill ? monster.active_skill : 'N/A';
     monstersJson.rarity = monster.rarity;
     monstersJson.cost = monster.team_cost;
     monstersJson.img = 'https://www.padherder.com' + monster.image60_href;
@@ -366,21 +366,24 @@ function createEvoObjects(evoArray, monster) {
             continue;
         }
 
+        let evolvesToMonster = getMonsterByNumber(evo.evolves_to);
+
         evoObj.id = evo.evolves_to;
-        evoObj.pic = getMonsterByNumber(evo.evolves_to).img;
+        evoObj.pic = evolvesToMonster.img;
+        evoObj.name = evolvesToMonster.name;
         evoObj.hasChild = true;
         evoObj.childId = monster.id;
         evoObj.childPic = monster.img;
-        evoObj.evopics = [];
+        evoObj.childName = monster.name;
+        evoObj.evoMonsters = [];
         evoObj.evoIds = [];
         for(let material of evo.materials) {
-            evoObj.evopics.push(getMonsterByNumber(material[0]).img);
-            evoObj.evoIds.push(material[0]);
+            let monster = getMonsterByNumber(material[0]);
+            evoObj.evoMonsters.push({img: monster.img, id: monster.id, name: monster.name});
         }
-        if(evoObj.evopics.length < 5) {
-            for(let i = evoObj.evopics.length; i < 5; i++) {
-                evoObj.evopics.push("/images/transparent.png");
-                evoObj.evoIds.push(-i);
+        if(evoObj.evoMonsters.length < 5) {
+            for(let i = evoObj.evoMonsters.length; i <= 4; i++) {
+                evoObj.evoMonsters.push({img:"/images/transparent.png", id:-1, name:"placeholder"});
             }
         }
        

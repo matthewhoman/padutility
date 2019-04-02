@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import ReturnNav from './ReturnNav';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 let monsterImageURL = "http://www.puzzledragonx.com/en/img/monster/MONS_#.jpg";
 
@@ -51,9 +51,9 @@ class ShowMonsterDetails extends Component {
     }
 
     render() {
-        const loading = (
-            <div> <FontAwesomeIcon icon={faSpinner}/> loading ...</div>
-        )
+        // const loading = (
+        //     <div> <FontAwesomeIcon icon={faSpinner}/> loading ...</div>
+        // )
         let rarityStars = [];
         if(this.state.monsterData && this.state.monsterData.rarity) {
             for(let i = 0; i < this.state.monsterData.rarity; i++) {
@@ -73,17 +73,23 @@ class ShowMonsterDetails extends Component {
                             <div key={j} className="evoImageWrap">
                                 <Link to={'/showMonsterDetails?monsterId=' + evoMonster.childId + "&monsterName=" + evoMonster.childName}>
                                     <img className="evoImageBig" 
-                                        src={evoMonster.childPic + ""} title={this.childId + ".&nbsp;" + evoMonster.childName} alt="Missing"/>
+                                        src={evoMonster.childPic + ""} title={this.childId + ".&nbsp;" + evoMonster.childName} alt=" "/>
                                 </Link>
                             </div>
                         )
-                        for(let k = 0; k < evoMonster.evopics.length; k++) {
-                            let evoPic = evoMonster.evopics[k];
+                        for(let k = 0; k < evoMonster.evoMonsters.length; k++) {
+                            let evoPic = evoMonster.evoMonsters[k].img;
                             evoTreeIndComponent.push(
-                                <div key={evoMonster.evoIds[k]} className="evoImageWrap">
-                                    <Link to={'/showMonsterDetails?monsterId=' + evoMonster.evoIds[k] + "&monsterName="}>{/* //TODO: GET NAME FOR EVO MATS */}
-                                        <img className="evoImageSmall" src={evoPic} alt="Missing"/>
-                                    </Link>
+                                <div key={evoMonster.evoMonsters[k].id + '' + k} className="evoImageWrap">
+                                    {
+                                        evoMonster.evoMonsters[k].id === -1 
+                                        ? 
+                                            <img className="evoImageSmall" src={evoPic} alt=" "/>
+                                        :
+                                            <Link to={'/showMonsterDetails?monsterId=' + evoMonster.evoMonsters[k].id + "&monsterName=" + evoMonster.evoMonsters[k].name}>
+                                                <img className="evoImageSmall" src={evoPic} alt=" "/>
+                                            </Link>
+                                    }
                                 </div>
                             )
                         }
@@ -91,7 +97,7 @@ class ShowMonsterDetails extends Component {
                             <div key={evoMonster.id} className="evoImageWrap">
                                 <Link to={'/showMonsterDetails?monsterId=' + evoMonster.id + "&monsterName=" + evoMonster.name}>
                                     <img className="evoImageBig" 
-                                        src={evoMonster.pic} title={evoMonster.id+ ".&nbsp;" + evoMonster.name} alt="Missing"/>
+                                        src={evoMonster.pic} title={evoMonster.id+ ".&nbsp;" + evoMonster.name} alt=" "/>
                                 </Link>
                             </div>
                         )
@@ -125,17 +131,17 @@ class ShowMonsterDetails extends Component {
                         <div>
                             <div style={{position:"relative", display:"inline-block"}}>
                                 <img src={"images/"+ (this.state.monsterData.element + 1) +".png"} 
-                                    style={{width:"30px",height:"30px",position:"absolute", bottom:"25px", right:"65px"}} />
+                                    style={{width:"30px",height:"30px",position:"absolute", bottom:"25px", right:"65px"}} alt= " "/>
 
                                 {
-                                    this.state.monsterData.element2 ?
+                                    this.state.monsterData.element2 !== undefined ?
                                         <img src={"images/"+ (this.state.monsterData.element2 + 1) +".png"} 
-                                            style={{width:"30px", height:"30px", position:"absolute", bottom:"25px", right:"25px"}}/>
+                                            style={{width:"30px", height:"30px", position:"absolute", bottom:"25px", right:"25px"}} alt= " "/>
                                     :
                                     <div></div>
                                 }
                                 <img src={monsterImageURL.replace("#", this.state.monsterData.id)} 
-                                    style={{width:"100%", height:"auto", maxHeight:"600px", maxWidth:"800px", outline:"18px solid black", outlineOffset:"-18px"}}/>
+                                    style={{width:"100%", height:"auto", maxHeight:"600px", maxWidth:"800px", outline:"18px solid black", outlineOffset:"-18px"}} alt= " "/>
                             </div>
                             <div style={{whiteSpace: "nowrap", marginLeft: "20px"}}>
                                 <br></br>
