@@ -177,14 +177,20 @@ class ShowMonsterDetails extends Component {
                                                         Turn:&nbsp;{this.state.monsterData.turnMin})
                                 </span>
                                 <div className="w3-theme-dark w3-small">
-                                    &nbsp;&nbsp;{this.state.monsterData.activeSkill}: {this.state.monsterData.activeSkillDescription}
+                                    &nbsp;&nbsp;{this.state.monsterData.activeSkill}:
+                                </div>
+                                <div className="w3-theme-dark w3-small">
+                                <div style={{display:"inline-block",width:"2%"}}>&nbsp;</div><div style={{display:"inline-block", width:"98%"}}>{this.state.monsterData.activeSkillDescription}</div>
                                 </div>
                                 <br></br>
                                 <div className="w3-theme-dark w3-medium">
                                     <b>Leader Skill</b>
                                 </div>
                                 <div className="w3-theme-dark w3-small">
-                                    &nbsp;&nbsp;{this.state.monsterData.leaderSkill}: {this.state.monsterData.leaderSkillDescription}
+                                    &nbsp;&nbsp;{this.state.monsterData.leaderSkill}:
+                                </div> 
+                                <div className="w3-theme-dark w3-small">
+                                <div style={{display:"inline-block",width:"2%"}}>&nbsp;</div><div style={{display:"inline-block", width:"98%"}}>{this.state.monsterData.leaderSkillDescription}</div>
                                 </div> 
                             <br></br>
                             <br></br>
