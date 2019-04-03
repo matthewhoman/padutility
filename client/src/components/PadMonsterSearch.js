@@ -46,15 +46,49 @@ class PadMonsterSearch extends Component {
     renderSuggestion = suggestion => (
         <Link to={'/showMonsterDetails?monsterId=' + suggestion.id + "&monsterName=" + suggestion.name}>
             <div className="autocompleteRow">
-                <div className="overflows" style={{position:"relative", top:"10px", display:"table", tableLayout:"fixed", width:"100%", height:"100%"}}>
-                    <span className="overflows" style={{display:"table-cell", width:"100px"}}>
+                <div className="overflows" style={{position:"relative", top:"10px", 
+                        display:"table", tableLayout:"fixed", width:"100%", height:"100%"}}>
+                    <span className="overflows" style={{display:"table-cell", width:"90px"}}>
                         <img className="monsterImageSearch" src={suggestion.img} title={suggestion.id + ".&nbsp;" + suggestion.name} alt="" />
                     </span>
                     <span className="w3-small overflows" style={{display:"table-cell",verticalAlign:"top"}}>
-                        <div className="overflows">{suggestion.name}</div>
                         <div className="overflows">
-                            <span>Lv.&nbsp;{suggestion.lvl}</span>&nbsp;&nbsp;<span>HP&nbsp;{suggestion.hp}</span>&nbsp;&nbsp;<span>ATK&nbsp;{suggestion.atk}</span>&nbsp;&nbsp;<span>RCV&nbsp;{suggestion.maxrcv}</span>
-                            <div className="overflows">Skill&nbsp;Turn:&nbsp;{suggestion.turnMax}&nbsp;-&nbsp;{suggestion.turnMin}</div>
+                            <span style={{color: "lightblue"}}>No.{suggestion.id}</span>
+                            <span style={{color: "lightgrey", float:"right"}}>
+                                <span>MP{suggestion.mp}&nbsp;/&nbsp;</span>
+                                <span><i className="fa fa-star" aria-hidden="true" style={{width:"5px",height:"5px"}}></i>
+                                    &nbsp;&nbsp;{suggestion.rarity}&nbsp;/&nbsp;</span>
+                                <span>S{suggestion.turnMax}&nbsp;->&nbsp;{suggestion.turnMin}&nbsp;&nbsp;</span>
+                                {
+                                    suggestion.type && suggestion.type !== null
+                                    ?
+                                    <img src={"images/"+ ("0" + suggestion.type) +".png"} 
+                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
+                                    :
+                                    <span></span>
+                                }
+                                {
+                                    suggestion.type2 && suggestion.type2 !== null 
+                                    ?
+                                    <img src={"images/"+ ("0" + suggestion.type2) +".png"} 
+                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
+                                    :
+                                    <span></span>
+                                }
+                                {
+                                    suggestion.type3 && suggestion.type3 !== null
+                                    ?
+                                    <img src={"images/"+ ("0" + suggestion.type3) +".png"} 
+                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
+                                    :
+                                    <span></span>
+                                }
+                            </span>
+                        </div>
+                        <div className="overflows"><b>{suggestion.name}</b></div>
+                        <div className="overflows">
+                            <span>Lv.&nbsp;{suggestion.lvl}</span>&nbsp;&nbsp;<span>HP&nbsp;{suggestion.hp}</span>&nbsp;&nbsp;
+                            <span>ATK&nbsp;{suggestion.atk}</span>&nbsp;&nbsp;<span>RCV&nbsp;{suggestion.rcv}</span>
                         </div>
                     </span>
                 </div>
@@ -102,7 +136,7 @@ class PadMonsterSearch extends Component {
             <div> <FontAwesomeIcon icon={faSpinner} style={{color:"white"}}/> loading ...</div>
         )
         return (
-            <div style={{id:"PadSearchBar", width: "100%"}}>
+            <div style={{id:"PadSearchBar", width: "100%", maxWidth: "400px"}}>
               {
               this.state.monstersFetched && this.state.monsterListDictionary ? 
                 <Autosuggest

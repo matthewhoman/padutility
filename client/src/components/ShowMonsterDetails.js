@@ -140,6 +140,27 @@ class ShowMonsterDetails extends Component {
                                     :
                                     <div></div>
                                 }
+                                {
+                                    this.state.monsterData.type !== undefined && this.state.monsterData.type !== null ?
+                                        <img src={"images/"+ "0" + this.state.monsterData.type +".png"} 
+                                            style={{width:"30px", height:"30px", position:"absolute", bottom:"25px", left:"25px"}} alt= " "/>
+                                    :
+                                    <div></div>
+                                }
+                                {
+                                    this.state.monsterData.type2 !== undefined && this.state.monsterData.type2 !== null ?
+                                        <img src={"images/"+ "0" + this.state.monsterData.type2 +".png"} 
+                                            style={{width:"30px", height:"30px", position:"absolute", bottom:"25px", left:"65px"}} alt= " "/>
+                                    :
+                                    <div></div>
+                                }
+                                {
+                                    this.state.monsterData.type3 !== undefined && this.state.monsterData.type3 !== null ?
+                                        <img src={"images/"+ "0" + this.state.monsterData.type3 +".png"} 
+                                            style={{width:"30px", height:"30px", position:"absolute", bottom:"25px", left:"105px"}} alt= " "/>
+                                    :
+                                    <div></div>
+                                }
                                 <img src={monsterImageURL.replace("#", this.state.monsterData.id)} 
                                     style={{width:"100%", height:"auto", maxHeight:"600px", maxWidth:"800px", outline:"18px solid black", outlineOffset:"-18px"}} alt= " "/>
                             </div>
@@ -176,21 +197,23 @@ class ShowMonsterDetails extends Component {
                                     (lvl.&nbsp;1:&nbsp;Turn:&nbsp;{this.state.monsterData.turnMax}&nbsp;&nbsp;->&nbsp;
                                                         Turn:&nbsp;{this.state.monsterData.turnMin})
                                 </span>
-                                <div className="w3-theme-dark w3-small">
+                                <div className="w3-small" style={{color:"lightgreen",width:"auto"}}>
                                     &nbsp;&nbsp;{this.state.monsterData.activeSkill}:
                                 </div>
                                 <div className="w3-theme-dark w3-small">
-                                <div style={{display:"inline-block",width:"2%"}}>&nbsp;</div><div style={{display:"inline-block", width:"98%"}}>{this.state.monsterData.activeSkillDescription}</div>
+                                <div style={{display:"inline-block",width:"2%"}}>&nbsp;</div>
+                                    <div style={{display:"inline-block", width:"98%"}}>{this.state.monsterData.activeSkillDescription}</div>
                                 </div>
                                 <br></br>
                                 <div className="w3-theme-dark w3-medium">
                                     <b>Leader Skill</b>
                                 </div>
-                                <div className="w3-theme-dark w3-small">
+                                <div className="w3-small" style={{color:"lightblue",width:"auto"}}>
                                     &nbsp;&nbsp;{this.state.monsterData.leaderSkill}:
                                 </div> 
                                 <div className="w3-theme-dark w3-small">
-                                <div style={{display:"inline-block",width:"2%"}}>&nbsp;</div><div style={{display:"inline-block", width:"98%"}}>{this.state.monsterData.leaderSkillDescription}</div>
+                                <div style={{display:"inline-block",width:"2%"}}>&nbsp;</div>
+                                    <div style={{display:"inline-block", width:"98%"}}>{this.state.monsterData.leaderSkillDescription}</div>
                                 </div> 
                             <br></br>
                             <br></br>

@@ -86,7 +86,7 @@ class ReturnNav extends Component {
                         <Nav style={{whiteSpace:"nowrap",textAlign:"right",direction:"rtl"}}>
                             <Navbar.Text style={{marginLeft:"auto"}}>
                                 <NavDropdown.Divider style={{width:"150px"}}/>
-                                <Nav.Link href={"dashboard"}>Dashboard</Nav.Link>
+                                <Nav.Link href={"unreleasedMonsters"}>Unreleased Monsters</Nav.Link>
                                 <Nav.Link href={"profile"}>Profile</Nav.Link>
                                 <Nav.Link href={"subscriptions"}>Subscriptions</Nav.Link>
                                 <NavDropdown.Divider style={{width:"150px"}}/>

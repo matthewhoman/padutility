@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ShowMonsterDetails from './ShowMonsterDetails';
+import UnreleasedMonsters from './UnreleasedMonsters';
 import Main from './Main';
 
 import './App.scss';
@@ -46,6 +47,7 @@ class App extends Component {
               <ProtectedRoute exact={true} path='/profile' component={Profile} /> */}
               <Route exact={true} path='/' component={Main}/>
               <Route exact={true} path='/showMonsterDetails' component={ShowMonsterDetails}/>
+              <Route exact={true} path='/unreleasedMonsters' component={UnreleasedMonsters}/>
               <Route component={NoMatch} />
           </Switch>
         </div>

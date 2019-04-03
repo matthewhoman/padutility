@@ -164,6 +164,9 @@ function parseDictionaryForClient(dictionary) {
     monstersJson.unreleased = monster.jp_only;
     monstersJson.element = monster.element;
     monstersJson.element2 = monster.element2;
+    monstersJson.type = monster.type;
+    monstersJson.type2 = monster.type2;
+    monstersJson.type3 = monster.type3;
     monstersJson.mp = monster.monster_points;
     monstersJson.leaderSkill = monster.leader_skill ? monster.leader_skill : 'N/A';
     monstersJson.activeSkill = monster.active_skill ? monster.active_skill : 'N/A';
