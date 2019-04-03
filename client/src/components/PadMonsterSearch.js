@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Autosuggest from 'react-autosuggest';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 class PadMonsterSearch extends Component {
 
@@ -58,7 +59,7 @@ class PadMonsterSearch extends Component {
                                 <span>MP{suggestion.mp}&nbsp;/&nbsp;</span>
                                 <span><i className="fa fa-star" aria-hidden="true" style={{width:"5px",height:"5px"}}></i>
                                     &nbsp;&nbsp;{suggestion.rarity}&nbsp;/&nbsp;</span>
-                                <span>S{suggestion.turnMax}&nbsp;->&nbsp;{suggestion.turnMin}&nbsp;&nbsp;</span>
+                                <span>S{suggestion.turnMax}&nbsp;<FontAwesomeIcon icon={faArrowRight} />&nbsp;{suggestion.turnMin}&nbsp;&nbsp;</span>
                                 {
                                     suggestion.type && suggestion.type !== null
                                     ?

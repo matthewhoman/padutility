@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import ReturnNav from './ReturnNav';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 let monsterImageURL = "http://www.puzzledragonx.com/en/img/monster/MONS_#.jpg";
 
@@ -105,7 +105,7 @@ class ShowMonsterDetails extends Component {
                 evoTreeWrapperComponent.push(<div key={j} className="evoContainer">{evoTreeIndComponent}</div>);
             }
             evoTreeComponent.push(<div key="evoTree">
-                                    <div className="w3-margin-bottom w3-theme-dark w3-large">
+                                    <div className="w3-margin-bottom w3-theme-dark w3-medium">
                                         <b>Evolution Tree</b>
                                     </div>
                                     <div className="w3-margin-bottom" style={{maxWidth:"780px"}}>
@@ -143,7 +143,7 @@ class ShowMonsterDetails extends Component {
                                 <br></br>
                                 <div style={{display: "inline-block"}}>
                                     {/* outline to trim white borders */}
-                                    <div style={{height:"70px", width:"70px", backgroundSize:"contain", outline:"1px solid black", outlineOffset:"-1px",
+                                    <div style={{height:"60px", width:"60px", backgroundSize:"contain", outline:"1px solid black", outlineOffset:"-1px",
                                         backgroundRepeat:"no-repeat", backgroundImage:"url(" + this.state.monsterData.img + ")"}}>
                                     </div>
                                     <div className="w3-theme-dark w3-small">
@@ -205,8 +205,8 @@ class ShowMonsterDetails extends Component {
                                     <b>Skill&nbsp;</b>
                                 </span>
                                 <span className="w3-theme-dark w3-small">
-                                    lvl.&nbsp;1:&nbsp;Turn:&nbsp;{this.state.monsterData.turnMax}&nbsp;&nbsp;->&nbsp;
-                                                        Turn:&nbsp;{this.state.monsterData.turnMin}
+                                    (lvl.&nbsp;1:&nbsp;Turn:&nbsp;{this.state.monsterData.turnMax}&nbsp;&nbsp;<FontAwesomeIcon icon={faArrowRight} />&nbsp;
+                                                        Turn:&nbsp;{this.state.monsterData.turnMin})
                                 </span>
                                 <div className="w3-small" style={{color:"lightgreen",width:"auto"}}>
                                     &nbsp;&nbsp;{this.state.monsterData.activeSkill}:
