@@ -108,11 +108,27 @@ input[type=submit] {
 
 .fixedHeaderContainer {
 	display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+	justify-content: space-around;
+	align-items: flex-start;
 
-  border: 2px dashed rgba(114, 186, 94, 0.35);
-  background: rgba(114, 186, 94, 0.05);
+	border: 2px dashed rgba(114, 186, 94, 0.35);
+	background: rgba(114, 186, 94, 0.05);
+}
+
+.typeImg {
+	height: 25px;
+	width: 25px;
+	vertical-align: top;
+}
+
+.awakenImg {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+}
+
+.lightblueText {
+	color:#66b3ff;
 }
 
 html,body,header,h1,h2,h3,h4,h5 {font-family: "Montserrat", sans-serif}

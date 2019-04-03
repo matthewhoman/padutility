@@ -13,6 +13,7 @@ var monsterListJSON = "https://www.padherder.com/api/monsters/"; //"https://stor
 var monsterActiveSkillsJSON = "https://www.padherder.com/api/active_skills/";
 var monsterLeaderSkillsJSON = "https://www.padherder.com/api/leader_skills/";
 var monsterEvolutionsJSON = "https://www.padherder.com/api/evolutions/";
+var monsterAwakeningsJSON = "https://www.padherder.com/api/awakenings/";
 
 
 //slimmed down version of monsters name/ num pairs for the clients autocomplete
@@ -21,6 +22,7 @@ var leaderSkills = [];
 var activeSkills = [];
 var masterMonsterUnreleasedDictionary = [];
 var monsterEvolutions = {};
+var monsterAwakenings = {};
 var serverReady = false;
 
 var app = express();
@@ -133,7 +135,29 @@ function getEvolutions() {
     if (!error && response.statusCode === 200) {
         monsterEvolutions = JSON.parse(body);
         console.log("Done Fetching Evolutions!!")
+        getAwakenings();
+    }
+  });
+}
+
+function getAwakenings() {
+  var headers = {
+    'Content-Type': 'application/json'
+  };
+
+  var options = {
+    url: monsterAwakeningsJSON,
+    method: 'GET',
+    headers: headers,
+  };
+
+  request(options, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+        monsterAwakenings = JSON.parse(body);
+        console.log("Done Fetching Awakenings!!")
         getMonsters();
+    } else {
+      console.log("ERROR GETTING AWAKENINGS " + error);
     }
   });
 }
@@ -155,6 +179,12 @@ function parseDictionaryForClient(dictionary) {
     var monstersJson = {};
     var monster = dictionary[i];
   
+    monstersJson.awakenings = parseAwakenings(monster.awoken_skills);
+
+    // if(monstersJson.awakenings.length >= 9) {
+    //   console.log("monster has alot of awakenings! " + monster.name)
+    // }
+
     monstersJson.name = monster.name;
     monstersJson.id = monster.id;
     monstersJson.atk = monster.atk_max;
@@ -187,12 +217,61 @@ function parseDictionaryForClient(dictionary) {
 	}
     monsterNameNumArr.push(monstersJson);
   }
+
+  //sort array by ids
+  function compare(a, b) {
+      const idA = a.id;
+      const idB = b.id;
+    
+      let comparison = 0;
+      if (idA > idB) {
+        comparison = 1;
+      } else if (idA < idB) {
+        comparison = -1;
+      }
+      return comparison;
+  }
+    
+  monsterNameNumArr.sort(compare);
+
   fillEvos();
   console.log("Done Parsing Client Monster Data!!");
   fillUnreleasedMonsters();
   console.log("Done Parsing Unreleased Monster Data!!") ;
   console.log("DONE WITH DATA!!! APP READY!");
   serverReady = true;
+}
+
+function parseAwakenings(awokenArr) {
+  let awokenDetails = [];
+  if(awokenArr && awokenArr != null) {
+    for(let awokenId of awokenArr) {
+      for(let awokenObj of monsterAwakenings) {
+        if(awokenObj.id == awokenId) {
+          awokenDetails.push(awokenObj);
+          break;
+        }
+      }
+    }
+  }
+  //sort array by awoken id
+  function compare(a, b) {
+      // Use toUpperCase() to ignore character casing
+      const idA = a.id;
+      const idB = b.id;
+    
+      let comparison = 0;
+      if (idA > idB) {
+        comparison = 1;
+      } else if (idA < idB) {
+        comparison = -1;
+      }
+      return comparison;
+  }
+    
+  awokenDetails.sort(compare);
+
+  return awokenDetails;
 }
 
 // function getChildEvos(monsterId, evoArray) {

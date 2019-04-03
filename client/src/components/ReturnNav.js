@@ -85,9 +85,9 @@ class ReturnNav extends Component {
                     <Navbar.Collapse>
                         <Nav style={{whiteSpace:"nowrap",textAlign:"right",direction:"rtl"}}>
                             <Navbar.Text style={{marginLeft:"auto"}}>
+                                <Nav.Link href={"monsterBook"}>Monster Book</Nav.Link>
                                 <NavDropdown.Divider style={{width:"150px"}}/>
                                 <Nav.Link href={"unreleasedMonsters"}>Unreleased Monsters</Nav.Link>
-                                <Nav.Link href={"profile"}>Profile</Nav.Link>
                                 <Nav.Link href={"subscriptions"}>Subscriptions</Nav.Link>
                                 <NavDropdown.Divider style={{width:"150px"}}/>
                                 <Nav.Link href={"preferences"}>Preferences</Nav.Link>

@@ -122,53 +122,41 @@ class ShowMonsterDetails extends Component {
               <ReturnNav history={this.props.history} header="Monster Details"/>
                 {
                 this.state.monsterData ?
-                        this.state.monsterData.unreleased ? 
-                            <div className="w3-xlarge" style={{color:"pink"}}>
-                                * CARD IS NOT YET RELEASED
-                                <br></br>
-                            </div>
-                        :
                         <div>
+                            {
+                                this.state.monsterData.unreleased 
+                                ? 
+                                <div className="w3-xlarge" style={{color:"pink"}}>
+                                    * CARD IS NOT YET RELEASED
+                                    <br></br>
+                                </div>
+                                :
+                                <div></div>
+                            }
                             <div style={{position:"relative", display:"inline-block"}}>
-                                <img src={"images/"+ (this.state.monsterData.element + 1) +".png"} 
-                                    style={{width:"30px",height:"30px",position:"absolute", bottom:"25px", right:"65px"}} alt= " "/>
-
                                 {
-                                    this.state.monsterData.element2 !== undefined ?
-                                        <img src={"images/"+ (this.state.monsterData.element2 + 1) +".png"} 
-                                            style={{width:"30px", height:"30px", position:"absolute", bottom:"25px", right:"25px"}} alt= " "/>
-                                    :
-                                    <div></div>
+                                    this.state.monsterData.awakenings.map((value, index) => {
+                                        {   
+                                            return index > 8 
+                                            ?
+                                            <img key={index} src={"images/00"+ value.id + ".png"} title={value.name + ":/n" + value.desc}
+                                                className="awakenImg" style={{top: (8 + (this.state.monsterData.awakenings.length - index - 1) * 25) + "px", right: "35px"}} alt= ""/>
+                                            :
+                                            <img key={index} src={"images/00"+ value.id + ".png"} title={value.name + ":/n" + value.desc}
+                                                    className="awakenImg" style={{top: (8 + (25 * index)) + "px", right: "8px"}} alt= ""/>
+                                        }
+                                    })}
                                 }
-                                {
-                                    this.state.monsterData.type !== undefined && this.state.monsterData.type !== null ?
-                                        <img src={"images/"+ "0" + this.state.monsterData.type +".png"} 
-                                            style={{width:"30px", height:"30px", position:"absolute", bottom:"25px", left:"25px"}} alt= " "/>
-                                    :
-                                    <div></div>
-                                }
-                                {
-                                    this.state.monsterData.type2 !== undefined && this.state.monsterData.type2 !== null ?
-                                        <img src={"images/"+ "0" + this.state.monsterData.type2 +".png"} 
-                                            style={{width:"30px", height:"30px", position:"absolute", bottom:"25px", left:"65px"}} alt= " "/>
-                                    :
-                                    <div></div>
-                                }
-                                {
-                                    this.state.monsterData.type3 !== undefined && this.state.monsterData.type3 !== null ?
-                                        <img src={"images/"+ "0" + this.state.monsterData.type3 +".png"} 
-                                            style={{width:"30px", height:"30px", position:"absolute", bottom:"25px", left:"105px"}} alt= " "/>
-                                    :
-                                    <div></div>
-                                }
+                                {/* outline to hide water mark on image */}
                                 <img src={monsterImageURL.replace("#", this.state.monsterData.id)} 
-                                    style={{width:"100%", height:"auto", maxHeight:"600px", maxWidth:"800px", outline:"18px solid black", outlineOffset:"-18px"}} alt= " "/>
+                                    style={{width:"100%", height:"auto", maxHeight:"600px", maxWidth:"800px", outline:"18px solid black", outlineOffset:"-18px"}} alt= ""/> 
                             </div>
                             <div style={{whiteSpace: "nowrap", marginLeft: "20px"}}>
                                 <br></br>
                                 <br></br>
                                 <div style={{display: "inline-block"}}>
-                                    <div style={{height:"70px", width:"70px", backgroundSize:"contain",
+                                    {/* outline to trim white borders */}
+                                    <div style={{height:"70px", width:"70px", backgroundSize:"contain", outline:"1px solid black", outlineOffset:"-1px",
                                         backgroundRepeat:"no-repeat", backgroundImage:"url(" + this.state.monsterData.img + ")"}}>
                                     </div>
                                     <div className="w3-theme-dark w3-small">
@@ -177,17 +165,44 @@ class ShowMonsterDetails extends Component {
                                     <br></br>
                                 </div>
                                 <div style={{display:"inline-block", verticalAlign:"top", whiteSpace:"initial", marginLeft: "5px", marginRight: "25px"}} className="w3-theme-l3">
-                                    <div className="w3-theme-dark">
+                                    <div className="lightblueText">
                                         No.{this.state.monsterData.id}&nbsp;&nbsp;&nbsp;
-                                        &nbsp;{rarityStars}&nbsp;                                         
-                                        ({this.state.monsterData.rarity})&nbsp;/&nbsp;Cost:&nbsp;{this.state.monsterData.cost}
+                                        {
+                                            this.state.monsterData.type !== undefined && this.state.monsterData.type !== null ?
+                                                <span><img src={"images/"+ "0" + this.state.monsterData.type +".png"} 
+                                                    className="typeImg" alt= ""/>&nbsp;&nbsp;</span>
+                                            :
+                                            <div></div>
+                                        }
+                                        {
+                                            this.state.monsterData.type2 !== undefined && this.state.monsterData.type2 !== null ?
+                                                <span><img src={"images/"+ "0" + this.state.monsterData.type2 +".png"} 
+                                                    className="typeImg" alt= ""/>&nbsp;&nbsp;</span>
+                                            :
+                                            <div></div>
+                                        }
+                                        {
+                                            this.state.monsterData.type3 !== undefined && this.state.monsterData.type3 !== null ?
+                                                <span><img src={"images/"+ "0" + this.state.monsterData.type3 +".png"} 
+                                                    className="typeImg" alt= ""/>&nbsp;&nbsp;</span>
+                                            :
+                                            <div></div>
+                                        }
+                                    </div>
+                                    <div className="w3-theme-dark">
+                                        {this.state.monsterData.name}
                                     </div>
                                     <div className="w3-theme-dark" style={{display:"inline-block"}}>
-                                        {this.state.monsterData.name}
+                                        {rarityStars}&nbsp;({this.state.monsterData.rarity})
                                     </div>
                                 </div>
                                 <br></br>
                                 <br></br>
+                            </div>
+                            <div className="w3-theme-dark w3-small" style={{marginLeft: "20px", marginRight: "20px"}}>
+                                    Cost:&nbsp;{this.state.monsterData.cost}
+                                    <br></br>
+                                    <br></br>
                             </div>
                             <div className="w3-margin-bottom" style={{marginLeft: "20px", marginRight: "20px"}}>
                                 <span className="w3-theme-dark w3-medium">

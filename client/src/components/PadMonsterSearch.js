@@ -53,8 +53,8 @@ class PadMonsterSearch extends Component {
                     </span>
                     <span className="w3-small overflows" style={{display:"table-cell",verticalAlign:"top"}}>
                         <div className="overflows">
-                            <span style={{color: "lightblue"}}>No.{suggestion.id}</span>
-                            <span style={{color: "lightgrey", float:"right"}}>
+                            <span className="lightblueText">No.{suggestion.id}</span>
+                            <span style={{color: "darkgrey", float:"right"}}>
                                 <span>MP{suggestion.mp}&nbsp;/&nbsp;</span>
                                 <span><i className="fa fa-star" aria-hidden="true" style={{width:"5px",height:"5px"}}></i>
                                     &nbsp;&nbsp;{suggestion.rarity}&nbsp;/&nbsp;</span>

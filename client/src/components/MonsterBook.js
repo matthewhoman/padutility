@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import ReturnNav from './ReturnNav'
 
-class UnreleasedMonsters extends Component {
+class MonsterBook extends Component {
 
     constructor(props) {
         super(props);
@@ -18,7 +18,7 @@ class UnreleasedMonsters extends Component {
     }
 
     getMonsters() {
-        fetch('/retrieveUnreleasedMonsters')
+        fetch('/retrieveMonsters')
             .then(response => response.json())
             .then(data => {
                 this.setState(() => ({
@@ -41,6 +41,7 @@ class UnreleasedMonsters extends Component {
             let monster = this.state.monsters[i];
             monsters.push(
                 <div style={{margin:"5px",display:"inline-block"}}>
+                    <div className="lightblueText" style={{fontSize:"12px"}}>No.{monster.id}</div>
                     <Link key={i} to={'/showMonsterDetails?monsterId=' + monster.id + "&monsterName=" + monster.name}>
                         <div style={{display:"inline-block", width:"60px", height:"60px"}}>
                             <img className="evoImageBig" 
@@ -52,7 +53,7 @@ class UnreleasedMonsters extends Component {
         }
         return (
             <div>
-                <ReturnNav history={this.props.history} header="Unreleased Monsters"/>
+                <ReturnNav history={this.props.history} header="Monster Book"/>
                 <div style={{margin:"12px"}}>
                     {monsters}  
                 </div>
@@ -61,4 +62,4 @@ class UnreleasedMonsters extends Component {
     }
 }
 
-export default UnreleasedMonsters;
+export default MonsterBook;
