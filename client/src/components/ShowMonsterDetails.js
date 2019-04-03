@@ -180,25 +180,27 @@ class ShowMonsterDetails extends Component {
                                         {this.state.monsterData.name}
                                     </div>
                                     <div className="w3-theme-dark" style={{display:"inline-block"}}>
-                                        {rarityStars}&nbsp;{this.state.monsterData.rarity}
+                                        {rarityStars}&nbsp;({this.state.monsterData.rarity})
                                     </div>
                                 </div>
                             </div>
-                            <div className="w3-theme-dark w3-small" style={{marginLeft: "20px"}}>
-                                Awakenings:
-                                {
-                                    this.state.monsterData.awakenings.map((value, index) => {                     
-                                        return <img key={index} src={"images/00"+ value.id + ".png"} title={value.name + ":/n" + value.desc}
-                                                className="awakenImg" alt= ""/>
-                                    })}
-                                }
-                            </div>
-                            <div className="w3-theme-dark w3-small" style={{marginLeft: "20px", marginRight: "20px"}}>
-                                    Cost:&nbsp;{this.state.monsterData.cost}
-                                    <br></br>
-                                    <br></br>
-                            </div>
                             <div className="w3-margin-bottom" style={{marginLeft: "20px", marginRight: "20px"}}>
+                                <div className="w3-theme-dark w3-medium">
+                                    <b>Awakenings:</b>
+                                </div>
+                                <div className="w3-theme-dark w3-small">
+                                    {
+                                        this.state.monsterData.awakenings.map((value, index) => {                     
+                                            return <img key={index} src={"images/00"+ value.id + ".png"} title={value.name + ":/n" + value.desc}
+                                                    className="awakenImg" alt= ""/>
+                                        })
+                                    }
+                                </div>
+                                <br></br>
+                                <div className="w3-theme-dark w3-small">
+                                        Cost:&nbsp;{this.state.monsterData.cost}
+                                </div>
+                                <br></br>
                                 <span className="w3-theme-dark w3-medium">
                                     <b>Skill&nbsp;</b>
                                 </span>
