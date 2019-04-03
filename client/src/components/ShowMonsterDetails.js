@@ -134,19 +134,6 @@ class ShowMonsterDetails extends Component {
                                 <div></div>
                             }
                             <div style={{position:"relative", display:"inline-block"}}>
-                                {
-                                    this.state.monsterData.awakenings.map((value, index) => {
-                                        {   
-                                            return index > 8 
-                                            ?
-                                            <img key={index} src={"images/00"+ value.id + ".png"} title={value.name + ":/n" + value.desc}
-                                                className="awakenImg" style={{top: (8 + (this.state.monsterData.awakenings.length - index - 1) * 25) + "px", right: "35px"}} alt= ""/>
-                                            :
-                                            <img key={index} src={"images/00"+ value.id + ".png"} title={value.name + ":/n" + value.desc}
-                                                    className="awakenImg" style={{top: (8 + (25 * index)) + "px", right: "8px"}} alt= ""/>
-                                        }
-                                    })}
-                                }
                                 {/* outline to hide water mark on image */}
                                 <img src={monsterImageURL.replace("#", this.state.monsterData.id)} 
                                     style={{width:"100%", height:"auto", maxHeight:"600px", maxWidth:"800px", outline:"18px solid black", outlineOffset:"-18px"}} alt= ""/> 
@@ -169,21 +156,21 @@ class ShowMonsterDetails extends Component {
                                         No.{this.state.monsterData.id}&nbsp;&nbsp;&nbsp;
                                         {
                                             this.state.monsterData.type !== undefined && this.state.monsterData.type !== null ?
-                                                <span><img src={"images/"+ "0" + this.state.monsterData.type +".png"} 
+                                                <span><img src={"images/0" + this.state.monsterData.type +".png"} 
                                                     className="typeImg" alt= ""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
                                             this.state.monsterData.type2 !== undefined && this.state.monsterData.type2 !== null ?
-                                                <span><img src={"images/"+ "0" + this.state.monsterData.type2 +".png"} 
+                                                <span><img src={"images/0" + this.state.monsterData.type2 +".png"} 
                                                     className="typeImg" alt= ""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
                                             this.state.monsterData.type3 !== undefined && this.state.monsterData.type3 !== null ?
-                                                <span><img src={"images/"+ "0" + this.state.monsterData.type3 +".png"} 
+                                                <span><img src={"images/0" + this.state.monsterData.type3 +".png"} 
                                                     className="typeImg" alt= ""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
@@ -193,11 +180,18 @@ class ShowMonsterDetails extends Component {
                                         {this.state.monsterData.name}
                                     </div>
                                     <div className="w3-theme-dark" style={{display:"inline-block"}}>
-                                        {rarityStars}&nbsp;({this.state.monsterData.rarity})
+                                        {rarityStars}&nbsp;{this.state.monsterData.rarity}
                                     </div>
                                 </div>
-                                <br></br>
-                                <br></br>
+                            </div>
+                            <div className="w3-theme-dark w3-small" style={{marginLeft: "20px"}}>
+                                Awakenings:
+                                {
+                                    this.state.monsterData.awakenings.map((value, index) => {                     
+                                        return <img key={index} src={"images/00"+ value.id + ".png"} title={value.name + ":/n" + value.desc}
+                                                className="awakenImg" alt= ""/>
+                                    })}
+                                }
                             </div>
                             <div className="w3-theme-dark w3-small" style={{marginLeft: "20px", marginRight: "20px"}}>
                                     Cost:&nbsp;{this.state.monsterData.cost}
@@ -209,8 +203,8 @@ class ShowMonsterDetails extends Component {
                                     <b>Skill&nbsp;</b>
                                 </span>
                                 <span className="w3-theme-dark w3-small">
-                                    (lvl.&nbsp;1:&nbsp;Turn:&nbsp;{this.state.monsterData.turnMax}&nbsp;&nbsp;->&nbsp;
-                                                        Turn:&nbsp;{this.state.monsterData.turnMin})
+                                    lvl.&nbsp;1:&nbsp;Turn:&nbsp;{this.state.monsterData.turnMax}&nbsp;&nbsp;->&nbsp;
+                                                        Turn:&nbsp;{this.state.monsterData.turnMin}
                                 </span>
                                 <div className="w3-small" style={{color:"lightgreen",width:"auto"}}>
                                     &nbsp;&nbsp;{this.state.monsterData.activeSkill}:

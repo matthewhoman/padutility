@@ -62,7 +62,7 @@ class PadMonsterSearch extends Component {
                                 {
                                     suggestion.type && suggestion.type !== null
                                     ?
-                                    <img src={"images/"+ ("0" + suggestion.type) +".png"} 
+                                    <img src={"images/0" + suggestion.type +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
                                     :
                                     <span></span>
@@ -70,7 +70,7 @@ class PadMonsterSearch extends Component {
                                 {
                                     suggestion.type2 && suggestion.type2 !== null 
                                     ?
-                                    <img src={"images/"+ ("0" + suggestion.type2) +".png"} 
+                                    <img src={"images/0" + suggestion.type2 +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
                                     :
                                     <span></span>
@@ -78,7 +78,7 @@ class PadMonsterSearch extends Component {
                                 {
                                     suggestion.type3 && suggestion.type3 !== null
                                     ?
-                                    <img src={"images/"+ ("0" + suggestion.type3) +".png"} 
+                                    <img src={"images/0" + suggestion.type3 +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
                                     :
                                     <span></span>
@@ -133,7 +133,7 @@ class PadMonsterSearch extends Component {
             onChange: this.onChange
         };
         const loading = (
-            <div> <FontAwesomeIcon icon={faSpinner} style={{color:"white"}}/> loading ...</div>
+            <div style={{color:"white"}}> <FontAwesomeIcon icon={faSpinner}/> loading ...</div>
         )
         return (
             <div style={{id:"PadSearchBar", width: "100%", maxWidth: "400px"}}>

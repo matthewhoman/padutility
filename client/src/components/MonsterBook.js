@@ -33,7 +33,7 @@ class MonsterBook extends Component {
     render() {
         if(!this.state.monstersFetched) {
             return (
-                <div> <FontAwesomeIcon icon={faSpinner} style={{color:"white"}}/> loading ...</div>
+                <div style={{color:"white"}}> <FontAwesomeIcon icon={faSpinner}/> loading ...</div>
             )
         }
         let monsters = [];

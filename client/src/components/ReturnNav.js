@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import {Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
@@ -85,13 +86,9 @@ class ReturnNav extends Component {
                     <Navbar.Collapse>
                         <Nav style={{whiteSpace:"nowrap",textAlign:"right",direction:"rtl"}}>
                             <Navbar.Text style={{marginLeft:"auto"}}>
-                                <Nav.Link href={"monsterBook"}>Monster Book</Nav.Link>
+                                <Link to={'/monsterBook'}>Monster Book</Link>
                                 <NavDropdown.Divider style={{width:"150px"}}/>
-                                <Nav.Link href={"unreleasedMonsters"}>Unreleased Monsters</Nav.Link>
-                                <Nav.Link href={"subscriptions"}>Subscriptions</Nav.Link>
-                                <NavDropdown.Divider style={{width:"150px"}}/>
-                                <Nav.Link href={"preferences"}>Preferences</Nav.Link>
-                                <Nav.Link onClick={this.handleLogOut} href="signin">Log Out</Nav.Link>
+                                <Link to={'/unreleasedMonsters'}>Unreleased Monsters</Link>
                             </Navbar.Text>
                         </Nav>
                     </Navbar.Collapse>

@@ -461,7 +461,10 @@ function createEvoObjects(evoArray, monster) {
         evoObj.evoIds = [];
         for(let material of evo.materials) {
             let monster = getMonsterByNumber(material[0]);
-            evoObj.evoMonsters.push({img: monster.img, id: monster.id, name: monster.name});
+            //insert how many of the material there is
+            for(let i = 0; i < material[1]; i++) {
+              evoObj.evoMonsters.push({img: monster.img, id: monster.id, name: monster.name});
+            }
         }
         if(evoObj.evoMonsters.length < 5) {
             for(let i = evoObj.evoMonsters.length; i <= 4; i++) {
