@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ShowMonsterDetails from './ShowMonsterDetails';
 import UnreleasedMonsters from './UnreleasedMonsters';
+import LeaderSkillSearch from './LeaderSkillSearch';
 import MonsterBook from './MonsterBook';
 import Main from './Main';
 
@@ -49,6 +50,7 @@ class App extends Component {
               <Route exact={true} path='/' component={Main}/>
               <Route exact={true} path='/showMonsterDetails' component={ShowMonsterDetails}/>
               <Route exact={true} path='/unreleasedMonsters' component={UnreleasedMonsters}/>
+              <Route exact={true} path='/leaderSkillSearch' component={LeaderSkillSearch}/>
               <Route exact={true} path='/monsterBook' component={MonsterBook}/>
               <Route component={NoMatch} />
           </Switch>

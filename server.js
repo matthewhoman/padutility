@@ -23,7 +23,6 @@ var monsterAwakeningsJSON = "https://www.padherder.com/api/awakenings/";
 //slimmed down version of monsters name/ num pairs for the clients autocomplete
 var monsterNameNumArr = [];
 var masterMonsterUnreleasedDictionary = [];
-var monsterEvolutions = {};
 var serverReady = false;
 
 var app = express();
@@ -44,6 +43,21 @@ app.get('/retrieveMonsters', function(req, res) {
 
 app.get('/retrieveUnreleasedMonsters', function(req, res) {
   res.end(JSON.stringify(masterMonsterUnreleasedDictionary));
+});
+
+app.get('/retrieveLeaders', function(req, res) {
+  var queryStr = URL.parse(req.url, true).query.searchStr;
+  if(queryStr) {
+    let monsters = [];
+    for(let mons of monsterNameNumArr) {
+      if(mons.leaderSkillDescription && mons.leaderSkillDescription.toLowerCase().includes(queryStr.toLowerCase())) {
+          monsters.push(mons);
+      }
+    }
+    res.end(JSON.stringify(monsters));
+  } else {
+    res.end(JSON.stringify({}));
+  }
 });
 
 app.get('/retrieveMonster', function(req, res) { 
@@ -150,15 +164,15 @@ function parseDictionaryForClient(dictionary, evosArr) {
     monsterNameNumArr.push(monstersJson);
   }
 
-  //sort array by ids
+  //sort array by ids desc
   function compare(a, b) {
     const idA = a.id;
     const idB = b.id;
   
     let comparison = 0;
-    if (idA > idB) {
+    if (idA < idB) {
       comparison = 1;
-    } else if (idA < idB) {
+    } else if (idA > idB) {
       comparison = -1;
     }
     return comparison;
