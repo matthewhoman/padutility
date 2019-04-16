@@ -63,7 +63,9 @@ function getMonsterByNumber(monsterNum) {
 function getMonsters() {
   var cardsJson = fs.readFileSync("./JSON_DATA/na_cards.json", ENCODING);
   console.log("Done Fetching Monster Data!!")
-  parseDictionaryForClient(JSON.parse(cardsJson));
+  var evosJson = fs.readFileSync("./JSON_DATA/evolutionList.json", ENCODING);
+  console.log("Done Fetching Evolution Data!!")
+  parseDictionaryForClient(JSON.parse(cardsJson), JSON.parse(evosJson).items);
 
   // var headers = {
   //   'Content-Type': 'application/json'
@@ -92,7 +94,7 @@ function fillUnreleasedMonsters() {
     }
 }
 
-function parseDictionaryForClient(dictionary) {
+function parseDictionaryForClient(dictionary, evosArr) {
   for(var i = 0; i < dictionary.length; i++) {
     var monstersJson = {};
     var monster = dictionary[i];
@@ -135,32 +137,36 @@ function parseDictionaryForClient(dictionary) {
       monstersJson.turnMax = 'N/A';
       monstersJson.activeSkillDescription = 'N/A';
     }
+
     monstersJson.ancestorId = monster.card.ancestor_id;
-    monstersJson.evoMats = [];
-    monstersJson.evoMats.push(monster.card.evo_mat_id_1);
-    monstersJson.evoMats.push(monster.card.evo_mat_id_2);
-    monstersJson.evoMats.push(monster.card.evo_mat_id_3);
-    monstersJson.evoMats.push(monster.card.evo_mat_id_4);
-    monstersJson.evoMats.push(monster.card.evo_mat_id_5);
+    monstersJson.evoMat1 = monster.card.evo_mat_id_1;
+    monstersJson.evoMat2 = monster.card.evo_mat_id_2;
+    monstersJson.evoMat3 = monster.card.evo_mat_id_3;
+    monstersJson.evoMat4 = monster.card.evo_mat_id_4;
+    monstersJson.evoMat5 = monster.card.evo_mat_id_5;
+
+    monstersJson.evoTree = [];
 
     monsterNameNumArr.push(monstersJson);
   }
 
   //sort array by ids
   function compare(a, b) {
-      const idA = a.id;
-      const idB = b.id;
-    
-      let comparison = 0;
-      if (idA > idB) {
-        comparison = 1;
-      } else if (idA < idB) {
-        comparison = -1;
-      }
-      return comparison;
+    const idA = a.id;
+    const idB = b.id;
+  
+    let comparison = 0;
+    if (idA > idB) {
+      comparison = 1;
+    } else if (idA < idB) {
+      comparison = -1;
+    }
+    return comparison;
   }
-    
+
   monsterNameNumArr.sort(compare);
+
+  fillEvos(monsterNameNumArr, evosArr);
 
   console.log("Done Parsing Client Monster Data!!");
   fillUnreleasedMonsters();
@@ -183,81 +189,41 @@ function parseAwakenings(awokenArr) {
   return awokenArr;
 }
 
-function fillEvos(evos) {
-  var evosJson = fs.readFileSync("./JSON_DATA/evolutionList.json", ENCODING);
-  console.log("Done Fetching Evolution Data!!")
+function fillEvos(monsterNameNumArr, evosArr) {
   for(let monster of monsterNameNumArr) {
-      let evoArray = [];
-      for (var key in monsterEvolutions) {
-          if (monsterEvolutions.hasOwnProperty(key)) {
-              if(key == monster.id) {
-                  for(var i = 0; i < monsterEvolutions[key].length; i++){
-                      let evo = monsterEvolutions[key][i];
-                      evo.id = key;
-                      let exists = false;
-                      //for some reason there are dups in the evolves to array
-                      for(let evoItem of evoArray) {
-                          if(evoItem.evolves_to === evo.evolves_to) {
-                              exists = true;
-                              break;
-                          }
-                      }
-                      if(!exists) {
-                          evoArray.push(evo);
-                      }
-                  }
-                  break;
-              }
-          }
+    //push your 'evo from' to the tree
+    pushEvo(monster.id, monster);
+    for(let evo of evosArr) {
+      if(evo.MONSTER_NO == monster.id) {
+        //push your 'evo to's' to the tree
+        pushEvo(evo.TO_NO, monster);
       }
-      monster.evoTree = createEvoObjects(evoArray, monster);
-      // if(monster.id == 1) {
-      //     console.log(JSON.stringify(evoArray));
-      //     console.log(JSON.stringify(createEvoObjects(evoArray, monster)));
-      // }
-      
+    }
   }
 }
 
-function createEvoObjects(evoArray, monster) {
-  let newEvoArr = [];
-  for(var i = 0; i < evoArray.length; i++) {
-      let evo = evoArray[i];
-      let evoObj = {};
-      let nextEvo = {};
-
-      //some monsters in the array actually don't exist
-      if(!getMonsterByNumber(evo.evolves_to)) {
-          continue;
-      }
-
-      let evolvesToMonster = getMonsterByNumber(evo.evolves_to);
-
-      evoObj.id = evo.evolves_to;
-      evoObj.pic = evolvesToMonster.img;
-      evoObj.name = evolvesToMonster.name;
-      evoObj.hasChild = true;
-      evoObj.childId = monster.id;
-      evoObj.childPic = monster.img;
-      evoObj.childName = monster.name;
-      evoObj.evoMonsters = [];
-      evoObj.evoIds = [];
-      for(let material of evo.materials) {
-          let monster = getMonsterByNumber(material[0]);
-          //insert how many of the material there is
-          for(let i = 0; i < material[1]; i++) {
-            evoObj.evoMonsters.push({img: monster.img, id: monster.id, name: monster.name});
-          }
-      }
-      if(evoObj.evoMonsters.length < 5) {
-          for(let i = evoObj.evoMonsters.length; i <= 4; i++) {
-              evoObj.evoMonsters.push({img:"/images/transparent.png", id:-1, name:"placeholder"});
-          }
-      }
-     
-      newEvoArr.push(evoObj);
+function pushEvo(monsterNum, monsterObj) {
+  let monster = getMonsterByNumber(monsterNum);
+  if(monster) {
+    let ancestor = monster.ancestorId !== 0 ? getMonsterByNumber(monster.ancestorId) : null;
+    if(!ancestor) {
+      return;
+    }
+    let evoMats = [];
+        evoMats.push(monster.evoMat1);
+        evoMats.push(monster.evoMat2);
+        evoMats.push(monster.evoMat3);
+        evoMats.push(monster.evoMat4);
+        evoMats.push(monster.evoMat5);
+    let evo =  {
+      evoFromId : ancestor.id,
+      evoFromName : ancestor.name,
+      evoToId : monster.id,
+      evoToName : monster.name,
+      evoMats : evoMats
+    }
+    monsterObj.evoTree.push(evo);
   }
-  return newEvoArr;
 }
 
 if (process.env.NODE_ENV === 'production') {
