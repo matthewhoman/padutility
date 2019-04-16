@@ -36,11 +36,12 @@ input[type=submit] {
 	top: 100%;
 	left: 0;
 	right: 0;
-	max-height:220px;
+	max-height:475px;
 	overflow-y:auto;
 	width: 100%;
 	list-style-type: none;
 	padding-left:0px;
+	background: white;
 }
 
 .autocompleteRow, .react-autosuggest__suggestion {
@@ -99,7 +100,8 @@ input[type=submit] {
 
 .monsterImageSearch {
 	max-width: 80%;
-	min-width: 60px;
+	min-width: 55px;
+	max-height: 60px;
 	cursor: pointer;
 }
 

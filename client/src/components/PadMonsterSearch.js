@@ -37,8 +37,8 @@ class PadMonsterSearch extends Component {
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
     
-        return inputLength === 0 ? [] : this.state.monsterListDictionary.filter(item =>
-            item.name.toLowerCase().slice(0, inputLength) === inputValue
+        return inputLength < 3 ? [] : this.state.monsterListDictionary.filter(item =>
+            item.name.toLowerCase().indexOf(inputValue) > -1
         );
     };
     
