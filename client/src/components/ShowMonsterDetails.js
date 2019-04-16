@@ -61,59 +61,103 @@ class ShowMonsterDetails extends Component {
             }
         }
 
-        let evoTreeComponent = []; 
-        if(this.state.monsterData && this.state.monsterData.evoTree) {
-            
-            let evoTreeWrapperComponent = [];
-            for(let j = 0; j < this.state.monsterData.evoTree.length; j++) {
-                let evoTreeIndComponent = [];
-                let evoMonster = this.state.monsterData.evoTree[j];
-                    if(evoMonster.hasChild) {
-                        evoTreeIndComponent.push(
-                            <div key={j} className="evoImageWrap">
-                                <Link to={'/showMonsterDetails?monsterId=' + evoMonster.childId + "&monsterName=" + evoMonster.childName}>
-                                    <img className="evoImageBig" 
-                                        src={evoMonster.childPic + ""} title={this.childId + ".&nbsp;" + evoMonster.childName} alt=" "/>
-                                </Link>
+        let evoTreeComponent = [];
+        let evoMatsComponent = [];
+        if(this.state.monsterData && this.state.monsterData.ancestorId !== 0) {
+            for(let mat of this.state.monsterData.evoMats) {
+                if(mat === 0) {
+                    evoMatsComponent.push(
+                        <div key={mat} className="evoImageWrap">
+                            <img className="evoImageSmall" src="/images/transparent.png" alt=""/>
                             </div>
-                        )
-                        for(let k = 0; k < evoMonster.evoMonsters.length; k++) {
-                            let evoPic = evoMonster.evoMonsters[k].img;
-                            evoTreeIndComponent.push(
-                                <div key={evoMonster.evoMonsters[k].id + '' + k} className="evoImageWrap">
-                                    {
-                                        evoMonster.evoMonsters[k].id === -1 
-                                        ? 
-                                            <img className="evoImageSmall" src={evoPic} alt=" "/>
-                                        :
-                                            <Link to={'/showMonsterDetails?monsterId=' + evoMonster.evoMonsters[k].id + "&monsterName=" + evoMonster.evoMonsters[k].name}>
-                                                <img className="evoImageSmall" src={evoPic} alt=" "/>
-                                            </Link>
-                                    }
-                                </div>
-                            )
-                        }
-                        evoTreeIndComponent.push(
-                            <div key={evoMonster.id} className="evoImageWrap">
-                                <Link to={'/showMonsterDetails?monsterId=' + evoMonster.id + "&monsterName=" + evoMonster.name}>
-                                    <img className="evoImageBig" 
-                                        src={evoMonster.pic} title={evoMonster.id+ ".&nbsp;" + evoMonster.name} alt=" "/>
-                                </Link>
-                            </div>
-                        )
-                    }
-                evoTreeWrapperComponent.push(<div key={j} className="evoContainer">{evoTreeIndComponent}</div>);
+                    )
+                } else {
+                    evoMatsComponent.push(
+                        <div key={mat} className="evoImageWrap">
+                            <Link to={'/showMonsterDetails?monsterId=' + mat}>{/* TODO: do i need name? + "&monsterName=" + evoMonster.name}> */}
+                                <img className="evoImageSmall" 
+                                    src={'http://www.puzzledragonx.com/en/img/book/' + mat + ".png"} title={mat} alt=" "/>
+                            </Link>
+                        </div>
+                    )
+                }
             }
             evoTreeComponent.push(<div key="evoTree">
-                                    <div className="w3-margin-bottom w3-theme-dark w3-medium">
-                                        <b>Evolution Tree</b>
+                                     <div className="w3-margin-bottom w3-theme-dark w3-medium">
+                                         <b>Evolution Tree</b>
                                     </div>
                                     <div className="w3-margin-bottom" style={{maxWidth:"780px"}}>
-                                        {evoTreeWrapperComponent}
-                                    </div>
+                                        <div key={this.state.monsterData.ancestorId} className="evoImageWrap">
+                                            <Link to={'/showMonsterDetails?monsterId=' + this.state.monsterData.ancestorId}>{/* TODO: do i need name? + "&monsterName=" + evoMonster.name}> */}
+                                                <img className="evoImageBig" 
+                                                    src={'http://www.puzzledragonx.com/en/img/book/' + this.state.monsterData.ancestorId + ".png"} title={this.state.monsterData.ancestorId} alt=""/>
+                                            </Link>
+                                        </div>
+                                        {evoMatsComponent}
+                                        <div key={this.state.monsterData.id} className="evoImageWrap">
+                                            <Link to={'/showMonsterDetails?monsterId=' + this.state.monsterData.id}>{/* TODO: do i need name? + "&monsterName=" + evoMonster.name}> */}
+                                                <img className="evoImageBig" 
+                                                    src={'http://www.puzzledragonx.com/en/img/book/' + this.state.monsterData.id + ".png"} title={this.state.monsterData.id} alt=""/>
+                                            </Link>
+                                        </div>
+                                     </div>
                                   </div>
                                   );
         }
+
+        // let evoTreeComponent = []; 
+        // if(this.state.monsterData && this.state.monsterData.evoTree) {
+            
+        //     let evoTreeWrapperComponent = [];
+        //     for(let j = 0; j < this.state.monsterData.evoTree.length; j++) {
+        //         let evoTreeIndComponent = [];
+        //         let evoMonster = this.state.monsterData.evoTree[j];
+        //             if(evoMonster.hasChild) {
+        //                 evoTreeIndComponent.push(
+        //                     <div key={j} className="evoImageWrap">
+        //                         <Link to={'/showMonsterDetails?monsterId=' + evoMonster.childId + "&monsterName=" + evoMonster.childName}>
+        //                             <img className="evoImageBig" 
+        //                                 src={evoMonster.childPic + ""} title={this.childId + ".&nbsp;" + evoMonster.childName} alt=" "/>
+        //                         </Link>
+        //                     </div>
+        //                 )
+        //                 for(let k = 0; k < evoMonster.evoMonsters.length; k++) {
+        //                     let evoPic = evoMonster.evoMonsters[k].img;
+        //                     evoTreeIndComponent.push(
+        //                         <div key={evoMonster.evoMonsters[k].id + '' + k} className="evoImageWrap">
+        //                             {
+        //                                 evoMonster.evoMonsters[k].id === -1 
+        //                                 ? 
+        //                                     <img className="evoImageSmall" src={evoPic} alt=" "/>
+        //                                 :
+        //                                     <Link to={'/showMonsterDetails?monsterId=' + evoMonster.evoMonsters[k].id + "&monsterName=" + evoMonster.evoMonsters[k].name}>
+        //                                         <img className="evoImageSmall" src={evoPic} alt=" "/>
+        //                                     </Link>
+        //                             }
+        //                         </div>
+        //                     )
+        //                 }
+        //                 evoTreeIndComponent.push(
+        //                     <div key={evoMonster.id} className="evoImageWrap">
+        //                         <Link to={'/showMonsterDetails?monsterId=' + evoMonster.id + "&monsterName=" + evoMonster.name}>
+        //                             <img className="evoImageBig" 
+        //                                 src={evoMonster.pic} title={evoMonster.id+ ".&nbsp;" + evoMonster.name} alt=" "/>
+        //                         </Link>
+        //                     </div>
+        //                 )
+        //             }
+        //         evoTreeWrapperComponent.push(<div key={j} className="evoContainer">{evoTreeIndComponent}</div>);
+        //     }
+        //     evoTreeComponent.push(<div key="evoTree">
+        //                             <div className="w3-margin-bottom w3-theme-dark w3-medium">
+        //                                 <b>Evolution Tree</b>
+        //                             </div>
+        //                             <div className="w3-margin-bottom" style={{maxWidth:"780px"}}>
+        //                                 {evoTreeWrapperComponent}
+        //                             </div>
+        //                           </div>
+        //                           );
+        // }
 
         
 
@@ -146,7 +190,7 @@ class ShowMonsterDetails extends Component {
                                     <div style={{height:"60px", width:"60px", backgroundSize:"contain", outline:"1px solid black", outlineOffset:"-1px",
                                         backgroundRepeat:"no-repeat", backgroundImage:"url(" + this.state.monsterData.img + ")"}}>
                                     </div>
-                                    <div className="w3-theme-dark w3-small">
+                                    <div className="w3-theme-dark w3-tiny">
                                         MP:{this.state.monsterData.mp}
                                     </div>
                                     <br></br>
@@ -155,21 +199,21 @@ class ShowMonsterDetails extends Component {
                                     <div className="lightblueText">
                                         No.{this.state.monsterData.id}&nbsp;&nbsp;&nbsp;
                                         {
-                                            this.state.monsterData.type !== undefined && this.state.monsterData.type !== null ?
+                                            this.state.monsterData.type !== -1 && this.state.monsterData.type !== null ?
                                                 <span><img src={"images/0" + this.state.monsterData.type +".png"} 
                                                     className="typeImg" alt= ""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
-                                            this.state.monsterData.type2 !== undefined && this.state.monsterData.type2 !== null ?
+                                            this.state.monsterData.type2 !== -1 && this.state.monsterData.type2 !== null ?
                                                 <span><img src={"images/0" + this.state.monsterData.type2 +".png"} 
                                                     className="typeImg" alt= ""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
-                                            this.state.monsterData.type3 !== undefined && this.state.monsterData.type3 !== null ?
+                                            this.state.monsterData.type3 !== -1 && this.state.monsterData.type3 !== null ?
                                                 <span><img src={"images/0" + this.state.monsterData.type3 +".png"} 
                                                     className="typeImg" alt= ""/>&nbsp;&nbsp;</span>
                                             :
@@ -191,12 +235,32 @@ class ShowMonsterDetails extends Component {
                                 <div className="w3-theme-dark w3-small">
                                     {
                                         this.state.monsterData.awakenings.map((value, index) => {                     
-                                            return <img key={index} src={"images/00"+ value.id + ".png"} title={value.name + ":/n" + value.desc}
+                                            return <img key={index} src={"images/awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
                                                     className="awakenImg" alt= ""/>
                                         })
                                     }
                                 </div>
                                 <br></br>
+                                {
+                                    this.state.monsterData.superAwakenings.length > 0 
+                                    ? 
+                                        <div>
+                                            <div className="w3-theme-dark w3-medium">
+                                                <b>Super Awakenings:</b>
+                                            </div>
+                                            <div className="w3-theme-dark w3-small">
+                                                {
+                                                    this.state.monsterData.superAwakenings.map((value, index) => {                     
+                                                        return <img key={index} src={"images/awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
+                                                                className="awakenImg" alt= ""/>
+                                                    })
+                                                }
+                                            </div>
+                                            <br></br>
+                                        </div>
+                                    : 
+                                    <div></div>
+                                }
                                 <div className="w3-theme-dark w3-small">
                                         Cost:&nbsp;{this.state.monsterData.cost}
                                 </div>
