@@ -63,7 +63,7 @@ class PadMonsterSearch extends Component {
                                 {
                                     suggestion.type && suggestion.type !== null
                                     ?
-                                    <img src={"images/0" + suggestion.type +".png"} 
+                                    <img src={"images/type/" + suggestion.type +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
                                     :
                                     <span></span>
@@ -71,7 +71,7 @@ class PadMonsterSearch extends Component {
                                 {
                                     suggestion.type2 && suggestion.type2 !== null 
                                     ?
-                                    <img src={"images/0" + suggestion.type2 +".png"} 
+                                    <img src={"images/type/" + suggestion.type2 +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
                                     :
                                     <span></span>
@@ -79,7 +79,7 @@ class PadMonsterSearch extends Component {
                                 {
                                     suggestion.type3 && suggestion.type3 !== null
                                     ?
-                                    <img src={"images/0" + suggestion.type3 +".png"} 
+                                    <img src={"images/type/" + suggestion.type3 +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
                                     :
                                     <span></span>

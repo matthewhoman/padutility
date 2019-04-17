@@ -145,21 +145,21 @@ class ShowMonsterDetails extends Component {
                                         No.{this.state.monsterData.id}&nbsp;&nbsp;&nbsp;
                                         {
                                             this.state.monsterData.type !== -1 && this.state.monsterData.type !== null ?
-                                                <span><img src={"images/0" + this.state.monsterData.type +".png"} 
+                                                <span><img src={"images/type/" + this.state.monsterData.type +".png"} 
                                                     className="typeImg" alt=""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
                                             this.state.monsterData.type2 !== -1 && this.state.monsterData.type2 !== null ?
-                                                <span><img src={"images/0" + this.state.monsterData.type2 +".png"} 
+                                                <span><img src={"images/type/" + this.state.monsterData.type2 +".png"} 
                                                     className="typeImg" alt=""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
                                             this.state.monsterData.type3 !== -1 && this.state.monsterData.type3 !== null ?
-                                                <span><img src={"images/0" + this.state.monsterData.type3 +".png"} 
+                                                <span><img src={"images/type/" + this.state.monsterData.type3 +".png"} 
                                                     className="typeImg" alt=""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
