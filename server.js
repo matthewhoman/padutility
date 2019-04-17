@@ -10,6 +10,8 @@ const URL = require('url');
 const util = require('./lib/utils.js');
 const fs = require('fs');
 const ENCODING = 'utf8';
+var Scraper = require("image-scraper");
+const phantom = require('phantom');
 
 //PAD STUFF
 //var monsterListJSON = "https://www.padherder.com/api/monsters/"; //"https://storage.googleapis.com/mirubot/paddata/processed/na_cards.json";
@@ -72,6 +74,12 @@ function getMonsterByNumber(monsterNum) {
       return monster;
     }
   }
+  for(var j = 0; j < masterMonsterUnreleasedDictionary.length; j++) {
+    var monster = masterMonsterUnreleasedDictionary[j];
+    if(monster.id == monsterNum) {
+      return monster;
+    }
+  }
 }
 
 function getMonsters() {
@@ -98,14 +106,6 @@ function getMonsters() {
   //       parseDictionaryForClient(monsterObjs);
   //   }
   // });
-}
-
-function fillUnreleasedMonsters() {
-    for(var monster of monsterNameNumArr) {
-        if(monster.unreleased) {
-            masterMonsterUnreleasedDictionary.push(monster);
-        }
-    }
 }
 
 function parseDictionaryForClient(dictionary, evosArr) {
@@ -142,7 +142,7 @@ function parseDictionaryForClient(dictionary, evosArr) {
     monstersJson.activeSkill = monster.active_skill ? monster.active_skill.name : 'N/A';
     monstersJson.rarity = monster.card.rarity;
     monstersJson.cost = monster.card.cost;
-    monstersJson.img = 'http://www.puzzledragonx.com/en/img/book/' + monster.card.card_id + ".png";
+    monstersJson.img = 'images/monsterIcons/' + monster.card.card_id + ".png";
     if(monster.leader_skill) {
         monstersJson.leaderSkillDescription = monster.leader_skill.clean_description ? monster.leader_skill.clean_description : "N/A"
     }
@@ -166,6 +166,11 @@ function parseDictionaryForClient(dictionary, evosArr) {
 
     monstersJson.evoTree = [];
 
+    if(!monster.card.released_status) {
+      masterMonsterUnreleasedDictionary.push(monstersJson);
+      continue;
+    }
+
     monsterNameNumArr.push(monstersJson);
   }
 
@@ -184,14 +189,56 @@ function parseDictionaryForClient(dictionary, evosArr) {
   }
 
   monsterNameNumArr.sort(compare);
+  masterMonsterUnreleasedDictionary.sort(compare);
 
   fillEvos(monsterNameNumArr, evosArr);
+  fillEvos(masterMonsterUnreleasedDictionary, evosArr);
 
   console.log("Done Parsing Client Monster Data!!");
-  fillUnreleasedMonsters();
-  console.log("Done Parsing Unreleased Monster Data!!") ;
+  
+  //TODO: WHEN TO SCRAPE IMAGES? WHAT TO SCRAPE FOR? ONLY LATEST>> NEW STUFF I DON'T HAVE
+  //scrapeImages();
   console.log("DONE WITH DATA!!! APP READY!");
   serverReady = true;
+}
+
+function scrapeImages() {
+  (async function() {
+    const instance = await phantom.create();
+    const page = await instance.createPage();
+    await page.on('onConsoleMessage', function(msg) {
+      console.info(msg);
+    });
+    await page.on('onError', function(msg) {
+      console.info(msg);
+    });
+    await page.on('onResourceRequested', function(requestData) {
+      console.info('Requesting', requestData.url);
+    });
+    let baseURL = 'http://puzzledragonx.com/en/img/thumbnail/';
+    for(let i = 0; i < monsterNameNumArr.length; i++) {
+      let monster = monsterNameNumArr[i];
+      let imgExt = monster.id + ".png";
+      let url = baseURL + imgExt;
+      const status = await page.open(url);
+      await console.log(`Page opened with status [${status}].`);
+      await page.includeJs('https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js');
+
+      let imgObj = await page.evaluate(function() {
+        img = $("img");
+        return {
+          top : img.offset().top,
+          left : img.offset().left,
+          width : img.width(),
+          height : img.height()
+        };
+      }); 
+      await page.property('clipRect', imgObj);
+      await page.render('client/public/images/monsterIcons/' + imgExt);   
+      console.log('created: ' + imgExt)
+    }
+    await instance.exit();
+  })();
 }
 
 function parseAwakenings(awokenArr) {

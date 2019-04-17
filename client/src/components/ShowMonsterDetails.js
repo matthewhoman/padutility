@@ -79,7 +79,7 @@ class ShowMonsterDetails extends Component {
                             <div key={i + j} className="evoImageWrap">
                                 <Link to={'/showMonsterDetails?monsterId=' + mat}>{/* TODO: do i need name? + "&monsterName=" + evoMonster.name}> */}
                                     <img className="evoImageSmall" 
-                                        src={'http://www.puzzledragonx.com/en/img/book/' + mat + ".png"} title={mat} alt=""/>
+                                        src={'images/monsterIcons/' + mat + ".png"} title={mat} alt=""/>
                                 </Link>
                             </div>
                         )
@@ -90,14 +90,14 @@ class ShowMonsterDetails extends Component {
                                             <div key={evo.evoFromId} className="evoImageWrap">
                                                 <Link to={'/showMonsterDetails?monsterId=' + evo.evoFromId + "&monsterName=" + evo.evoFromName}>
                                                     <img className="evoImageBig" 
-                                                        src={'http://www.puzzledragonx.com/en/img/book/' + evo.evoFromId + ".png"} title={evo.evoFromId} alt=""/>
+                                                        src={'images/monsterIcons/' + evo.evoFromId + ".png"} title={evo.evoFromId} alt=""/>
                                                 </Link>
                                             </div>
                                             {evoMatsComponent}
                                             <div key={evo.evoToId} className="evoImageWrap">
                                                 <Link to={'/showMonsterDetails?monsterId=' + evo.evoToId + "&monsterName=" + evo.evoToName}>
                                                     <img className="evoImageBig" 
-                                                        src={'http://www.puzzledragonx.com/en/img/book/' + evo.evoToId + ".png"} title={evo.evoToId} alt=""/>
+                                                        src={'images/monsterIcons/' + evo.evoToId + ".png"} title={evo.evoToId} alt=""/>
                                                 </Link>
                                             </div>
                                         </div>
