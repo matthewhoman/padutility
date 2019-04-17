@@ -184,7 +184,7 @@ class ShowMonsterDetails extends Component {
                                         <div className="w3-theme-dark w3-small">
                                             {
                                                 this.state.monsterData.awakenings.map((value, index) => {                     
-                                                    return <img key={index} src={"images/awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
+                                                    return <img key={index} src={"images/Awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
                                                             className="awakenImg" alt= ""/>
                                                 })
                                             }
@@ -204,7 +204,7 @@ class ShowMonsterDetails extends Component {
                                             <div className="w3-theme-dark w3-small">
                                                 {
                                                     this.state.monsterData.superAwakenings.map((value, index) => {                     
-                                                        return <img key={index} src={"images/awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
+                                                        return <img key={index} src={"images/Awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
                                                                 className="awakenImg" alt= ""/>
                                                     })
                                                 }
