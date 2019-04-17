@@ -112,6 +112,11 @@ function parseDictionaryForClient(dictionary, evosArr) {
   for(var i = 0; i < dictionary.length; i++) {
     var monstersJson = {};
     var monster = dictionary[i];
+
+    //don't add cards that have id's greater than 100000
+    if(monster.card.card_id > 100000) {
+      continue;
+    }
   
     monstersJson.awakenings = parseAwakenings(monster.card.awakenings);
     monstersJson.superAwakenings = monster.card.super_awakenings;
