@@ -251,6 +251,12 @@ class ShowMonsterDetails extends Component {
                                     <div className="w3-margin-bottom w3-theme-dark w3-medium">
                                         <b>Evolution Tree</b>
                                         {evoTreeComponent}
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
+                                        <br></br>
                                     </div>
                                 :
                                 <div></div>
