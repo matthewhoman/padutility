@@ -16,16 +16,26 @@ const phantom = require('phantom');
 //PAD STUFF
 //var monsterListJSON = "https://www.padherder.com/api/monsters/"; //"https://storage.googleapis.com/mirubot/paddata/processed/na_cards.json";
 var monsterListJSON = "https://f002.backblazeb2.com/file/miru-data/paddata/processed/na_cards.json";
-var monsterActiveSkillsJSON = "https://www.padherder.com/api/active_skills/";
-var monsterLeaderSkillsJSON = "https://www.padherder.com/api/leader_skills/";
-var monsterEvolutionsJSON = "https://www.padherder.com/api/evolutions/";
-var monsterAwakeningsJSON = "https://www.padherder.com/api/awakenings/";
-
 
 //slimmed down version of monsters name/ num pairs for the clients autocomplete
 var monsterNameNumArr = [];
 var masterMonsterUnreleasedDictionary = [];
 var serverReady = false;
+
+var typeMap = {
+  evolve : '0',
+  balanced : '1',
+  physical : '2',
+  healer : '3',
+  dragon : '4',
+  god : '5',
+  attacker : '6',
+  devil : '7',
+  machine : '8',
+  awaken : '12',
+  enhanced : '14',
+  vendor : '15'
+}
 
 var app = express();
 
@@ -38,8 +48,33 @@ app.get('/serverReady', function(req, res) {
   res.end(JSON.stringify(serverReady));
 });
 
-//retrieve monster stuff
+//retrieve monster stuff, they can be filtered
 app.get('/retrieveMonsters', function(req, res) {
+  var typeFilters = URL.parse(req.url, true).query.typeFilter;
+
+  if(typeFilters) {
+    let types = JSON.parse(typeFilters);
+    if(types.length > 0) {
+      let monsters = [];
+      for(let mons of monsterNameNumArr) {
+        if(mons.type != -1 && types.includes(mons.type + '')) {
+          monsters.push(mons);
+        }
+        if(mons.type2 != -1 && types.includes(mons.type2 + '')) {
+          monsters.push(mons);
+        }
+        if(mons.type3 != -1 && types.includes(mons.type3 + '')) {
+          monsters.push(mons);
+        }
+      }
+      res.end(JSON.stringify(monsters));
+      return;
+    } else {
+      res.end(JSON.stringify(monsterNameNumArr));
+      return;
+    }
+  }
+  
   res.end(JSON.stringify(monsterNameNumArr));
 });
 

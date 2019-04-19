@@ -10,34 +10,16 @@ class PadMonsterSearch extends Component {
     constructor(props) {
         super(props);
         this.state = { 
-            monstersFetched : false
+            monstersFetched : false,
+            suggestions: [],
+            value: ''
         };
     }
 
-    componentDidMount() {
-        this.getMonsters();
-    }
-
-    getMonsters() {
-        fetch('/retrieveMonsters')
-            .then(response => response.json())
-            .then(data => {
-                this.setState(() => ({
-                    monstersFetched : true,
-                    value: '',
-                    suggestions: [],
-                    monsterListDictionary : data, 
-                }))
-            }).catch(function(error) {
-                console.log('Request failed', error)
-            });
-    }
-
-    getSuggestions = value => {
+    getSuggestions = (value, data) => {
         const inputValue = value.trim().toLowerCase();
-        const inputLength = inputValue.length;
-    
-        return inputLength < 3 ? [] : this.state.monsterListDictionary.filter(item =>
+
+        return data.filter(item =>
             item.name.toLowerCase().indexOf(inputValue) > -1
         );
     };
@@ -106,9 +88,19 @@ class PadMonsterSearch extends Component {
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
     onSuggestionsFetchRequested = ({ value }) => {
-        this.setState({
-            suggestions: this.getSuggestions(value)
-        });
+        if(value.length < 3) {return}
+        fetch('/retrieveMonsters')
+            .then(response => response.json())
+            .then(data => {
+                this.setState(() => ({
+                    monstersFetched : true,
+                    value: value,
+                    monsterListDictionary : data, 
+                    suggestions: this.getSuggestions(value, data) 
+                }))
+            }).catch(function(error) {
+                console.log('Request failed', error)
+            });
     };
 
     // Autosuggest will call this function every time you need to clear suggestions.
@@ -138,8 +130,7 @@ class PadMonsterSearch extends Component {
         )
         return (
             <div style={{id:"PadSearchBar", width: "100%", maxWidth: "400px"}}>
-              {
-              this.state.monstersFetched && this.state.monsterListDictionary ? 
+              
                 <Autosuggest
                     suggestions={suggestions}
                     onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -149,9 +140,6 @@ class PadMonsterSearch extends Component {
                     renderInputComponent={inputComponent}
                     inputProps={inputProps}
                 />
-              : 
-              loading
-              }
 			  
 		    </div>
         )
