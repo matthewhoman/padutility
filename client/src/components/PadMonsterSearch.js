@@ -32,7 +32,7 @@ class PadMonsterSearch extends Component {
                 <div className="overflows" style={{position:"relative", top:"10px", 
                         display:"table", tableLayout:"fixed", width:"100%", height:"100%"}}>
                     <span className="overflows" style={{display:"table-cell", width:"90px"}}>
-                        <img className="monsterImageSearch" src={suggestion.img} title={suggestion.id + ".&nbsp;" + suggestion.name} alt="" />
+                        <img className="monsterImageSearch" src={suggestion.img} title={suggestion.id + ".&nbsp;" + suggestion.name} alt=" " />
                     </span>
                     <span className="w3-small overflows" style={{display:"table-cell",verticalAlign:"top"}}>
                         <div className="overflows">
@@ -46,7 +46,7 @@ class PadMonsterSearch extends Component {
                                     suggestion.type && suggestion.type !== null
                                     ?
                                     <img src={"images/type/" + suggestion.type +".png"} 
-                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
+                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= " "/>
                                     :
                                     <span></span>
                                 }
@@ -54,7 +54,7 @@ class PadMonsterSearch extends Component {
                                     suggestion.type2 && suggestion.type2 !== null 
                                     ?
                                     <img src={"images/type/" + suggestion.type2 +".png"} 
-                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
+                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= " "/>
                                     :
                                     <span></span>
                                 }
@@ -62,7 +62,7 @@ class PadMonsterSearch extends Component {
                                     suggestion.type3 && suggestion.type3 !== null
                                     ?
                                     <img src={"images/type/" + suggestion.type3 +".png"} 
-                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
+                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= " "/>
                                     :
                                     <span></span>
                                 }
