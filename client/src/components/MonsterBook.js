@@ -57,7 +57,8 @@ class MonsterBook extends Component {
     }
 
     getMonsters() {
-        fetch('/retrieveMonsters?typeFilter=' + JSON.stringify(this.state.typeFilter))
+        let typeFilter = this.state.typeFilter.length > 0 ? this.state.typeFilter : null;
+        fetch('/retrieveMonsters?typeFilter=' + JSON.stringify(typeFilter))
             .then(response => response.json())
             .then(data => {
                 this.setState(() => ({
@@ -74,13 +75,14 @@ class MonsterBook extends Component {
         for (var key in typeMap) {
             if (typeMap.hasOwnProperty(key)) {
                 checkBoxComps.push(
-                    <div className="w3-theme-dark" key={key} style={{textAlign:"left", display:"inline-block"}}>
+                    <div className="w3-theme-dark" key={key} style={{textAlign:"left", display:"inline-block", marginLeft:"5px", marginBottom:"10px"}}>
                         <input name={typeMap[key]} onChange={this.handleCheckBoxChange} type="checkbox" 
-                            style={{width: "20px",height:"20px",display:"inline-block",verticalAlign:'bottom'}}
+                            style={{width: "18px",height:"18px",display:"inline-block",verticalAlign:'bottom'}}
                             id={typeMap[key]}>
                         </input>
+                        &nbsp;&nbsp;
                         <img src={"images/type/" + typeMap[key] +".png"} 
-                                        style={{width:"18px",height:"18px", verticalAlign:"top"}} alt= ""/>
+                                        style={{width:"18px",height:"18px", verticalAlign:"baseline"}} alt= ""/>
                         <span>&nbsp;&nbsp;</span>
                     </div>
                 )
@@ -113,12 +115,23 @@ class MonsterBook extends Component {
             <div>
                 <ReturnNav history={this.props.history} header="Monster Book"/>
                 <div style={{margin:"12px"}}>
-                    <div className="w3-theme-dark w3-large">Filter: </div>
-                    <form onSubmit={this.handleSubmit}> 
-                        {checkBoxComps}
-                        <input text="Find" variant="emphasis" type="submit" className="FormContent" />
-                    </form>
-                    {monsters}  
+                    <div style={{marginBottom:"10px"}}>
+                        <div className="w3-theme-dark w3-large">Filter: </div>
+                        <form onSubmit={this.handleSubmit}> 
+                            <div style={{marginBottom:"10px"}}>
+                                {checkBoxComps}
+                            </div>
+                            <div>
+                                <input text="Find" variant="emphasis" type="submit" className="FormContent" />
+                                <div className="w3-theme-dark w3-small" style={{display:"inline-block", marginLeft:"10px"}}>
+                                    Top 100 results&nbsp;(&nbsp;{this.state.monsters ? this.state.monsters.length : 0}&nbsp;)
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        {monsters}  
+                    </div>
                 </div>
             </div>     
         )

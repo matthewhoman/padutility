@@ -66,32 +66,41 @@ app.get('/retrieveMonstersSuggest', function(req, res) {
 
 //retrieve monster stuff, they can be filtered
 app.get('/retrieveMonsters', function(req, res) {
-  var typeFilters = URL.parse(req.url, true).query.typeFilter;
-
-  if(typeFilters) {
+  let typeFilters = URL.parse(req.url, true).query.typeFilter;
+  let monsters = [];
+  if(typeFilters != 'null') {
     let types = JSON.parse(typeFilters);
     if(types.length > 0) {
-      let monsters = [];
       for(let mons of monsterNameNumArr) {
-        if(mons.type != -1 && types.includes(mons.type + '')) {
+        // only return monsters that match all criteria
+        let matches = true;
+        for(let type of types) {
+          if(!mons.types.includes(type + '')) {
+            matches = false
+          }
+        }
+        if(matches) {
           monsters.push(mons);
         }
-        if(mons.type2 != -1 && types.includes(mons.type2 + '')) {
-          monsters.push(mons);
-        }
-        if(mons.type3 != -1 && types.includes(mons.type3 + '')) {
-          monsters.push(mons);
+        // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
+        if(monsters.length >= 100) {
+          break;
         }
       }
       res.end(JSON.stringify(monsters));
       return;
-    } else {
-      res.end(JSON.stringify(monsterNameNumArr));
-      return;
+    } 
+  } else {
+    //if no filters just return back top 100 monsters
+    for(let mons of monsterNameNumArr) {
+      monsters.push(mons);
+      if(monsters.length >= 100) {
+        break;
+      }
     }
+    res.end(JSON.stringify(monsters));
+    return;
   }
-  
-  res.end(JSON.stringify(monsterNameNumArr));
 });
 
 app.get('/retrieveUnreleasedMonsters', function(req, res) {
@@ -188,6 +197,7 @@ function parseDictionaryForClient(dictionary, evosArr) {
     monstersJson.type = monster.card.type_1_id;
     monstersJson.type2 = monster.card.type_2_id;
     monstersJson.type3 = monster.card.type_3_id;
+    monstersJson.types = [monster.card.type_1_id + '', monster.card.type_2_id + '', monster.card.type_3_id + ''];
     monstersJson.mp = monster.card.sell_mp;
     monstersJson.leaderSkill = monster.leader_skill ? monster.leader_skill.name : 'N/A';
     monstersJson.activeSkill = monster.active_skill ? monster.active_skill.name : 'N/A';
