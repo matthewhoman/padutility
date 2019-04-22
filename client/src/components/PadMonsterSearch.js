@@ -88,8 +88,8 @@ class PadMonsterSearch extends Component {
     // Autosuggest will call this function every time you need to update suggestions.
     // You already implemented this logic above, so just use it.
     onSuggestionsFetchRequested = ({ value }) => {
-        if(value.length < 3) {return}
-        fetch('/retrieveMonsters')
+        //if(value.length < 3) {return}
+        fetch('/retrieveMonstersSuggest?searchStr=' + value)
             .then(response => response.json())
             .then(data => {
                 this.setState(() => ({

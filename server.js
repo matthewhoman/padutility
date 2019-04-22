@@ -48,6 +48,22 @@ app.get('/serverReady', function(req, res) {
   res.end(JSON.stringify(serverReady));
 });
 
+app.get('/retrieveMonstersSuggest', function(req, res) {
+  var searchStr = URL.parse(req.url, true).query.searchStr;
+
+  let monsters = [];
+  for(let mons of monsterNameNumArr) {
+    if(mons.name && mons.name.toLowerCase().includes(searchStr.toLowerCase())) {
+        monsters.push(mons);
+    }
+    if(monsters.length >= 30) {
+      break;
+    }
+  }
+  
+  res.end(JSON.stringify(monsters));
+});
+
 //retrieve monster stuff, they can be filtered
 app.get('/retrieveMonsters', function(req, res) {
   var typeFilters = URL.parse(req.url, true).query.typeFilter;
