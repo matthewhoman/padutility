@@ -71,7 +71,7 @@ class ShowMonsterDetails extends Component {
                     if(mat === 0) {
                         evoMatsComponent.push(
                             <div key={i + j} className="evoImageWrap">
-                                <img className="evoImageSmall" src="/images/transparent.png" alt=" "/>
+                                <img className="evoImageSmall" src="/images/transparent.png" alt=""/>
                                 </div>
                         )
                     } else {
@@ -79,7 +79,7 @@ class ShowMonsterDetails extends Component {
                             <div key={i + j} className="evoImageWrap">
                                 <Link to={'/showMonsterDetails?monsterId=' + mat}>{/* TODO: do i need name? + "&monsterName=" + evoMonster.name}> */}
                                     <img className="evoImageSmall" 
-                                        src={'images/monsterIcons/' + mat + ".png"} title={mat} alt=" "/>
+                                        src={'images/monsterIcons/' + mat + ".png"} title={mat} alt=""/>
                                 </Link>
                             </div>
                         )
@@ -90,14 +90,14 @@ class ShowMonsterDetails extends Component {
                                             <div key={evo.evoFromId} className="evoImageWrap">
                                                 <Link to={'/showMonsterDetails?monsterId=' + evo.evoFromId + "&monsterName=" + evo.evoFromName}>
                                                     <img className="evoImageBig" 
-                                                        src={'images/monsterIcons/' + evo.evoFromId + ".png"} title={evo.evoFromId} alt=" "/>
+                                                        src={'images/monsterIcons/' + evo.evoFromId + ".png"} title={evo.evoFromId} alt=""/>
                                                 </Link>
                                             </div>
                                             {evoMatsComponent}
                                             <div key={evo.evoToId} className="evoImageWrap">
                                                 <Link to={'/showMonsterDetails?monsterId=' + evo.evoToId + "&monsterName=" + evo.evoToName}>
                                                     <img className="evoImageBig" 
-                                                        src={'images/monsterIcons/' + evo.evoToId + ".png"} title={evo.evoToId} alt=" "/>
+                                                        src={'images/monsterIcons/' + evo.evoToId + ".png"} title={evo.evoToId} alt=""/>
                                                 </Link>
                                             </div>
                                         </div>
@@ -125,7 +125,7 @@ class ShowMonsterDetails extends Component {
                             <div style={{position:"relative", display:"inline-block"}}>
                                 {/* outline to hide water mark on image */}
                                 <img src={monsterImageURL.replace("#", this.state.monsterData.id)} 
-                                    style={{width:"100%", height:"auto", maxHeight:"600px", maxWidth:"800px", outline:"18px solid black", outlineOffset:"-18px"}} alt=" "/> 
+                                    style={{width:"100%", height:"auto", maxHeight:"600px", maxWidth:"800px", outline:"18px solid black", outlineOffset:"-18px"}} alt=""/> 
                             </div>
                             <div style={{whiteSpace: "nowrap", marginLeft: "20px"}}>
                                 <br></br>
@@ -144,23 +144,23 @@ class ShowMonsterDetails extends Component {
                                     <div className="lightblueText">
                                         No.{this.state.monsterData.id}&nbsp;&nbsp;&nbsp;
                                         {
-                                            this.state.monsterData.type !== -1 && this.state.monsterData.type !== null ?
+                                            this.state.monsterData.type && this.state.monsterData.type != -1 && this.state.monsterData.type !== null ?
                                                 <span><img src={"images/type/" + this.state.monsterData.type +".png"} 
-                                                    className="typeImg" alt=" "/>&nbsp;&nbsp;</span>
+                                                    className="typeImg" alt=""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
-                                            this.state.monsterData.type2 !== -1 && this.state.monsterData.type2 !== null ?
+                                            this.state.monsterData.type2 && this.state.monsterData.type2 != -1 && this.state.monsterData.type2 !== null ?
                                                 <span><img src={"images/type/" + this.state.monsterData.type2 +".png"} 
-                                                    className="typeImg" alt=" "/>&nbsp;&nbsp;</span>
+                                                    className="typeImg" alt=""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
-                                            this.state.monsterData.type3 !== -1 && this.state.monsterData.type3 !== null ?
+                                            this.state.monsterData.type3 && this.state.monsterData.type3 != -1 && this.state.monsterData.type3 !== null ?
                                                 <span><img src={"images/type/" + this.state.monsterData.type3 +".png"} 
-                                                    className="typeImg" alt=" "/>&nbsp;&nbsp;</span>
+                                                    className="typeImg" alt=""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
@@ -185,7 +185,7 @@ class ShowMonsterDetails extends Component {
                                             {
                                                 this.state.monsterData.awakenings.map((value, index) => {                     
                                                     return <img key={index} src={"images/Awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
-                                                            className="awakenImg" alt= " "/>
+                                                            className="awakenImg" alt= ""/>
                                                 })
                                             }
                                         </div>
@@ -205,7 +205,7 @@ class ShowMonsterDetails extends Component {
                                                 {
                                                     this.state.monsterData.superAwakenings.map((value, index) => {                     
                                                         return <img key={index} src={"images/Awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
-                                                                className="awakenImg" alt= " "/>
+                                                                className="awakenImg" alt= ""/>
                                                     })
                                                 }
                                             </div>
