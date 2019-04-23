@@ -27,18 +27,7 @@ class ReturnNav extends Component {
         sessionStorage.clear();
     }
 
-    render() {
-        let userName = this.props.userName ? this.props.userName : 
-                            sessionStorage.getItem('userName');
-        let userID = this.props.userID ? this.props.userID : 
-                            sessionStorage.getItem('userID');
-        let patientName = this.props.patientName ? this.props.patientName : 
-                            sessionStorage.getItem('patientName');
-
-        sessionStorage.setItem('patientName', patientName);
-        sessionStorage.setItem('userID', userID);
-        sessionStorage.setItem('userName', userName);
-        
+    render() { 
         let breadCrumbs = JSON.parse(sessionStorage.getItem('breadCrumbs'));
         let location = "";
         if(this.props.history) {

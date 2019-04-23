@@ -101,11 +101,11 @@ class MonsterBook extends Component {
 
         this.state = {
             monstersFetched : false,
-            typeFilter : [],
-            elementFilter : [],
-            awokenFilter: [],
-            leaderFilter : '',
-            activeFilter : ''
+            typeFilter : sessionStorage.getItem('typeFilter') ? JSON.parse(sessionStorage.getItem('typeFilter')) : [],
+            elementFilter : sessionStorage.getItem('elementFilter') ? JSON.parse(sessionStorage.getItem('elementFilter')) : [],
+            awokenFilter: sessionStorage.getItem('awokenFilter') ? JSON.parse(sessionStorage.getItem('awokenFilter')) : [],
+            leaderFilter : sessionStorage.getItem('leaderFilter') ? JSON.parse(sessionStorage.getItem('leaderFilter')) : '',
+            activeFilter : sessionStorage.getItem('activeFilter') ? JSON.parse(sessionStorage.getItem('activeFilter')) : ''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -113,6 +113,10 @@ class MonsterBook extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.resetForm = this.resetForm.bind(this);
         this.setDefaultState = this.setDefaultState.bind(this);
+    }
+
+    componentDidMount() {
+        this.getMonsters();
     }
 
     setDefaultState() {
@@ -178,6 +182,12 @@ class MonsterBook extends Component {
             queryStr += "activeFilter=" + encodeURIComponent(this.state.activeFilter)
         }
 
+        sessionStorage.setItem('typeFilter', JSON.stringify(this.state.typeFilter));
+        sessionStorage.setItem('activeFilter', JSON.stringify(this.state.activeFilter));
+        sessionStorage.setItem('leaderFilter', JSON.stringify(this.state.leaderFilter));
+        sessionStorage.setItem('elementFilter', JSON.stringify(this.state.elementFilter));
+        sessionStorage.setItem('awokenFilter', JSON.stringify(this.state.awokenFilter));
+
         queryStr = queryStr.substring(0, queryStr.length - 1);
         
         fetch('/retrieveMonsters?' + queryStr)
@@ -200,7 +210,7 @@ class MonsterBook extends Component {
                     <div className="w3-theme-dark" key={key} style={{textAlign:"left", display:"inline-block", marginLeft:"5px", marginBottom:"10px"}}>
                         <input name={typeMap[key]} onChange={this.handleChange} type="checkbox" filtername="typeFilter"
                             style={{width: "18px",height:"18px",display:"inline-block",verticalAlign:'bottom'}}
-                            id={typeMap[key]}>
+                            id={typeMap[key]} checked={this.state.typeFilter.includes(typeMap[key])}>
                         </input>
                         &nbsp;&nbsp;
                         <img src={"images/type/" + typeMap[key] +".png"} 
@@ -218,7 +228,7 @@ class MonsterBook extends Component {
                     <div className="w3-theme-dark" key={elKey} style={{textAlign:"left", display:"inline-block", marginLeft:"5px", marginBottom:"10px"}}>
                         <input name={elementMap[elKey]} onChange={this.handleChange} type="checkbox" filtername="elementFilter"
                             style={{width: "18px",height:"18px",display:"inline-block",verticalAlign:'bottom'}}
-                            id={elementMap[elKey]}>
+                            id={elementMap[elKey]} checked={this.state.elementFilter.includes(elementMap[elKey])}>
                         </input>
                         &nbsp;&nbsp;
                         <img src={"images/element/" + elementMap[elKey] +".png"} 
@@ -236,7 +246,7 @@ class MonsterBook extends Component {
                     <div className="w3-theme-dark" key={awKey} style={{textAlign:"left", display:"inline-block", marginLeft:"5px", marginBottom:"10px"}}>
                         <input name={awokenMap[awKey]} onChange={this.handleChange} type="checkbox" filtername="awokenFilter"
                             style={{width: "18px",height:"18px",display:"inline-block",verticalAlign:'bottom'}}
-                            id={awokenMap[awKey]}>
+                            id={awokenMap[awKey]} checked={this.state.awokenFilter.includes(awokenMap[awKey])}>
                         </input>
                         &nbsp;&nbsp;
                         <img src={"images/Awokens/" + awokenMap[awKey] +".png"} 
@@ -309,10 +319,10 @@ class MonsterBook extends Component {
                                 {checkBoxAwokenComps}
                             </div>
                             <div style={{marginBottom:"10px"}}>
-                                <input name="leaderFilter" type="text" placeholder="Leader Skill" value={this.state.value} onChange={this.handleChange} />
+                                <input name="leaderFilter" type="text" placeholder="Leader Skill" value={this.state.leaderFilter} onChange={this.handleChange} />
                             </div>
                             <div style={{marginBottom:"10px"}}>
-                                <input name="activeFilter" type="text" placeholder="Active Skill" value={this.state.value} onChange={this.handleChange} />
+                                <input name="activeFilter" type="text" placeholder="Active Skill" value={this.state.activeFilter} onChange={this.handleChange} />
                             </div>
                             <div>
                                 <input text="Find" variant="emphasis" type="submit" className="FormContent" />
