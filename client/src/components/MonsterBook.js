@@ -88,7 +88,10 @@ var awokenMap = {
     hplessthan50percentattackboost : '58',
     ldamagereduction : '59',
     lunlockorbsandincreaseattack : '60',
-    enhanced10combo : '61'
+    enhanced10combo : '61',
+    comboorbs : '62',
+    voice : '63',
+    dungeonbonus : '64'
 }
 
 class MonsterBook extends Component {
@@ -112,10 +115,6 @@ class MonsterBook extends Component {
         this.setDefaultState = this.setDefaultState.bind(this);
     }
 
-    componentDidMount() {
-        this.setDefaultState();
-    }
-
     setDefaultState() {
         this.setState({
             monstersFetched : false,
@@ -123,7 +122,8 @@ class MonsterBook extends Component {
             elementFilter : [],
             awokenFilter: [],
             leaderFilter : '',
-            activeFilter : ''})
+            activeFilter : ''
+        });
     }
 
     handleSubmit(event) {
