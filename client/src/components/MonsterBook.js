@@ -332,6 +332,10 @@ class MonsterBook extends Component {
                     <div>
                         {monsters}  
                     </div>
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <br></br>
                 </div>
             </div>     
         )
