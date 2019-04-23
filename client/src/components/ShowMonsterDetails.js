@@ -144,21 +144,21 @@ class ShowMonsterDetails extends Component {
                                     <div className="lightblueText">
                                         No.{this.state.monsterData.id}&nbsp;&nbsp;&nbsp;
                                         {
-                                            this.state.monsterData.type && this.state.monsterData.type != -1 && this.state.monsterData.type !== null ?
+                                            this.state.monsterData.type && this.state.monsterData.type !== -1 && this.state.monsterData.type !== null ?
                                                 <span><img src={"images/type/" + this.state.monsterData.type +".png"} 
                                                     className="typeImg" alt=""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
-                                            this.state.monsterData.type2 && this.state.monsterData.type2 != -1 && this.state.monsterData.type2 !== null ?
+                                            this.state.monsterData.type2 && this.state.monsterData.type2 !== -1 && this.state.monsterData.type2 !== null ?
                                                 <span><img src={"images/type/" + this.state.monsterData.type2 +".png"} 
                                                     className="typeImg" alt=""/>&nbsp;&nbsp;</span>
                                             :
                                             <div></div>
                                         }
                                         {
-                                            this.state.monsterData.type3 && this.state.monsterData.type3 != -1 && this.state.monsterData.type3 !== null ?
+                                            this.state.monsterData.type3 && this.state.monsterData.type3 !== -1 && this.state.monsterData.type3 !== null ?
                                                 <span><img src={"images/type/" + this.state.monsterData.type3 +".png"} 
                                                     className="typeImg" alt=""/>&nbsp;&nbsp;</span>
                                             :
@@ -184,7 +184,7 @@ class ShowMonsterDetails extends Component {
                                         <div className="w3-theme-dark w3-small">
                                             {
                                                 this.state.monsterData.awakenings.map((value, index) => {                     
-                                                    return <img key={index} src={"images/Awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
+                                                    return <img key={index} src={"images/Awokens/"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
                                                             className="awakenImg" alt= ""/>
                                                 })
                                             }
@@ -204,7 +204,7 @@ class ShowMonsterDetails extends Component {
                                             <div className="w3-theme-dark w3-small">
                                                 {
                                                     this.state.monsterData.superAwakenings.map((value, index) => {                     
-                                                        return <img key={index} src={"images/Awokens/00"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
+                                                        return <img key={index} src={"images/Awokens/"+ value + ".png"} //** NO DECSCRIPTION? */title={value.name + ":/n" + value.desc}
                                                                 className="awakenImg" alt= ""/>
                                                     })
                                                 }

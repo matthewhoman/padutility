@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Autosuggest from 'react-autosuggest';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+//import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 class PadMonsterSearch extends Component {
@@ -43,7 +43,7 @@ class PadMonsterSearch extends Component {
                                     &nbsp;&nbsp;{suggestion.rarity}&nbsp;/&nbsp;</span>
                                 <span>S{suggestion.turnMax}&nbsp;<FontAwesomeIcon icon={faArrowRight} />&nbsp;{suggestion.turnMin}&nbsp;&nbsp;</span>
                                 {
-                                    suggestion.type && suggestion.type != -1 && suggestion.type != null
+                                    suggestion.type && suggestion.type !== -1 && suggestion.type != null
                                     ?
                                     <img src={"images/type/" + suggestion.type +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"top"}} alt=""/>
@@ -51,7 +51,7 @@ class PadMonsterSearch extends Component {
                                     <span></span>
                                 }
                                 {
-                                    suggestion.type2 && suggestion.type2 != -1 && suggestion.type2 != null
+                                    suggestion.type2 && suggestion.type2 !== -1 && suggestion.type2 != null
                                     ?
                                     <img src={"images/type/" + suggestion.type2 +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"top"}} alt=""/>
@@ -59,7 +59,7 @@ class PadMonsterSearch extends Component {
                                     <span></span>
                                 }
                                 {
-                                    suggestion.type3 && suggestion.type3 != -1 && suggestion.type3 != null
+                                    suggestion.type3 && suggestion.type3 !== -1 && suggestion.type3 != null
                                     ?
                                     <img src={"images/type/" + suggestion.type3 +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"top"}} alt=""/>
@@ -125,9 +125,9 @@ class PadMonsterSearch extends Component {
             value,
             onChange: this.onChange
         };
-        const loading = (
-            <div style={{color:"white"}}> <FontAwesomeIcon icon={faSpinner}/> loading ...</div>
-        )
+        // const loading = (
+        //     <div style={{color:"white"}}> <FontAwesomeIcon icon={faSpinner}/> loading ...</div>
+        // )
         return (
             <div style={{id:"PadSearchBar", width: "100%", maxWidth: "400px"}}>
               

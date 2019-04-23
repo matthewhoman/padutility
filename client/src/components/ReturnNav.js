@@ -90,7 +90,6 @@ class ReturnNav extends Component {
                                 <NavDropdown.Divider style={{width:"150px"}}/>
                                 <Link to={'/unreleasedMonsters'}>Unreleased Monsters</Link>
                                 <NavDropdown.Divider style={{width:"150px"}}/>
-                                <Link to={'/leaderSkillSearch'}> LeaderSkill Search</Link>
                             </Navbar.Text>
                         </Nav>
                     </Navbar.Collapse>

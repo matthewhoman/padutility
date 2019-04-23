@@ -37,6 +37,14 @@ var typeMap = {
   vendor : '15'
 }
 
+var elementMap = {
+  fire : '1',
+  water : '2',
+  wood : '3',
+  light : '4',
+  dark : '5',
+}
+
 var app = express();
 
 app.use(bodyParser.json());
@@ -67,8 +75,23 @@ app.get('/retrieveMonstersSuggest', function(req, res) {
 //retrieve monster stuff, they can be filtered
 app.get('/retrieveMonsters', function(req, res) {
   let typeFilters = URL.parse(req.url, true).query.typeFilter;
+  let elementFilters = URL.parse(req.url, true).query.elementFilter;
+  let awokenFilters = URL.parse(req.url, true).query.awokenFilter;
+  let leaderFilter = URL.parse(req.url, true).query.leaderFilter;
+  let activeFilter = URL.parse(req.url, true).query.activeFilter;
+
+  let hasFilter = typeFilters || 
+                  leaderFilter ||
+                  activeFilter ||
+                  awokenFilters ||
+                  elementFilters;
+
+  let maxResults = 100;
   let monsters = [];
-  if(typeFilters != 'null') {
+  //default sort
+  sortById(monsterNameNumArr);
+
+  if(typeFilters) {
     let types = JSON.parse(typeFilters);
     if(types.length > 0) {
       for(let mons of monsterNameNumArr) {
@@ -83,43 +106,112 @@ app.get('/retrieveMonsters', function(req, res) {
           monsters.push(mons);
         }
         // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
-        if(monsters.length >= 100) {
+        if(monsters.length >= maxResults) {
           break;
         }
       }
-      res.end(JSON.stringify(monsters));
-      return;
+      
     } 
-  } else {
-    //if no filters just return back top 100 monsters
-    for(let mons of monsterNameNumArr) {
-      monsters.push(mons);
-      if(monsters.length >= 100) {
+  } 
+
+  if(elementFilters) {
+    let monsterArr = monsters.length > 0 ? monsters : monsterNameNumArr;
+    monsters = [];
+    let elements = JSON.parse(elementFilters);
+    if(elements.length > 0) {
+      for(let mons of monsterArr) {
+        // only return monsters that match all criteria
+        let matches = true;
+        for(let element of elements) {
+          if(!mons.elements.includes(element + '')) {
+            matches = false
+          }
+        }
+        if(matches) {
+          monsters.push(mons);
+        }
+        // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
+        if(monsters.length >= maxResults) {
+          break;
+        }
+      }
+    }
+  }
+
+  if(awokenFilters) {
+    let monsterArr = monsters.length > 0 ? monsters : monsterNameNumArr;
+    monsters = [];
+    let awokens = JSON.parse(awokenFilters);
+    if(awokens.length > 0) {
+      sortByAwokens(monsterArr, awokens[0]);
+
+      for(let mons of monsterArr) {
+        // only return monsters that match all criteria
+        let matches = true;
+        for(let awoken of awokens) {
+          if(!mons.awakenings.includes(parseInt(awoken))) {
+            matches = false
+          }
+        }
+        if(matches) {
+          monsters.push(mons);
+        }
+        // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
+        if(monsters.length >= maxResults) {
+          break;
+        }
+      }
+    }
+  }
+
+  if(leaderFilter) {
+    let monsterArr = monsters.length > 0 ? monsters : monsterNameNumArr;
+    monsters = [];
+    for(let mons of monsterArr) {
+      if(mons.leaderSkillDescription && mons.leaderSkillDescription.toLowerCase().includes(decodeURIComponent(leaderFilter).toLowerCase())) {
+        monsters.push(mons);
+      }
+      // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
+      if(monsters.length >= maxResults) {
         break;
       }
     }
+  }
+
+  if(activeFilter) {
+    let monsterArr = monsters.length > 0 ? monsters : monsterNameNumArr;
+    monsters = [];
+    for(let mons of monsterArr) {
+      if(mons.activeSkillDescription && mons.activeSkillDescription.toLowerCase().includes(decodeURIComponent(activeFilter).toLowerCase())) {
+        monsters.push(mons);
+      }
+      // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
+      if(monsters.length >= maxResults) {
+        break;
+      }
+    }
+  }
+
+  //if filtered monsters return 
+  if(hasFilter) {
     res.end(JSON.stringify(monsters));
     return;
   }
+
+  //if no filters just return back top 100 monsters
+  for(let mons of monsterNameNumArr) {
+    monsters.push(mons);
+    if(monsters.length >= maxResults) {
+      break;
+    }
+  }
+  res.end(JSON.stringify(monsters));
+  return;
+  
 });
 
 app.get('/retrieveUnreleasedMonsters', function(req, res) {
   res.end(JSON.stringify(masterMonsterUnreleasedDictionary));
-});
-
-app.get('/retrieveLeaders', function(req, res) {
-  var queryStr = URL.parse(req.url, true).query.searchStr;
-  if(queryStr) {
-    let monsters = [];
-    for(let mons of monsterNameNumArr) {
-      if(mons.leaderSkillDescription && mons.leaderSkillDescription.toLowerCase().includes(queryStr.toLowerCase())) {
-          monsters.push(mons);
-      }
-    }
-    res.end(JSON.stringify(monsters));
-  } else {
-    res.end(JSON.stringify({}));
-  }
 });
 
 app.get('/retrieveMonster', function(req, res) { 
@@ -198,6 +290,7 @@ function parseDictionaryForClient(dictionary, evosArr) {
     monstersJson.type2 = monster.card.type_2_id;
     monstersJson.type3 = monster.card.type_3_id;
     monstersJson.types = [monster.card.type_1_id + '', monster.card.type_2_id + '', monster.card.type_3_id + ''];
+    monstersJson.elements = [monster.card.attr_id + '', monster.card.sub_attr_id + ''];
     monstersJson.mp = monster.card.sell_mp;
     monstersJson.leaderSkill = monster.leader_skill ? monster.leader_skill.name : 'N/A';
     monstersJson.activeSkill = monster.active_skill ? monster.active_skill.name : 'N/A';
@@ -235,6 +328,21 @@ function parseDictionaryForClient(dictionary, evosArr) {
     monsterNameNumArr.push(monstersJson);
   }
 
+  sortById(monsterNameNumArr);
+  sortById(masterMonsterUnreleasedDictionary);
+
+  fillEvos(monsterNameNumArr, evosArr);
+  fillEvos(masterMonsterUnreleasedDictionary, evosArr);
+
+  console.log("Done Parsing Client Monster Data!!");
+  
+  //TODO: WHEN TO SCRAPE IMAGES? WHAT TO SCRAPE FOR? ONLY LATEST>> NEW STUFF I DON'T HAVE
+  //scrapeImages();
+  console.log("DONE WITH DATA!!! APP READY!");
+  serverReady = true;
+}
+
+function sortById(arr) {
   //sort array by ids desc
   function compare(a, b) {
     const idA = a.id;
@@ -249,18 +357,26 @@ function parseDictionaryForClient(dictionary, evosArr) {
     return comparison;
   }
 
-  monsterNameNumArr.sort(compare);
-  masterMonsterUnreleasedDictionary.sort(compare);
+  arr.sort(compare);
+}
 
-  fillEvos(monsterNameNumArr, evosArr);
-  fillEvos(masterMonsterUnreleasedDictionary, evosArr);
+function sortByAwokens(arr, awokenIn) {
+  //sort array by 1st awoken filter and by the most awokens desc
+  function compare(a, b) {
+    //get just the awoken that matches the first filter and how many
+    const awakeningsA = a.awakenings.filter(awoken => awoken === parseInt(awokenIn)).length;
+    const awakeningsB = b.awakenings.filter(awoken => awoken === parseInt(awokenIn)).length;
 
-  console.log("Done Parsing Client Monster Data!!");
-  
-  //TODO: WHEN TO SCRAPE IMAGES? WHAT TO SCRAPE FOR? ONLY LATEST>> NEW STUFF I DON'T HAVE
-  //scrapeImages();
-  console.log("DONE WITH DATA!!! APP READY!");
-  serverReady = true;
+    let comparison = 0;
+    if (awakeningsA < awakeningsB) {
+      comparison = 1;
+    } else if (awakeningsA > awakeningsB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
+  arr.sort(compare);
 }
 
 function scrapeImages() {
