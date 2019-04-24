@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import ReturnNav from './ReturnNav'
+import Collapsible from 'react-collapsible';
 
 var typeMap = {
     evolve : '0',
@@ -105,7 +106,8 @@ class MonsterBook extends Component {
             elementFilter : sessionStorage.getItem('elementFilter') ? JSON.parse(sessionStorage.getItem('elementFilter')) : [],
             awokenFilter: sessionStorage.getItem('awokenFilter') ? JSON.parse(sessionStorage.getItem('awokenFilter')) : [],
             leaderFilter : sessionStorage.getItem('leaderFilter') ? JSON.parse(sessionStorage.getItem('leaderFilter')) : '',
-            activeFilter : sessionStorage.getItem('activeFilter') ? JSON.parse(sessionStorage.getItem('activeFilter')) : ''
+            activeFilter : sessionStorage.getItem('activeFilter') ? JSON.parse(sessionStorage.getItem('activeFilter')) : '',
+            filterOpen : sessionStorage.getItem('filterOpen') !== 'undefined' ? JSON.parse(sessionStorage.getItem('filterOpen')) : false
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -307,37 +309,47 @@ class MonsterBook extends Component {
             <div>
                 <ReturnNav history={this.props.history} header="Monster Book"/>
                 <div style={{margin:"12px"}}>
-                    <div style={{marginBottom:"10px",maxWidth:"347px"}}>
-                        <form id="filterForm" onSubmit={this.handleSubmit}> 
-                            <div style={{marginBottom:"10px"}}>
-                                {checkBoxElementComps}
-                            </div>
-                            <div style={{marginBottom:"10px"}}>
-                                {checkBoxTypeComps}
-                            </div>
-                            <div style={{marginBottom:"10px"}}>
-                                {checkBoxAwokenComps}
-                            </div>
-                            <div style={{marginBottom:"10px"}}>
-                                <input name="leaderFilter" type="text" placeholder="Leader Skill" value={this.state.leaderFilter} onChange={this.handleChange} />
-                            </div>
-                            <div style={{marginBottom:"10px"}}>
-                                <input name="activeFilter" type="text" placeholder="Active Skill" value={this.state.activeFilter} onChange={this.handleChange} />
-                            </div>
-                            <div>
-                                <input text="Find" variant="emphasis" type="submit" className="FormContent" />
-                                <div className="w3-theme-dark w3-small" style={{display:"inline-block", marginLeft:"10px"}}>
-                                    Top 100 results&nbsp;(&nbsp;{this.state.monsters ? this.state.monsters.length : 0}&nbsp;)
+                    <div style={{marginBottom:"12px",maxWidth:"347px"}}>
+                        <Collapsible 
+                            className="w3-theme-dark w3-medium" 
+                            trigger="Filters" 
+                            transitionTime={100}
+                            open={this.state.filterOpen}
+                            onOpen={() => sessionStorage.setItem('filterOpen', true)}
+                            onClose={() => sessionStorage.setItem('filterOpen', false)}
+                        >
+                            <br></br>
+                            <form id="filterForm" onSubmit={this.handleSubmit}> 
+                                <div style={{marginBottom:"10px"}}>
+                                    {checkBoxElementComps}
                                 </div>
-                                <button
-                                    style={{backgroundColor:"DodgerBlue", color:"white", border:"none", float:"right"}}
-                                    variant="emphasis" 
-                                    className="FormContent" 
-                                    onClick={this.resetForm}>
-                                    Clear
-                                </button>
-                            </div>
-                        </form>
+                                <div style={{marginBottom:"10px"}}>
+                                    {checkBoxTypeComps}
+                                </div>
+                                <div style={{marginBottom:"10px"}}>
+                                    {checkBoxAwokenComps}
+                                </div>
+                                <div style={{marginBottom:"10px"}}>
+                                    <input name="leaderFilter" type="text" placeholder="Leader Skill" value={this.state.leaderFilter} onChange={this.handleChange} />
+                                </div>
+                                <div style={{marginBottom:"10px"}}>
+                                    <input name="activeFilter" type="text" placeholder="Active Skill" value={this.state.activeFilter} onChange={this.handleChange} />
+                                </div>
+                                <div>
+                                    <input text="Find" variant="emphasis" type="submit" className="FormContent" />
+                                    <div className="w3-theme-dark w3-small" style={{display:"inline-block", marginLeft:"10px"}}>
+                                        Top 100 results&nbsp;(&nbsp;{this.state.monsters ? this.state.monsters.length : 0}&nbsp;)
+                                    </div>
+                                    <button
+                                        style={{backgroundColor:"DodgerBlue", color:"white", border:"none", float:"right"}}
+                                        variant="emphasis" 
+                                        className="FormContent" 
+                                        onClick={this.resetForm}>
+                                        Clear
+                                    </button>
+                                </div>
+                            </form>
+                        </Collapsible>
                     </div>
                     <div>
                         {monsters}  
