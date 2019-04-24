@@ -107,11 +107,17 @@ function getMonstersFromAPI() {
 
   request(options, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-        monsterObjectsFromAPI = JSON.parse(body);
-        console.info("Done Fetching Monster Data From API!!")
-        getMonsterEvosFromAPI();
+        //if this fails.. just grab the monsters from the cache
+        try { 
+          monsterObjectsFromAPI = JSON.parse(body);
+          console.info("Done Fetching Monster Data From API!!")
+          getMonsterEvosFromAPI();
+        } catch(e) {
+          getMonsters();
+        }
     } else {
       console.error("Failed Fetching Monster Data From API!!")
+      getMonsters();
     }
   });
 }
@@ -129,11 +135,16 @@ function getMonsterEvosFromAPI() {
 
   request(options, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-        monsterEvosFromAPI = JSON.parse(body).items;
-        console.info("Done Fetching Monster Evolution Data From API!!")
-        getMonsters();
+        try {
+          monsterEvosFromAPI = JSON.parse(body).items;
+          console.info("Done Fetching Monster Evolution Data From API!!")
+          getMonsters();
+        } catch(e) {
+          getMonsters();
+        }
     } else {
       console.error("Failed Fetching Monster Evolution Data From API!!")
+      getMonsters();
     }
   });
 }
@@ -553,6 +564,7 @@ app.listen(port, function () {
       getMonstersFromAPI();
   } catch(e) {
       console.error("SOMETHING FAILED IN MONSTER RETRIEVAL/PARSING " + e);
+      getMonsters();
   }
   }, 86400000);
 });

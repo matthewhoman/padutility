@@ -4,6 +4,12 @@ import {Link} from 'react-router-dom';
 //import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import ReturnNav from './ReturnNav'
 import Collapsible from 'react-collapsible';
+import Popover from 'react-bootstrap/Popover';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 var typeMap = {
     evolve : '0',
@@ -217,7 +223,7 @@ class MonsterBook extends Component {
                         &nbsp;&nbsp;
                         <img src={"images/type/" + typeMap[key] +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"baseline"}} alt= ""/>
-                        <span>&nbsp;&nbsp;</span>
+                        <span>&nbsp;</span>
                     </div>
                 )
             }
@@ -235,7 +241,7 @@ class MonsterBook extends Component {
                         &nbsp;&nbsp;
                         <img src={"images/element/" + elementMap[elKey] +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"baseline"}} alt= ""/>
-                        <span>&nbsp;&nbsp;</span>
+                        <span>&nbsp;</span>
                     </div>
                 )
             }
@@ -253,7 +259,7 @@ class MonsterBook extends Component {
                         &nbsp;&nbsp;
                         <img src={"images/Awokens/" + awokenMap[awKey] +".png"} 
                                         style={{width:"18px",height:"18px", verticalAlign:"baseline"}} alt= ""/>
-                        <span>&nbsp;&nbsp;</span>
+                        <span>&nbsp;</span>
                     </div>
                 )
             }
@@ -269,10 +275,9 @@ class MonsterBook extends Component {
             for(let i = 0; i < this.state.monsters.length; i++) {
                 let monster = this.state.monsters[i];
                 monsters.push(
-                    <div style={{display:"inline-block", width:"175px", height: "80px"}}>
+                    <div style={{display:"inline-block",marginBottom:"5px",width:"69px"}}>
                         <div>
-                            <div style={{display:"inline-block",width:"65px"}}>
-                                <div className="lightblueText" style={{fontSize:"12px"}}>No.{monster.id}</div>
+                            <div style={{display:"inline-block",width:"69px",marginBottom:"2px"}}>
                                 <Link key={i} to={'/showMonsterDetails?monsterId=' + monster.id + "&monsterName=" + monster.name}>
                                     <div style={{
                                             display:"inline-block", 
@@ -285,20 +290,60 @@ class MonsterBook extends Component {
                                     </div>
                                 </Link>
                             </div>
-                            <div style={{display:"inline-block",width:"70px",verticalAlign:"top"}}>
-                            {
-                                monster.awakenings.map((value, index) => {                     
-                                    return (
-                                            <div style={{display:"inline-block",width:"17px",height:"17px"}}>
-                                                <img key={index} 
-                                                    src={"images/Awokens/"+ value + ".png"}
-                                                    style={{width:"15px",height:"15px"}} 
-                                                    alt= ""/>
+                            <div>
+                                <OverlayTrigger
+                                    rootClose={true}
+                                    trigger="click"
+                                    key="bottom"
+                                    placement="bottom"
+                                    overlay={
+                                        <Popover
+                                            className="w3-theme-dark"
+                                            style={{border:"1px solid white"}}
+                                            id={'popover-positioned-bottom'}
+                                        >
+                                            <div style={{display:"inline-block"}}>
+                                                <div className="lightblueText">No.{monster.id}</div>
+                                                <div className="w3-theme-dark">{monster.name}</div>
+                                            <div>
+                                                {
+                                                    monster.types.map((value, index) => {                     
+                                                        return (
+                                                                <div style={{display:"inline-block",width:"17px",height:"17px"}}>
+                                                                    <img key={index} 
+                                                                        src={"images/type/"+ value + ".png"}
+                                                                        style={{width:"15px",height:"15px"}} 
+                                                                        alt= ""/>
+                                                                </div>
+                                                            
+                                                        )
+                                                    })
+                                                }
                                             </div>
-                                        
-                                    )
-                                })
-                            }
+                                            {
+                                                monster.awakenings.map((value, index) => {                     
+                                                    return (
+                                                            <div style={{display:"inline-block",width:"17px",height:"17px"}}>
+                                                                <img key={index} 
+                                                                    src={"images/Awokens/"+ value + ".png"}
+                                                                    style={{width:"15px",height:"15px"}} 
+                                                                    alt= ""/>
+                                                            </div>
+                                                        
+                                                    )
+                                                })
+                                            }
+                                            </div>
+                                        </Popover>
+                                    }
+                                    >
+                                    <Button 
+                                        className="w3-theme-dark w3-small" 
+                                        style={{width:"60px"}} 
+                                        variant="secondary">
+                                        Details
+                                    </Button>
+                                </OverlayTrigger>
                             </div>
                         </div>
                     </div>
@@ -308,57 +353,64 @@ class MonsterBook extends Component {
         return (
             <div>
                 <ReturnNav history={this.props.history} header="Monster Book"/>
-                <div style={{margin:"12px"}}>
-                    <div style={{marginBottom:"12px",maxWidth:"347px"}}>
-                        <Collapsible 
-                            className="w3-theme-dark w3-medium" 
-                            trigger="Filters" 
-                            transitionTime={100}
-                            open={this.state.filterOpen}
-                            onOpen={() => sessionStorage.setItem('filterOpen', true)}
-                            onClose={() => sessionStorage.setItem('filterOpen', false)}
-                        >
-                            <br></br>
-                            <form id="filterForm" onSubmit={this.handleSubmit}> 
-                                <div style={{marginBottom:"10px"}}>
-                                    {checkBoxElementComps}
-                                </div>
-                                <div style={{marginBottom:"10px"}}>
-                                    {checkBoxTypeComps}
-                                </div>
-                                <div style={{marginBottom:"10px"}}>
-                                    {checkBoxAwokenComps}
-                                </div>
-                                <div style={{marginBottom:"10px"}}>
-                                    <input name="leaderFilter" type="text" placeholder="Leader Skill" value={this.state.leaderFilter} onChange={this.handleChange} />
-                                </div>
-                                <div style={{marginBottom:"10px"}}>
-                                    <input name="activeFilter" type="text" placeholder="Active Skill" value={this.state.activeFilter} onChange={this.handleChange} />
-                                </div>
-                                <div>
-                                    <input text="Find" variant="emphasis" type="submit" className="FormContent" />
-                                    <div className="w3-theme-dark w3-small" style={{display:"inline-block", marginLeft:"10px"}}>
-                                        Top 100 results&nbsp;(&nbsp;{this.state.monsters ? this.state.monsters.length : 0}&nbsp;)
-                                    </div>
-                                    <button
-                                        style={{backgroundColor:"DodgerBlue", color:"white", border:"none", float:"right"}}
-                                        variant="emphasis" 
-                                        className="FormContent" 
-                                        onClick={this.resetForm}>
-                                        Clear
-                                    </button>
-                                </div>
-                            </form>
-                        </Collapsible>
-                    </div>
-                    <div>
-                        {monsters}  
-                    </div>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                    <br></br>
-                </div>
+                <Container fluid={true}>
+                    <Row>
+                        <Col sm={8} lg='auto'>
+                        <div style={{marginTop:"15px"}}>
+                            <div style={{marginBottom:"12px",maxWidth:"347px"}}>
+                                <Collapsible 
+                                    className="w3-theme-dark w3-medium" 
+                                    trigger="Filters" 
+                                    transitionTime={100}
+                                    open={this.state.filterOpen}
+                                    onOpen={() => sessionStorage.setItem('filterOpen', true)}
+                                    onClose={() => sessionStorage.setItem('filterOpen', false)}
+                                >
+                                    <br></br>
+                                    <form id="filterForm" onSubmit={this.handleSubmit}> 
+                                        <div style={{marginBottom:"10px"}}>
+                                            {checkBoxElementComps}
+                                        </div>
+                                        <div style={{marginBottom:"10px"}}>
+                                            {checkBoxTypeComps}
+                                        </div>
+                                        <div style={{marginBottom:"10px"}}>
+                                            {checkBoxAwokenComps}
+                                        </div>
+                                        <div style={{marginBottom:"10px"}}>
+                                            <input name="leaderFilter" type="text" placeholder="Leader Skill" value={this.state.leaderFilter} onChange={this.handleChange} />
+                                        </div>
+                                        <div style={{marginBottom:"10px"}}>
+                                            <input name="activeFilter" type="text" placeholder="Active Skill" value={this.state.activeFilter} onChange={this.handleChange} />
+                                        </div>
+                                        <div>
+                                            <input text="Find" variant="emphasis" type="submit" className="FormContent" />
+                                            <div className="w3-theme-dark w3-small" style={{display:"inline-block", marginLeft:"10px"}}>
+                                                Top 100 results&nbsp;(&nbsp;{this.state.monsters ? this.state.monsters.length : 0}&nbsp;)
+                                            </div>
+                                            <button
+                                                style={{backgroundColor:"DodgerBlue", color:"white", border:"none", float:"right"}}
+                                                variant="emphasis" 
+                                                className="FormContent" 
+                                                onClick={this.resetForm}>
+                                                Clear
+                                            </button>
+                                        </div>
+                                    </form>
+                                </Collapsible>
+                            </div>
+                            </div>
+                        </Col>
+                        <Col>
+                        <div style={{marginTop:"15px"}}>
+                            {monsters}  
+                        </div>
+                        </Col>
+                        <br></br>
+                        <br></br>
+                        <br></br>
+                    </Row>
+                </Container>
             </div>     
         )
     }
