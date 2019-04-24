@@ -5,22 +5,23 @@ const request = require('request');
 const path = require('path');
 const port = process.env.PORT || 1337;
 const isDev = port === 1337 ? true : false;
-const schedule = require('node-schedule');
 const URL = require('url');
 const util = require('./lib/utils.js');
 const fs = require('fs');
 const ENCODING = 'utf8';
-var Scraper = require("image-scraper");
 const phantom = require('phantom');
 
 //PAD STUFF
 //var monsterListJSON = "https://www.padherder.com/api/monsters/"; //"https://storage.googleapis.com/mirubot/paddata/processed/na_cards.json";
 var monsterListJSON = "https://f002.backblazeb2.com/file/miru-data/paddata/processed/na_cards.json";
+var monsterEVOJSON = "https://f002.backblazeb2.com/file/miru-data/paddata/padguide/evolutionList.json";
 
 //slimmed down version of monsters name/ num pairs for the clients autocomplete
 var monsterNameNumArr = [];
 var masterMonsterUnreleasedDictionary = [];
 var serverReady = false;
+var monsterObjectsFromAPI = [];
+var monsterEvosFromAPI = [];
 
 var typeMap = {
   evolve : '0',
@@ -56,9 +57,89 @@ app.get('/serverReady', function(req, res) {
   res.end(JSON.stringify(serverReady));
 });
 
+function getMonsters() {
+  //see if there was a significant amount of data in the api call to use it as opposed to the backed up hard copy!
+  let cardsJson = JSON.parse(fs.readFileSync("./JSON_DATA/na_cards.json", ENCODING));
+  let evosJson = JSON.parse(fs.readFileSync("./JSON_DATA/evolutionList.json", ENCODING));
+  //console.info("Done Reading Cards/Evolution Data!!")
+
+  let cardsToUse = cardsJson;
+  let evosToUse = evosJson;
+
+  /*
+    if the monsters/evolutions fetched from api are not the same as whats cached use them.. 
+    update the cache and back up the old copies! 
+  */
+  let monsterEvoAPIStr = JSON.stringify(monsterEvosFromAPI);
+  let monsterEvoJSONStr = JSON.stringify(evosJson);
+
+  if(monsterEvosFromAPI.length > 0 && monsterEvoAPIStr.length !== monsterEvoJSONStr.length) {
+    fs.writeFileSync("./JSON_DATA/evolutionList.json", monsterEvoAPIStr);
+    fs.writeFileSync("./JSON_DATA/evolutionList"+new Date().toISOString()+".json", monsterEvoJSONStr)
+    evosToUse = monsterEvosFromAPI;
+    console.info("Backed Up and Updated evolutionsList, Using Evos from API");
+  }
+
+  let monsterCardAPIStr = JSON.stringify(monsterObjectsFromAPI);
+  let monserCardJSONStr = JSON.stringify(cardsJson);
+
+  if(monsterObjectsFromAPI.length > 0 && monsterCardAPIStr.length !== monserCardJSONStr.length) {
+    fs.writeFileSync("./JSON_DATA/na_cards.json", monsterCardAPIStr);
+    fs.writeFileSync("./JSON_DATA/na_cards"+new Date().toISOString()+".json", monserCardJSONStr)
+    cardsToUse = monsterObjectsFromAPI;
+    console.info("Backed Up and Updated na_cards, Using Cards from API");
+  }
+  
+  parseDictionaryForClient(cardsToUse, evosToUse);
+  scrapeImages();
+}
+
+function getMonstersFromAPI() {
+  var headers = {
+    'Content-Type': 'application/json'
+  };
+
+  var options = {
+    url: monsterListJSON,
+    method: 'GET',
+    headers: headers,
+  };
+
+  request(options, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+        monsterObjectsFromAPI = JSON.parse(body);
+        console.info("Done Fetching Monster Data From API!!")
+        getMonsterEvosFromAPI();
+    } else {
+      console.error("Failed Fetching Monster Data From API!!")
+    }
+  });
+}
+
+function getMonsterEvosFromAPI() {
+  var headers = {
+    'Content-Type': 'application/json'
+  };
+
+  var options = {
+    url: monsterEVOJSON,
+    method: 'GET',
+    headers: headers,
+  };
+
+  request(options, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+        monsterEvosFromAPI = JSON.parse(body).items;
+        console.info("Done Fetching Monster Evolution Data From API!!")
+        getMonsters();
+    } else {
+      console.error("Failed Fetching Monster Evolution Data From API!!")
+    }
+  });
+}
+
 app.get('/retrieveMonstersSuggest', function(req, res) {
   var searchStr = URL.parse(req.url, true).query.searchStr;
-
   let monsters = [];
   for(let mons of monsterNameNumArr) {
     if(mons.name && mons.name.toLowerCase().includes(searchStr.toLowerCase())) {
@@ -234,33 +315,9 @@ function getMonsterByNumber(monsterNum) {
   }
 }
 
-function getMonsters() {
-  var cardsJson = fs.readFileSync("./JSON_DATA/na_cards.json", ENCODING);
-  console.log("Done Fetching Monster Data!!")
-  var evosJson = fs.readFileSync("./JSON_DATA/evolutionList.json", ENCODING);
-  console.log("Done Fetching Evolution Data!!")
-  parseDictionaryForClient(JSON.parse(cardsJson), JSON.parse(evosJson).items);
-
-  // var headers = {
-  //   'Content-Type': 'application/json'
-  // };
-
-  // var options = {
-  //   url: monsterListJSON,
-  //   method: 'GET',
-  //   headers: headers,
-  // };
-
-  // request(options, function (error, response, body) {
-  //   if (!error && response.statusCode === 200) {
-  //       var monsterObjs = JSON.parse(body);
-  //       console.log("Done Fetching Monster Data!!")
-  //       parseDictionaryForClient(monsterObjs);
-  //   }
-  // });
-}
-
 function parseDictionaryForClient(dictionary, evosArr) {
+  monsterNameNumArr = [];
+  masterMonsterUnreleasedDictionary = [];
   for(var i = 0; i < dictionary.length; i++) {
     var monstersJson = {};
     var monster = dictionary[i];
@@ -335,9 +392,6 @@ function parseDictionaryForClient(dictionary, evosArr) {
   fillEvos(masterMonsterUnreleasedDictionary, evosArr);
 
   console.log("Done Parsing Client Monster Data!!");
-  
-  //TODO: WHEN TO SCRAPE IMAGES? WHAT TO SCRAPE FOR? ONLY LATEST>> NEW STUFF I DON'T HAVE
-  //scrapeImages();
   console.log("DONE WITH DATA!!! APP READY!");
   serverReady = true;
 }
@@ -393,28 +447,34 @@ function scrapeImages() {
       console.info('Requesting', requestData.url);
     });
     let baseURL = 'http://puzzledragonx.com/en/img/thumbnail/';
-    for(let i = 0; i < monsterNameNumArr.length; i++) {
-      let monster = monsterNameNumArr[i];
+    let arr = monsterNameNumArr;//.slice(0, 19);
+    //only get image if it doesnt exist!
+    for(let i = 0; i < arr.length; i++) {
+      let monster = arr[i];
       let imgExt = monster.id + ".png";
-      let url = baseURL + imgExt;
-      const status = await page.open(url);
-      await console.log(`Page opened with status [${status}].`);
-      await page.includeJs('https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js');
+      let serverPath = 'client/public/images/monsterIcons/' + imgExt;
+      if(!fs.existsSync(serverPath)) {
+        let url = baseURL + imgExt;
+        const status = await page.open(url);
+        await console.log(`Page opened with status [${status}].`);
+        await page.includeJs('https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js');
 
-      let imgObj = await page.evaluate(function() {
-        img = $("img");
-        return {
-          top : img.offset().top,
-          left : img.offset().left,
-          width : img.width(),
-          height : img.height()
-        };
-      }); 
-      await page.property('clipRect', imgObj);
-      await page.render('client/public/images/monsterIcons/' + imgExt);   
-      console.log('created: ' + imgExt)
+        let imgObj = await page.evaluate(function() {
+          img = $("img");
+          return {
+            top : img.offset().top,
+            left : img.offset().left,
+            width : img.width(),
+            height : img.height()
+          };
+        }); 
+        await page.property('clipRect', imgObj);
+        await page.render(serverPath);   
+        console.log('created: ' + imgExt)
+      }
     }
     await instance.exit();
+    console.info("Done Scraping Images");
   })();
 }
 
@@ -479,22 +539,20 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 app.listen(port, function () {
-  console.log("booting... on port " + port );
-  //var rule = new schedule.RecurrenceRule();
-  //every morning at 4am
-  //rule.hour = 4;
-  //run now then run at every 12am.
-  //try {
+  console.log("booting... on port " + port ); 
+  try {
     getMonsters();
-  //} catch(e) {
-  //  console.log("SOMETHING FAILED IN MONSTER RETRIEVAL/PARSING " + e);
-  //}
-  //var sched = schedule.scheduleJob(rule, function(){
-  // try {
-  //    getMonsters();
-  //  } catch(e) {
-  //      console.log("SOMETHING FAILED IN MONSTER RETRIEVAL/PARSING " + e);
-  //  }
-	//console.log('Updating Library');
-  //});
+  } catch(e) {
+    console.error("SOMETHING FAILED IN MONSTER RETRIEVAL/PARSING " + e);
+  }
+
+  //run once a day!
+  setInterval(function(){
+  try {
+      console.info('Updating Library from Schedule!');
+      getMonstersFromAPI();
+  } catch(e) {
+      console.error("SOMETHING FAILED IN MONSTER RETRIEVAL/PARSING " + e);
+  }
+  }, 86400000);
 });
