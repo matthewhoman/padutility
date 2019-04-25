@@ -275,7 +275,7 @@ class MonsterBook extends Component {
             for(let i = 0; i < this.state.monsters.length; i++) {
                 let monster = this.state.monsters[i];
                 monsters.push(
-                    <div style={{display:"inline-block",marginBottom:"5px",width:"69px"}}>
+                    <div key={monster.id} style={{display:"inline-block",marginBottom:"5px",width:"69px"}}>
                         <div>
                             <div style={{display:"inline-block",width:"69px",marginBottom:"2px"}}>
                                 <Link key={i} to={'/showMonsterDetails?monsterId=' + monster.id + "&monsterName=" + monster.name}>
@@ -310,8 +310,8 @@ class MonsterBook extends Component {
                                                     monster.types.map((value, index) => {                     
                                                         return (
                                                                 value !== '-1' ?
-                                                                    <div style={{display:"inline-block",width:"17px",height:"17px"}}>
-                                                                        <img key={index} 
+                                                                    <div key={index} style={{display:"inline-block",width:"17px",height:"17px"}}>
+                                                                        <img  
                                                                             src={"images/type/"+ value + ".png"}
                                                                             style={{width:"15px",height:"15px"}} 
                                                                             alt= ""/>
@@ -325,8 +325,8 @@ class MonsterBook extends Component {
                                             {
                                                 monster.awakenings.map((value, index) => {                     
                                                     return (
-                                                            <div style={{display:"inline-block",width:"17px",height:"17px"}}>
-                                                                <img key={index} 
+                                                            <div key={index} style={{display:"inline-block",width:"17px",height:"17px"}}>
+                                                                <img 
                                                                     src={"images/Awokens/"+ value + ".png"}
                                                                     style={{width:"15px",height:"15px"}} 
                                                                     alt= ""/>

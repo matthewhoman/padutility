@@ -20,7 +20,8 @@ class PadMonsterSearch extends Component {
         const inputValue = value.trim().toLowerCase();
 
         return data.filter(item =>
-            item.name.toLowerCase().indexOf(inputValue) > -1
+            ((item.id + "").trim().toLowerCase() === inputValue.trim().toLowerCase() || 
+                item.name.toLowerCase().indexOf(inputValue) > -1)
         );
     };
     

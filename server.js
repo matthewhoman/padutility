@@ -153,7 +153,8 @@ app.get('/retrieveMonstersSuggest', function(req, res) {
   var searchStr = URL.parse(req.url, true).query.searchStr;
   let monsters = [];
   for(let mons of monsterNameNumArr) {
-    if(mons.name && mons.name.toLowerCase().includes(searchStr.toLowerCase())) {
+    if((mons.name && mons.name.toLowerCase().includes(searchStr.toLowerCase())) ||
+          (mons.id && (mons.id + '') == searchStr)) {
         monsters.push(mons);
     }
     if(monsters.length >= 30) {
@@ -311,6 +312,12 @@ app.get('/retrieveMonster', function(req, res) {
   res.end(JSON.stringify(getMonsterByNumber(monsterNum)));
 });
 
+function fillSameActives(monsArr) {
+  for(let mons of monsterNameNumArr) {
+      mons.sameActiveMonsters = getMonstersByActiveSkillName(mons.activeSkill);
+  }
+}
+
 function getMonstersByActiveSkillName(skillName) {
   let monsters = [];
   if(skillName === null || skillName === "N/A") {
@@ -405,9 +412,6 @@ function parseDictionaryForClient(dictionary, evosArr) {
 
     monstersJson.evoTree = [];
     monstersJson.sameActiveMonsters = [];
-    if(!monstersJson.unreleased) {
-      monstersJson.sameActiveMonsters = getMonstersByActiveSkillName(monstersJson.activeSkill);
-    }
 
     if(!monster.card.released_status) {
       masterMonsterUnreleasedDictionary.push(monstersJson);
@@ -416,6 +420,8 @@ function parseDictionaryForClient(dictionary, evosArr) {
 
     monsterNameNumArr.push(monstersJson);
   }
+
+  fillSameActives(monsterNameNumArr);
 
   sortById(monsterNameNumArr);
   sortById(masterMonsterUnreleasedDictionary);
