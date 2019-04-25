@@ -144,25 +144,24 @@ class ShowMonsterDetails extends Component {
                                     <div className="lightblueText">
                                         No.{this.state.monsterData.id}&nbsp;&nbsp;&nbsp;
                                         {
-                                            this.state.monsterData.type && this.state.monsterData.type !== -1 && this.state.monsterData.type !== null ?
-                                                <span><img src={"images/type/" + this.state.monsterData.type +".png"} 
-                                                    className="typeImg" alt=""/>&nbsp;&nbsp;</span>
-                                            :
-                                            <div></div>
-                                        }
-                                        {
-                                            this.state.monsterData.type2 && this.state.monsterData.type2 !== -1 && this.state.monsterData.type2 !== null ?
-                                                <span><img src={"images/type/" + this.state.monsterData.type2 +".png"} 
-                                                    className="typeImg" alt=""/>&nbsp;&nbsp;</span>
-                                            :
-                                            <div></div>
-                                        }
-                                        {
-                                            this.state.monsterData.type3 && this.state.monsterData.type3 !== -1 && this.state.monsterData.type3 !== null ?
-                                                <span><img src={"images/type/" + this.state.monsterData.type3 +".png"} 
-                                                    className="typeImg" alt=""/>&nbsp;&nbsp;</span>
-                                            :
-                                            <div></div>
+                                            this.state.monsterData.types.map((value, index) => {                     
+                                                return (
+                                                        <span>
+                                                            {
+                                                                value !== '-1' 
+                                                                ?  
+                                                                    <img key={index} 
+                                                                        src={"images/type/"+ value + ".png"}
+                                                                        className="typeImg"
+                                                                        alt= ""/>
+                                                                :
+                                                                    <span></span>
+                                                            }
+                                                            &nbsp;&nbsp;
+                                                        </span>
+                                                    
+                                                )
+                                            })
                                         }
                                     </div>
                                     <div className="w3-theme-dark">
@@ -243,8 +242,38 @@ class ShowMonsterDetails extends Component {
                                 <div style={{display:"inline-block",width:"2%"}}>&nbsp;</div>
                                     <div style={{display:"inline-block", width:"98%"}}>{this.state.monsterData.leaderSkillDescription}</div>
                                 </div> 
-                            <br></br>
-                            <br></br>
+                                <br></br>
+                                <br></br>
+                                <div className="w3-theme-dark w3-medium" style={{marginBottom:"5px"}}>
+                                    <b>Skill Up Monsters: </b>
+                                </div>
+                                <div>
+                                    {
+                                        this.state.monsterData.sameActiveMonsters.map((value, index) => {                     
+                                            return (
+                                                    <div style={{display:"inline-block",marginBottom:"10px"}}>
+                                                        {
+                                                            value !== '-1' 
+                                                            ?  
+                                                                <Link to={'/showMonsterDetails?monsterId=' + value.id + "&monsterName=" + value.name}>
+                                                                    <img key={index} 
+                                                                        src={"images/monsterIcons/"+ value.id + ".png"}
+                                                                        style={{width:"46px",height:"46px"}}
+                                                                        title={value.id + '. ' + value.name}
+                                                                        alt= ""/>
+                                                                </Link>
+                                                            :
+                                                                <span></span>
+                                                        }
+                                                        &nbsp;&nbsp;
+                                                    </div>
+                                                
+                                            )
+                                        })
+                                    } 
+                                </div>
+                                <br></br>
+                                <br></br>
                             {
                                 evoTreeComponent.length !== 0 
                                 ?

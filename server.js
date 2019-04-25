@@ -311,6 +311,19 @@ app.get('/retrieveMonster', function(req, res) {
   res.end(JSON.stringify(getMonsterByNumber(monsterNum)));
 });
 
+function getMonstersByActiveSkillName(skillName) {
+  let monsters = [];
+  if(skillName === null || skillName === "N/A") {
+    return monsters;
+  }
+  for(let mons of monsterNameNumArr) {
+    if(mons.activeSkill && mons.activeSkill.trim().toLowerCase() === skillName.trim().toLowerCase()) {
+      monsters.push(mons);
+    }
+  }
+  return monsters;
+}
+
 function getMonsterByNumber(monsterNum) {
   for(var i = 0; i < monsterNameNumArr.length; i++) {
     var monster = monsterNameNumArr[i];
@@ -387,6 +400,7 @@ function parseDictionaryForClient(dictionary, evosArr) {
     monstersJson.evoMat5 = monster.card.evo_mat_id_5;
 
     monstersJson.evoTree = [];
+    monstersJson.sameActiveMonsters = getMonstersByActiveSkillName(monstersJson.activeSkill);
 
     if(!monster.card.released_status) {
       masterMonsterUnreleasedDictionary.push(monstersJson);
@@ -514,6 +528,45 @@ function fillEvos(monsterNameNumArr, evosArr) {
       }
     }
   }
+  //push the rest of the evos in
+  // for(let monster of monsterNameNumArr) {
+  //   if(monster.ancestorId !== 0) {
+  //     let monstersToPushToEvo = [];
+  //     let ancestor = getMonsterByNumber(monster.ancestorId);
+  //     for(let subEvo of ancestor.evoTree) {
+  //       //only push unique evos 
+  //       for(let checkExistEvo of monster.evoTree) {
+  //         let exists = false;
+  //         if(JSON.stringify(checkExistEvo) !== JSON.stringify(subEvo)) {
+  //           for(let checkPushEvo of monstersToPushToEvo) {
+  //             if(JSON.stringify(checkPushEvo) === JSON.stringify(subEvo)) {
+  //               exists = true;
+  //             }
+  //           }
+  //         }
+  //         if(!exists) {
+  //           monstersToPushToEvo.push(subEvo);
+  //         }
+  //       }
+  //     }
+  //     // if(monster.id === 5157 && monster.ancestorId === 4305) {
+  //     //   console.log('got')
+  //     //   console.log(JSON.stringify(ancestor));
+  //     //   console.log(JSON.stringify(monstersToPushToEvo));
+  //     // }
+  //     // for(let evo of monster.evoTree) {
+  //     //   let befMonster = getMonsterByNumber(evo.evoFromId);
+  //     //   //if(befMonster.id != monster.id) {
+  //     //     if(befMonster && befMonster.evoTree) {
+  //     //       for(let subEvo of befMonster.evoTree) {
+  //     //         monstersToPushToEvo.push(subEvo);
+  //     //       }
+  //     //     }
+  //     //   //}
+  //     // }
+  //     monster.evoTree = monster.evoTree.concat(monstersToPushToEvo);
+  //   }
+  //}
 }
 
 function pushEvo(monsterNum, monsterObj) {

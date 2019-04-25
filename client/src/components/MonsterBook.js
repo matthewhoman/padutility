@@ -378,10 +378,10 @@ class MonsterBook extends Component {
                                             {checkBoxAwokenComps}
                                         </div>
                                         <div style={{marginBottom:"10px"}}>
-                                            <input name="leaderFilter" type="text" placeholder="Leader Skill" value={this.state.leaderFilter} onChange={this.handleChange} />
+                                            <input name="leaderFilter" type="text" placeholder="Leader Skill Description" value={this.state.leaderFilter} onChange={this.handleChange} />
                                         </div>
                                         <div style={{marginBottom:"10px"}}>
-                                            <input name="activeFilter" type="text" placeholder="Active Skill" value={this.state.activeFilter} onChange={this.handleChange} />
+                                            <input name="activeFilter" type="text" placeholder="Active Skill Description" value={this.state.activeFilter} onChange={this.handleChange} />
                                         </div>
                                         <div>
                                             <input text="Find" variant="emphasis" type="submit" className="FormContent" />
