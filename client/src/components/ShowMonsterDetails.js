@@ -132,7 +132,7 @@ class ShowMonsterDetails extends Component {
                                 <br></br>
                                 <div style={{display: "inline-block"}}>
                                     {/* outline to trim white borders */}
-                                    <div style={{height:"60px", width:"60px", backgroundSize:"contain", outline:"1px solid black", outlineOffset:"-1px",
+                                    <div style={{height:"60px", width:"60px", backgroundSize:"contain",
                                         backgroundRepeat:"no-repeat", backgroundImage:"url(" + this.state.monsterData.img + ")"}}>
                                     </div>
                                     <div className="w3-theme-dark w3-tiny">
