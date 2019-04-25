@@ -17,12 +17,7 @@ class PadMonsterSearch extends Component {
     }
 
     getSuggestions = (value, data) => {
-        const inputValue = value.trim().toLowerCase();
-
-        return data.filter(item =>
-            ((item.id + "").trim().toLowerCase() === inputValue.trim().toLowerCase() || 
-                item.name.toLowerCase().indexOf(inputValue) > -1)
-        );
+        return data;
     };
     
     getSuggestionValue = suggestion => suggestion.name;
