@@ -309,13 +309,15 @@ class MonsterBook extends Component {
                                                 {
                                                     monster.types.map((value, index) => {                     
                                                         return (
-                                                                <div style={{display:"inline-block",width:"17px",height:"17px"}}>
-                                                                    <img key={index} 
-                                                                        src={"images/type/"+ value + ".png"}
-                                                                        style={{width:"15px",height:"15px"}} 
-                                                                        alt= ""/>
-                                                                </div>
-                                                            
+                                                                value !== '-1' ?
+                                                                    <div style={{display:"inline-block",width:"17px",height:"17px"}}>
+                                                                        <img key={index} 
+                                                                            src={"images/type/"+ value + ".png"}
+                                                                            style={{width:"15px",height:"15px"}} 
+                                                                            alt= ""/>
+                                                                    </div>
+                                                                :
+                                                                <div></div>
                                                         )
                                                     })
                                                 }
