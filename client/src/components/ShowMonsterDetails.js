@@ -244,36 +244,44 @@ class ShowMonsterDetails extends Component {
                                 </div> 
                                 <br></br>
                                 <br></br>
-                                <div className="w3-theme-dark w3-medium" style={{marginBottom:"5px"}}>
-                                    <b>Skill Up Monsters: </b>
-                                </div>
-                                <div>
-                                    {
-                                        this.state.monsterData.sameActiveMonsters.map((value, index) => {                     
-                                            return (
-                                                    <div style={{display:"inline-block",marginBottom:"10px"}}>
-                                                        {
-                                                            value !== '-1' 
-                                                            ?  
-                                                                <Link to={'/showMonsterDetails?monsterId=' + value.id + "&monsterName=" + value.name}>
-                                                                    <img key={index} 
-                                                                        src={"images/monsterIcons/"+ value.id + ".png"}
-                                                                        style={{width:"46px",height:"46px"}}
-                                                                        title={value.id + '. ' + value.name}
-                                                                        alt= ""/>
-                                                                </Link>
-                                                            :
-                                                                <span></span>
-                                                        }
-                                                        &nbsp;&nbsp;
-                                                    </div>
-                                                
-                                            )
-                                        })
-                                    } 
-                                </div>
-                                <br></br>
-                                <br></br>
+                                {
+                                    this.state.monsterData.sameActiveMonsters.length > 0 
+                                    ?
+                                    <div>
+                                        <div className="w3-theme-dark w3-medium" style={{marginBottom:"5px"}}>
+                                            <b>Skill Up Monsters: </b>
+                                        </div>
+                                        <div>
+                                            {
+                                                this.state.monsterData.sameActiveMonsters.map((value, index) => {                     
+                                                    return (
+                                                            <div style={{display:"inline-block",marginBottom:"10px"}}>
+                                                                {
+                                                                    value !== '-1' 
+                                                                    ?  
+                                                                        <Link to={'/showMonsterDetails?monsterId=' + value.id + "&monsterName=" + value.name}>
+                                                                            <img key={index} 
+                                                                                src={"images/monsterIcons/"+ value.id + ".png"}
+                                                                                style={{width:"46px",height:"46px"}}
+                                                                                title={value.id + '. ' + value.name}
+                                                                                alt= ""/>
+                                                                        </Link>
+                                                                    :
+                                                                        <span></span>
+                                                                }
+                                                                &nbsp;&nbsp;
+                                                            </div>
+                                                        
+                                                    )
+                                                })
+                                            } 
+                                        </div>
+                                        <br></br>
+                                        <br></br>
+                                    </div>
+                                    :
+                                    <div></div>
+                                }
                             {
                                 evoTreeComponent.length !== 0 
                                 ?
