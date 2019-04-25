@@ -317,7 +317,7 @@ class MonsterBook extends Component {
                                                                             alt= ""/>
                                                                     </div>
                                                                 :
-                                                                <div></div>
+                                                                <div key={index}></div>
                                                         )
                                                     })
                                                 }

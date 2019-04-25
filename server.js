@@ -318,7 +318,11 @@ function getMonstersByActiveSkillName(skillName) {
   }
   for(let mons of monsterNameNumArr) {
     if(mons.activeSkill && mons.activeSkill.trim().toLowerCase() === skillName.trim().toLowerCase()) {
-      monsters.push(mons);
+      let monsResponse = {
+        name : mons.name,
+        id : mons.id,
+      }
+      monsters.push(monsResponse);
     }
   }
   return monsters;
@@ -400,7 +404,10 @@ function parseDictionaryForClient(dictionary, evosArr) {
     monstersJson.evoMat5 = monster.card.evo_mat_id_5;
 
     monstersJson.evoTree = [];
-    monstersJson.sameActiveMonsters = getMonstersByActiveSkillName(monstersJson.activeSkill);
+    monstersJson.sameActiveMonsters = [];
+    if(!monstersJson.unreleased) {
+      monstersJson.sameActiveMonsters = getMonstersByActiveSkillName(monstersJson.activeSkill);
+    }
 
     if(!monster.card.released_status) {
       masterMonsterUnreleasedDictionary.push(monstersJson);

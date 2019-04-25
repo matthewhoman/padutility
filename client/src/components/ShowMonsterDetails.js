@@ -267,7 +267,7 @@ class ShowMonsterDetails extends Component {
                                                                                 alt= ""/>
                                                                         </Link>
                                                                     :
-                                                                        <span></span>
+                                                                        <span key={index}></span>
                                                                 }
                                                                 &nbsp;&nbsp;
                                                             </div>
