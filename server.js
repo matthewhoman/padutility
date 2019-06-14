@@ -697,6 +697,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+//function to copy all images from disc to mongo db... will prob never need this again.
 function copyImagesToMongo() {
   var imagePaths = fs.readdirSync('client/public/images/monsterIcons');
   var imageDocs = [];
@@ -720,10 +721,8 @@ function copyImagesToMongo() {
 app.listen(port, function () {
   console.log("booting... on port " + port ); 
   try {
-    //getMonstersFromAPI();
+    getMonstersFromAPI();
     //getMonsters();
-    //functino to copy all images from disc to mongo db... will prob never need this again.
-    copyImagesToMongo();
   } catch(e) {
     console.error("SOMETHING FAILED IN MONSTER RETRIEVAL/PARSING " + e);
   }
