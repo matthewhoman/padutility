@@ -1,22 +1,45 @@
 import React, { Component } from 'react';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import {Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import UpdatedMessage from './UpdatedMessage';
+import PadMonsterSearch from './PadMonsterSearch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import PadMonsterSearch from './PadMonsterSearch'
+import { faBars, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import Image from 'react-bootstrap/Image'
 
 class ReturnNav extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            
+            expanded: false
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.handleNavBarClick = this.handleNavBarClick.bind(this);
+        this.handleNavBarMouseOver = this.handleNavBarMouseOver.bind(this);
+        this.handleNavBarMouseOut = this.handleNavBarMouseOut.bind(this);
+    }
+
+    handleNavBarClick() {
+        
+    }
+
+    handleNavBarMouseOver() {
+        if(!this.state.expanded) {
+            this.setState({
+                expanded: true
+            })
+        }
+    }
+
+    handleNavBarMouseOut() {
+        if(this.state.expanded) {
+            this.setState({
+                expanded: false
+            })
+        }
     }
 
     handleButtonClick() {
@@ -58,7 +81,8 @@ class ReturnNav extends Component {
 
         return (
             <div className="fixedHeader">
-                <Navbar expand="true" bg="dark" variant="dark" style={{padding:"10px"}}>
+                <Navbar expand="true" bg="dark" variant="dark" style={{padding:"10px"}} expanded={this.state.expanded} onClick={this.handleNavBarClick}
+                        onMouseOver={this.handleNavBarMouseOver} onMouseOut={this.handleNavBarMouseOut}>
                     <Navbar.Brand style={{textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"normal", flexGrow:1}}>
                         {this.props.suppressBack ?  headerComp : 
                             <span><FontAwesomeIcon icon={faArrowLeft} onClick={this.handleButtonClick} /> 
@@ -77,10 +101,34 @@ class ReturnNav extends Component {
                     <Navbar.Collapse>
                         <Nav style={{whiteSpace:"nowrap",textAlign:"right",direction:"rtl"}}>
                             <Navbar.Text style={{marginLeft:"auto"}}>
-                                <Link to={'/profile'}>Profile</Link>&nbsp;|&nbsp;
+                                <Link to={'/profile'}>Profile</Link>
+                                &nbsp;|&nbsp;
                                 <Link to={'/monsterBook'}>Monster Book</Link>
                                 {/* <Link to={'/unreleasedMonsters'}>Unreleased Monsters</Link>
                                 <NavDropdown.Divider style={{width:"150px"}}/> */}
+                            </Navbar.Text>
+                            <Navbar.Text style={{marginLeft:"auto"}}>
+                                <a href="http://steamcommunity.com/id/b34st3d" target="_blank" rel="noopener noreferrer">
+                                    <Image className="socialMediaIcon" src="/images/socialmedia/steam.svg" title='Steam'></Image>
+                                </a>
+                                <a href="http://matthewhoman.deviantart.com/" target="_blank" rel="noopener noreferrer">
+                                    <Image className="socialMediaIcon" src="/images/socialmedia/deviantart.svg" title='Deviant Art'></Image>
+                                </a>
+                                <a href="https://www.paypal.me/MatthewHoman" target="_blank" rel="noopener noreferrer">
+                                    <Image className="socialMediaIcon" src="/images/socialmedia/paypal.svg" title='PayPal'></Image>
+                                </a>
+                                <a href="https://www.twitch.tv/b34st3d" target="_blank" rel="noopener noreferrer">
+                                    <Image className="socialMediaIcon" src="/images/socialmedia/twitch.svg" title='Twitch'></Image>
+                                </a>
+                                <a href="http://instagram.com/m.h.h.11" target="_blank" rel="noopener noreferrer">
+                                    <Image className="socialMediaIcon" src="/images/socialmedia/instagram.svg" title='Instagram'></Image>
+                                </a>
+                                <a href="https://www.facebook.com/matthew.homan1" target="_blank" rel="noopener noreferrer">
+                                    <Image className="socialMediaIcon" src="/images/socialmedia/facebook.svg" title='Facebook'></Image>
+                                </a>
+                                <a href="http://www.linkedin.com/pub/matthew-homan/4a/528/546" target="_blank" rel="noopener noreferrer">
+                                    <Image className="socialMediaIcon" src="/images/socialmedia/linkedin.svg" title='Linked In'></Image>
+                                </a>
                             </Navbar.Text>
                         </Nav>
                     </Navbar.Collapse>
