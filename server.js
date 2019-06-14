@@ -721,8 +721,9 @@ function copyImagesToMongo() {
 app.listen(port, function () {
   console.log("booting... on port " + port ); 
   try {
-    getMonstersFromAPI();
-    //getMonsters();
+    //don't constantly pull from the api.. the getmonsters will pull from the mongo db copy!. The api is only called daily.
+    //getMonstersFromAPI();
+    getMonsters();
   } catch(e) {
     console.error("SOMETHING FAILED IN MONSTER RETRIEVAL/PARSING " + e);
   }

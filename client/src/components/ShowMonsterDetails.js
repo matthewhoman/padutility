@@ -273,11 +273,12 @@ class ShowMonsterDetails extends Component {
                                                                     value !== '-1' 
                                                                     ?  
                                                                         <Link to={'/showMonsterDetails?monsterId=' + value.id + "&monsterName=" + value.name}>
-                                                                            <img key={index} 
-                                                                                src={"images/monsterIcons/"+ value.id + ".png"}
-                                                                                style={{width:"46px",height:"46px"}}
+                                                                            <Image key={index}
+                                                                                className="monsterDetailImg"
                                                                                 title={value.id + '. ' + value.name}
-                                                                                alt= ""/>
+                                                                                id={value.id}
+                                                                                alt={value.id}>
+                                                                            </Image>
                                                                         </Link>
                                                                     :
                                                                         <span key={index}></span>
