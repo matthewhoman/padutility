@@ -22,6 +22,7 @@ var masterMonsterUnreleasedDictionary = [];
 var serverReady = false;
 var monsterObjectsFromAPI = [];
 var monsterEvosFromAPI = [];
+var recentCards = [];
 
 var typeMap = {
   evolve : '0',
@@ -59,39 +60,73 @@ app.get('/serverReady', function(req, res) {
 
 function getMonsters() {
   //see if there was a significant amount of data in the api call to use it as opposed to the backed up hard copy!
-  let cardsJson = JSON.parse(fs.readFileSync("./JSON_DATA/na_cards.json", ENCODING));
-  let evosJson = JSON.parse(fs.readFileSync("./JSON_DATA/evolutionList.json", ENCODING));
-  //console.info("Done Reading Cards/Evolution Data!!")
+  util.getCardsJSON()
+      .then(dbCards => {
+        let cardsJson = dbCards;
+        util.getEvolutionsJSON()
+            .then(dbEvos => {
+              console.info("Done Reading Cards/Evolution Data!!")
 
-  let cardsToUse = cardsJson;
-  let evosToUse = evosJson;
+              let evosJson = dbEvos;
+              let cardsToUse = cardsJson;
+              let evosToUse = evosJson;
 
-  /*
-    if the monsters/evolutions fetched from api are not the same as whats cached use them.. 
-    update the cache and back up the old copies! 
-  */
-  let monsterEvoAPIStr = JSON.stringify(monsterEvosFromAPI);
-  let monsterEvoJSONStr = JSON.stringify(evosJson);
+              /*
+                if the monsters/evolutions fetched from api are not the same as whats cached use them.. 
+                update the cache and back up the old copies! 
+              */
+              let monsterEvoAPIStr = JSON.stringify(monsterEvosFromAPI);
+              let monsterEvoJSONStr = JSON.stringify(evosJson);
 
-  if(monsterEvosFromAPI.length > 0 && monsterEvoAPIStr.length !== monsterEvoJSONStr.length) {
-    fs.writeFileSync("./JSON_DATA/evolutionList.json", monsterEvoAPIStr);
-    fs.writeFileSync("./JSON_DATA/evolutionList"+new Date().toISOString()+".json", monsterEvoJSONStr)
-    evosToUse = monsterEvosFromAPI;
-    console.info("Backed Up and Updated evolutionsList, Using Evos from API");
-  }
+              if(monsterEvosFromAPI.length > 0 && monsterEvoAPIStr.length !== monsterEvoJSONStr.length) {
+                util.deleteEvolutions()
+                    .then(result => {
+                      console.log(result);
+                      util.insertEvolutionsJSON(monsterEvosFromAPI)
+                        .then(result => {
+                          console.log(result);
+                        }).catch(err => {
+                          console.log("Failed to insert cards in db " + err);
+                        });
+                    }).catch(err => {
+                      console.log("Failed to delete cards in db " + err);
+                    });
+                //TODO: back up data!
+                //fs.writeFileSync("./JSON_DATA/evolutionList"+new Date().toISOString()+".json", monsterEvoJSONStr)
+                evosToUse = monsterEvosFromAPI;
+                console.info("Backed Up and Updated evolutionsList, Using Evos from API");
+              }
 
-  let monsterCardAPIStr = JSON.stringify(monsterObjectsFromAPI);
-  let monserCardJSONStr = JSON.stringify(cardsJson);
+              let monsterCardAPIStr = JSON.stringify(monsterObjectsFromAPI);
+              let monserCardJSONStr = JSON.stringify(cardsJson);
 
-  if(monsterObjectsFromAPI.length > 0 && monsterCardAPIStr.length !== monserCardJSONStr.length) {
-    fs.writeFileSync("./JSON_DATA/na_cards.json", monsterCardAPIStr);
-    fs.writeFileSync("./JSON_DATA/na_cards"+new Date().toISOString()+".json", monserCardJSONStr)
-    cardsToUse = monsterObjectsFromAPI;
-    console.info("Backed Up and Updated na_cards, Using Cards from API");
-  }
-  
-  parseDictionaryForClient(cardsToUse, evosToUse);
-  scrapeImages();
+              if(monsterObjectsFromAPI.length > 0 && monsterCardAPIStr.length !== monserCardJSONStr.length) {
+                util.deleteCards()
+                    .then(result => {
+                      console.log(result);
+                      util.insertCardsJSON(monsterObjectsFromAPI)
+                        .then(result => {
+                          console.log(result);
+                          console.info("Updated na_cards, Using Cards from API");
+                        }).catch(err => {
+                          console.log("Failed to insert cards in db " + err);
+                        });
+                    }).catch(err => {
+                      console.log("Failed to delete cards in db " + err);
+                    });
+                //TODO: backup data
+                //fs.writeFileSync("./JSON_DATA/na_cards"+new Date().toISOString()+".json", monserCardJSONStr)
+                cardsToUse = monsterObjectsFromAPI;
+              }
+              
+              parseDictionaryForClient(cardsToUse, evosToUse);
+              scrapeImages(cardsJson);
+            }).catch(err => {
+              console.log("Could not get evolutions from db " + err);
+            });
+        }).catch(err => {
+          console.log("Could not get cards from db " + err);
+        });
 }
 
 function getMonstersFromAPI() {
@@ -179,7 +214,7 @@ app.get('/retrieveMonsters', function(req, res) {
                   awokenFilters ||
                   elementFilters;
 
-  let maxResults = 100;
+  let maxResults = 30;
   let monsters = [];
   //default sort
   sortById(monsterNameNumArr);
@@ -471,7 +506,7 @@ function sortByAwokens(arr, awokenIn) {
   arr.sort(compare);
 }
 
-function scrapeImages() {
+function scrapeImages(oldCards) {
   (async function() {
     const instance = await phantom.create();
     const page = await instance.createPage();
@@ -486,12 +521,16 @@ function scrapeImages() {
     });
     let baseURL = 'http://puzzledragonx.com/en/img/thumbnail/';
     let arr = monsterNameNumArr;//.slice(0, 19);
+    var newImageDocs = [];
     //only get image if it doesnt exist!
     for(let i = 0; i < arr.length; i++) {
       let monster = arr[i];
       let imgExt = monster.id + ".png";
       let serverPath = 'client/public/images/monsterIcons/' + imgExt;
-      if(!fs.existsSync(serverPath)) {
+      let isNewCard = await newCard(imgExt);
+      if(isNewCard) {
+        //TODO: SAVE RECENT CARDS
+        recentCards.push(monster);
         let url = baseURL + imgExt;
         const status = await page.open(url);
         await console.log(`Page opened with status [${status}].`);
@@ -507,6 +546,11 @@ function scrapeImages() {
           };
         }); 
         await page.property('clipRect', imgObj);
+        var imageDoc = {
+          name : imagePaths[i],
+          img: Buffer.from(img64, 'base64')
+        };
+        newImageDocs.push(imageDoc);
         await page.render(serverPath);   
         console.log('created: ' + imgExt)
       }
@@ -514,6 +558,19 @@ function scrapeImages() {
     await instance.exit();
     console.info("Done Scraping Images");
   })();
+}
+
+async function newCard(id) {
+  return util.monsterImgExistsInDb(id)
+      .then(isNewCard => {
+        if(isNewCard) {
+          console.log("Is new card " + id);
+        }
+        return isNewCard;
+      }).catch(err => {
+        console.log("Failed to search if was new card " + err);
+        return false;
+      });
 }
 
 function parseAwakenings(awokenArr) {
@@ -615,10 +672,32 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+function copyImagesToMongo() {
+  var imagePaths = fs.readdirSync('client/public/images/monsterIcons');
+  var imageDocs = [];
+  for (var i = 0; i < imagePaths.length; i++) {
+    var img = fs.readFileSync('client/public/images/monsterIcons/' + imagePaths[i]);
+    var img64 = img.toString('base64');
+    var imageDoc = {
+      name : imagePaths[i],
+      img: Buffer.from(img64, 'base64')
+    };
+    imageDocs.push(imageDoc);
+  }
+  util.insertImagesIntoDb(imageDocs)
+      .then(result => {
+        console.log(result);
+      }).catch(err => {
+        console.log("Failed to images in db " + err);
+      });
+}
+
 app.listen(port, function () {
   console.log("booting... on port " + port ); 
   try {
-    getMonsters();
+    getMonstersFromAPI();
+    //getMonsters();
+    //copyImagesToMongo();
   } catch(e) {
     console.error("SOMETHING FAILED IN MONSTER RETRIEVAL/PARSING " + e);
   }

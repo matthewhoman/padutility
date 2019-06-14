@@ -286,7 +286,7 @@ class MonsterBook extends Component {
                                         <img className="evoImageBig" 
                                             src={monster.img} 
                                             title={monster.id+ ".&nbsp;" + monster.name} 
-                                            alt=""/>
+                                            alt={monster.id+ ".  " + monster.name}/>
                                     </div>
                                 </Link>
                             </div>
