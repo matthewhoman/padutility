@@ -145,8 +145,13 @@ class ShowMonsterDetails extends Component {
                                 <br></br>
                                 <div style={{display: "inline-block"}}>
                                     {/* outline to trim white borders */}
-                                    <div style={{height:"60px", width:"60px", backgroundSize:"contain",
-                                        backgroundRepeat:"no-repeat", backgroundImage:"url(" + this.state.monsterData.img + ")"}}>
+                                    <div>
+                                        <Image
+                                            className="monsterDetailMainImg"
+                                            title={this.state.monsterData.id}
+                                            id={this.state.monsterData.id}
+                                            alt={this.state.monsterData.id}>
+                                        </Image>
                                     </div>
                                     <div className="w3-theme-dark w3-tiny">
                                         MP:{this.state.monsterData.mp}

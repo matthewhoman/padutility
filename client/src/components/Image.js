@@ -20,6 +20,19 @@ class Image extends Component {
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.id !== prevProps.id) {
+            fetch('/imgData?id=' + this.props.id)
+            .then((res) => res.json())
+            .then((imgData) => {
+                var base64Flag = 'data:image/jpeg;base64,';
+                this.setState({
+                    img: base64Flag + imgData
+                })
+            })
+        }
+    }
+    
     render() {
         const {img} = this.state;
         return (
