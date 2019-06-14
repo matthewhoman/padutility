@@ -4,6 +4,7 @@ import ShowMonsterDetails from './ShowMonsterDetails';
 import UnreleasedMonsters from './UnreleasedMonsters';
 import MonsterBook from './MonsterBook';
 import Main from './Main';
+import Profile from './Profile';
 
 import './App.scss';
 import 'font-awesome/css/font-awesome.min.css';
@@ -46,7 +47,8 @@ class App extends Component {
               {/* <Route exact={true} path='/signin' component={SignIn}/>
               <Route exact={true} path='/signup' component={SignUp}/>
               <ProtectedRoute exact={true} path='/profile' component={Profile} /> */}
-              <Route exact={true} path='/' component={Main}/>
+              <Route exact={true} path='/' component={Profile}/>
+              <Route exact={true} path='/profile' component={Profile}/>
               <Route exact={true} path='/showMonsterDetails' component={ShowMonsterDetails}/>
               <Route exact={true} path='/unreleasedMonsters' component={UnreleasedMonsters}/>
               <Route exact={true} path='/monsterBook' component={MonsterBook}/>

@@ -242,7 +242,7 @@ class ShowMonsterDetails extends Component {
                                     (lvl.&nbsp;1:&nbsp;Turn:&nbsp;{this.state.monsterData.turnMax}&nbsp;&nbsp;<FontAwesomeIcon icon={faArrowRight} />&nbsp;
                                                         Turn:&nbsp;{this.state.monsterData.turnMin})
                                 </span>
-                                <div className="w3-small" style={{color:"lightgreen",width:"auto"}}>
+                                <div className="w3-small" style={{color:"lightblue",width:"auto"}}>
                                     &nbsp;&nbsp;{this.state.monsterData.activeSkill}:
                                 </div>
                                 <div className="w3-theme-dark w3-small">
@@ -253,7 +253,7 @@ class ShowMonsterDetails extends Component {
                                 <div className="w3-theme-dark w3-medium">
                                     <b>Leader Skill</b>
                                 </div>
-                                <div className="w3-small" style={{color:"lightblue",width:"auto"}}>
+                                <div className="w3-small" style={{color:"lightgreen",width:"auto"}}>
                                     &nbsp;&nbsp;{this.state.monsterData.leaderSkill}:
                                 </div> 
                                 <div className="w3-theme-dark w3-small">

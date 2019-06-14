@@ -71,12 +71,14 @@ class ReturnNav extends Component {
                         </div> */}
                         <Navbar.Toggle children={<FontAwesomeIcon icon={faBars} />} style={{border:"none", float:"right"}}/>
                     </Navbar.Text>
-                    <PadMonsterSearch/>
+                    {
+                        this.props.suppressSearch ? <div></div> : <PadMonsterSearch/>
+                    }
                     <Navbar.Collapse>
                         <Nav style={{whiteSpace:"nowrap",textAlign:"right",direction:"rtl"}}>
                             <Navbar.Text style={{marginLeft:"auto"}}>
+                                <Link to={'/profile'}>Profile</Link>&nbsp;|&nbsp;
                                 <Link to={'/monsterBook'}>Monster Book</Link>
-                                <NavDropdown.Divider style={{width:"150px"}}/>
                                 {/* <Link to={'/unreleasedMonsters'}>Unreleased Monsters</Link>
                                 <NavDropdown.Divider style={{width:"150px"}}/> */}
                             </Navbar.Text>

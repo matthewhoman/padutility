@@ -391,7 +391,7 @@ class MonsterBook extends Component {
                                         <div>
                                             <input text="Find" variant="emphasis" type="submit" className="FormContent" />
                                             <div className="w3-theme-dark w3-small" style={{display:"inline-block", marginLeft:"10px"}}>
-                                                Top 100 results&nbsp;(&nbsp;{this.state.monsters ? this.state.monsters.length : 0}&nbsp;)
+                                                Top 30 results&nbsp;(&nbsp;{this.state.monsters ? this.state.monsters.length : 0}&nbsp;)
                                             </div>
                                             <button
                                                 style={{backgroundColor:"DodgerBlue", color:"white", border:"none", float:"right"}}
