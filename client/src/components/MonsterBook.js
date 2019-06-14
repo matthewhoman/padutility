@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faSpinner } from '@fortawesome/free-solid-svg-icons'
-import ReturnNav from './ReturnNav'
+import ReturnNav from './ReturnNav';
 import Collapsible from 'react-collapsible';
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
@@ -10,6 +10,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Image from './Image';
 
 var typeMap = {
     evolve : '0',
@@ -283,10 +284,12 @@ class MonsterBook extends Component {
                                             display:"inline-block", 
                                             width:"60px", 
                                             height:"60px"}}>
-                                        <img className="evoImageBig" 
-                                            src={monster.img} 
-                                            title={monster.id+ ".&nbsp;" + monster.name} 
-                                            alt={monster.id+ ".  " + monster.name}/>
+                                        <Image 
+                                            className="evoImageBig"
+                                            title={monster.id+ ".&nbsp;" + monster.name}
+                                            id={monster.id}
+                                            alt={monster.id+ ".  " + monster.name}>
+                                        </Image>
                                     </div>
                                 </Link>
                             </div>

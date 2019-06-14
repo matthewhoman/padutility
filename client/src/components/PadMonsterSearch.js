@@ -4,6 +4,7 @@ import Autosuggest from 'react-autosuggest';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import Image from './Image';
 
 class PadMonsterSearch extends Component {
 
@@ -28,7 +29,12 @@ class PadMonsterSearch extends Component {
                 <div className="overflows" style={{position:"relative", top:"10px", 
                         display:"table", tableLayout:"fixed", width:"100%", height:"100%"}}>
                     <span className="overflows" style={{display:"table-cell", width:"90px"}}>
-                        <img className="monsterImageSearch" src={suggestion.img} title={suggestion.id + ".&nbsp;" + suggestion.name} alt="" />
+                        <Image 
+                            className="monsterImageSearch"
+                            title={suggestion.id + ".&nbsp;" + suggestion.name}
+                            id={suggestion.id}
+                            alt={suggestion.id}>
+                        </Image>
                     </span>
                     <span className="w3-small overflows" style={{display:"table-cell",verticalAlign:"top"}}>
                         <div className="overflows">

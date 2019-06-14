@@ -65,7 +65,7 @@ function getMonsters() {
         let cardsJson = dbCards;
         util.getEvolutionsJSON()
             .then(dbEvos => {
-              console.info("Done Reading Cards/Evolution Data!!")
+              console.info("Done Reading Cards/Evolution Data!!");
 
               let evosJson = dbEvos;
               let cardsToUse = cardsJson;
@@ -118,7 +118,7 @@ function getMonsters() {
                 //fs.writeFileSync("./JSON_DATA/na_cards"+new Date().toISOString()+".json", monserCardJSONStr)
                 cardsToUse = monsterObjectsFromAPI;
               }
-              
+              console.log("About to parse monsters: " + cardsToUse.length);
               parseDictionaryForClient(cardsToUse, evosToUse);
               scrapeImages(cardsJson);
             }).catch(err => {
@@ -198,6 +198,17 @@ app.get('/retrieveMonstersSuggest', function(req, res) {
   }
   
   res.end(JSON.stringify(monsters));
+});
+
+app.get('/imgData', function(req, res) {
+  let id = URL.parse(req.url, true).query.id + ".png";
+  util.getMonsterImgFromDb(id)
+      .then(imgData => {
+        console.log("Retrieved Image " + imgData.name);
+        res.end(JSON.stringify(imgData.img));
+      }).catch(err => {
+        console.log("Failed to retrieve imag in db " + id + "  " + err);
+      });
 });
 
 //retrieve monster stuff, they can be filtered
@@ -546,16 +557,30 @@ function scrapeImages(oldCards) {
           };
         }); 
         await page.property('clipRect', imgObj);
-        var imageDoc = {
-          name : imagePaths[i],
-          img: Buffer.from(img64, 'base64')
-        };
-        newImageDocs.push(imageDoc);
-        await page.render(serverPath);   
-        console.log('created: ' + imgExt)
+        var img64 = await page.renderBase64('PNG');  
+        if(img64.length > 0) {
+          var imageDoc = {
+            name : imgExt,
+            img: Buffer.from(img64, 'base64')
+          }; 
+          newImageDocs.push(imageDoc);
+         
+          console.log('created: ' + imgExt)  
+        } else {
+          console.log('*** DID NOT CREATED: ' + imgExt)  
+        } 
       }
     }
     await instance.exit();
+    if(newImageDocs.length > 0) {
+      util.insertImagesIntoDb(newImageDocs)
+          .then(result => {
+            console.log(result);
+            console.log("Done!");
+          }).catch(err => {
+            console.log("Failed to insert images in db " + err);
+          });
+    }
     console.info("Done Scraping Images");
   })();
 }
@@ -695,9 +720,10 @@ function copyImagesToMongo() {
 app.listen(port, function () {
   console.log("booting... on port " + port ); 
   try {
-    getMonstersFromAPI();
+    //getMonstersFromAPI();
     //getMonsters();
-    //copyImagesToMongo();
+    //functino to copy all images from disc to mongo db... will prob never need this again.
+    copyImagesToMongo();
   } catch(e) {
     console.error("SOMETHING FAILED IN MONSTER RETRIEVAL/PARSING " + e);
   }

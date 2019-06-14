@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import ReturnNav from './ReturnNav';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import Image from './Image';
 
 let monsterImageURL = "http://www.puzzledragonx.com/en/img/monster/MONS_#.jpg";
 
@@ -78,8 +79,12 @@ class ShowMonsterDetails extends Component {
                         evoMatsComponent.push(
                             <div key={i + j} className="evoImageWrap">
                                 <Link to={'/showMonsterDetails?monsterId=' + mat}>{/* TODO: do i need name? + "&monsterName=" + evoMonster.name}> */}
-                                    <img className="evoImageSmall" 
-                                        src={'images/monsterIcons/' + mat + ".png"} title={mat} alt=""/>
+                                    <Image 
+                                        className="evoImageSmall"
+                                        title={mat}
+                                        id={mat}
+                                        alt={mat}>
+                                    </Image>
                                 </Link>
                             </div>
                         )
@@ -89,15 +94,23 @@ class ShowMonsterDetails extends Component {
                                         <div className="w3-margin-bottom" style={{maxWidth:"780px"}}>
                                             <div key={evo.evoFromId} className="evoImageWrap">
                                                 <Link to={'/showMonsterDetails?monsterId=' + evo.evoFromId + "&monsterName=" + evo.evoFromName}>
-                                                    <img className="evoImageBig" 
-                                                        src={'images/monsterIcons/' + evo.evoFromId + ".png"} title={evo.evoFromId} alt=""/>
+                                                    <Image 
+                                                        className="evoImageBig"
+                                                        title={evo.evoFromId}
+                                                        id={evo.evoFromId}
+                                                        alt={evo.evoFromId}>
+                                                    </Image>
                                                 </Link>
                                             </div>
                                             {evoMatsComponent}
                                             <div key={evo.evoToId} className="evoImageWrap">
                                                 <Link to={'/showMonsterDetails?monsterId=' + evo.evoToId + "&monsterName=" + evo.evoToName}>
-                                                    <img className="evoImageBig" 
-                                                        src={'images/monsterIcons/' + evo.evoToId + ".png"} title={evo.evoToId} alt=""/>
+                                                    <Image 
+                                                        className="evoImageBig"
+                                                        title={evo.evoToId}
+                                                        id={evo.evoToId}
+                                                        alt={evo.evoToId}>
+                                                    </Image>
                                                 </Link>
                                             </div>
                                         </div>
