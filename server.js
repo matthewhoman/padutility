@@ -204,7 +204,7 @@ app.get('/imgData', function(req, res) {
   let id = URL.parse(req.url, true).query.id + ".png";
   util.getMonsterImgFromDb(id)
       .then(imgData => {
-        console.log("Retrieved Image " + imgData.name);
+        //console.log("Retrieved Image " + imgData.name);
         res.end(JSON.stringify(imgData.img));
       }).catch(err => {
         console.log("Failed to retrieve imag in db " + id + "  " + err);

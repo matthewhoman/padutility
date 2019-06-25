@@ -14,32 +14,8 @@ class ReturnNav extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: false
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
-        this.handleNavBarClick = this.handleNavBarClick.bind(this);
-        this.handleNavBarMouseOver = this.handleNavBarMouseOver.bind(this);
-        this.handleNavBarMouseOut = this.handleNavBarMouseOut.bind(this);
-    }
-
-    handleNavBarClick() {
-        
-    }
-
-    handleNavBarMouseOver() {
-        if(!this.state.expanded) {
-            this.setState({
-                expanded: true
-            })
-        }
-    }
-
-    handleNavBarMouseOut() {
-        if(this.state.expanded) {
-            this.setState({
-                expanded: false
-            })
-        }
     }
 
     handleButtonClick() {
@@ -81,8 +57,7 @@ class ReturnNav extends Component {
 
         return (
             <div className="fixedHeader">
-                <Navbar expand="true" bg="dark" variant="dark" style={{padding:"10px"}} expanded={this.state.expanded} onClick={this.handleNavBarClick}
-                        onMouseOver={this.handleNavBarMouseOver} onMouseOut={this.handleNavBarMouseOut}>
+                <Navbar expand="true" bg="dark" variant="dark" style={{padding:"10px"}}>
                     <Navbar.Brand style={{textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"normal", flexGrow:1}}>
                         {this.props.suppressBack ?  headerComp : 
                             <span><FontAwesomeIcon icon={faArrowLeft} onClick={this.handleButtonClick} /> 
