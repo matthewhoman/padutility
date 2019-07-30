@@ -218,6 +218,7 @@ app.get('/retrieveMonsters', function(req, res) {
   let awokenFilters = URL.parse(req.url, true).query.awokenFilter;
   let leaderFilter = URL.parse(req.url, true).query.leaderFilter;
   let activeFilter = URL.parse(req.url, true).query.activeFilter;
+  //let page = URL.parse(req.url, true).query.page;
 
   let hasFilter = typeFilters || 
                   leaderFilter ||
@@ -225,7 +226,7 @@ app.get('/retrieveMonsters', function(req, res) {
                   awokenFilters ||
                   elementFilters;
 
-  let maxResults = 30;
+  let maxResults = 60;
   let monsters = [];
   //default sort
   sortById(monsterNameNumArr);
