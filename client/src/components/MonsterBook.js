@@ -419,14 +419,13 @@ class MonsterBook extends Component {
                         <div style={{marginTop:"15px"}}>
                             <div style={{marginBottom:"12px",maxWidth:"347px"}}>
                                 <Collapsible 
-                                    className="w3-theme-dark w3-medium" 
                                     trigger="Filters" 
+                                    triggerStyle={{height:"35px",fontSize:"16px",padding:"5px"}}
                                     transitionTime={100}
                                     open={this.state.filterOpen}
                                     onOpen={() => sessionStorage.setItem('filterOpen', true)}
                                     onClose={() => sessionStorage.setItem('filterOpen', false)}
                                 >
-                                    <br></br>
                                     <form id="filterForm" onSubmit={this.handleSubmit}> 
                                         <div style={{marginBottom:"10px"}}>
                                             {checkBoxElementComps}
@@ -445,9 +444,6 @@ class MonsterBook extends Component {
                                         </div>
                                         <div>
                                             <input text="Find" variant="emphasis" type="submit" className="FormContent" />
-                                            <div className="w3-theme-dark w3-small" style={{display:"inline-block", marginLeft:"10px"}}>
-                                                Top 30 results&nbsp;(&nbsp;{this.state.monsters ? this.state.monsters.length : 0}&nbsp;)
-                                            </div>
                                             <button
                                                 style={{backgroundColor:"DodgerBlue", color:"white", border:"none", float:"right"}}
                                                 variant="emphasis" 
@@ -462,10 +458,10 @@ class MonsterBook extends Component {
                             </div>
                         </Col>
                         <Col>
-                        <div style={{marginTop:"15px"}}>
+                        <div style={{marginTop:"15px",maxWidth:"400px"}}>
                             {monsters}  
                         </div>
-                        <div style={{marginTop:"15px"}}>
+                        <div style={{marginTop:"15px",marginLeft:"206px",maxWidth:"400px"}}>
                             {prevButton}
                             {hasMoreButton}
                         </div>

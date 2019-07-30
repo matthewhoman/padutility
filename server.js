@@ -227,7 +227,7 @@ app.get('/retrieveMonsters', function(req, res) {
                   awokenFilters ||
                   elementFilters;
 
-  let maxResults = 30;
+  let maxResults = 20;
   let monsters = [];
   //default sort
   sortById(monsterNameNumArr);
