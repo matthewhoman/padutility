@@ -114,7 +114,8 @@ class MonsterBook extends Component {
             awokenFilter: sessionStorage.getItem('awokenFilter') ? JSON.parse(sessionStorage.getItem('awokenFilter')) : [],
             leaderFilter : sessionStorage.getItem('leaderFilter') ? JSON.parse(sessionStorage.getItem('leaderFilter')) : '',
             activeFilter : sessionStorage.getItem('activeFilter') ? JSON.parse(sessionStorage.getItem('activeFilter')) : '',
-            filterOpen : sessionStorage.getItem('filterOpen') !== 'undefined' ? JSON.parse(sessionStorage.getItem('filterOpen')) : false
+            filterOpen : sessionStorage.getItem('filterOpen') !== 'undefined' ? JSON.parse(sessionStorage.getItem('filterOpen')) : false,
+            page: 1
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -122,6 +123,8 @@ class MonsterBook extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.resetForm = this.resetForm.bind(this);
         this.setDefaultState = this.setDefaultState.bind(this);
+        this.loadMoreMonsters = this.loadMoreMonsters.bind(this);
+        this.loadPrevMonsters = this.loadPrevMonsters.bind(this);
     }
 
     componentDidMount() {
@@ -135,12 +138,14 @@ class MonsterBook extends Component {
             elementFilter : [],
             awokenFilter: [],
             leaderFilter : '',
-            activeFilter : ''
+            activeFilter : '',
+            page: 1
         });
     }
 
     handleSubmit(event) {
         event.preventDefault();
+        this.setState({page: 1});
         this.getMonsters();
     }
 
@@ -169,8 +174,23 @@ class MonsterBook extends Component {
         this.setDefaultState();
     }
 
+    loadPrevMonsters() {
+        this.setState({page: this.state.page--});
+        this.getMonsters();
+    }
+
+    loadMoreMonsters()  {
+        this.setState({page: this.state.page++});
+        this.getMonsters();
+    }
+
     getMonsters() {
         let queryStr = '';
+        let page = this.state.page;
+
+        queryStr += "page=" + page;
+        queryStr += "&"
+
         if(this.state.typeFilter.length > 0) {
             queryStr += "typeFilter=" + JSON.stringify(this.state.typeFilter)
             queryStr += "&"
@@ -204,7 +224,9 @@ class MonsterBook extends Component {
             .then(data => {
                 this.setState(() => ({
                     monstersFetched : true,
-                    monsters : data, 
+                    monsters : data.monsters, 
+                    hasMore : data.hasMore,
+                    page: page
                 }))
             }).catch(function(error) {
                 console.log('Request failed', error)
@@ -355,6 +377,39 @@ class MonsterBook extends Component {
                 )
             }
         }
+        let prevButton = [];
+        if(this.state.page > 1 && this.state.page != 1) {
+            prevButton.push(           
+                <div style={{display:"inline-block",width:"69px"}}>
+                    <Button 
+                        className="w3-theme-dark w3-small" 
+                        onClick={this.loadPrevMonsters}
+                        style={{width:"60px"}} 
+                        variant="secondary">
+                        &lt;
+                    </Button>
+                </div>
+            ) 
+        } else {
+            prevButton.push(           
+                <div style={{display:"inline-block",width:"69px"}}>
+                </div>
+            ) 
+        }
+        let hasMoreButton = [];
+        if(this.state.hasMore) {
+            hasMoreButton.push(           
+                <div style={{display:"inline-block",width:"69px"}}>
+                    <Button 
+                        className="w3-theme-dark w3-small" 
+                        onClick={this.loadMoreMonsters}
+                        style={{width:"60px"}} 
+                        variant="secondary">
+                        &gt;
+                    </Button>
+                </div>
+            ) 
+        }
         return (
             <div>
                 <ReturnNav history={this.props.history} header="Monster Book"/>
@@ -409,6 +464,10 @@ class MonsterBook extends Component {
                         <Col>
                         <div style={{marginTop:"15px"}}>
                             {monsters}  
+                        </div>
+                        <div style={{marginTop:"15px"}}>
+                            {prevButton}
+                            {hasMoreButton}
                         </div>
                         </Col>
                     </Row>

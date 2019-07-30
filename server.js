@@ -218,6 +218,7 @@ app.get('/retrieveMonsters', function(req, res) {
   let awokenFilters = URL.parse(req.url, true).query.awokenFilter;
   let leaderFilter = URL.parse(req.url, true).query.leaderFilter;
   let activeFilter = URL.parse(req.url, true).query.activeFilter;
+  let page = URL.parse(req.url, true).query.page;
   //let page = URL.parse(req.url, true).query.page;
 
   let hasFilter = typeFilters || 
@@ -226,7 +227,7 @@ app.get('/retrieveMonsters', function(req, res) {
                   awokenFilters ||
                   elementFilters;
 
-  let maxResults = 60;
+  let maxResults = 30;
   let monsters = [];
   //default sort
   sortById(monsterNameNumArr);
@@ -244,10 +245,6 @@ app.get('/retrieveMonsters', function(req, res) {
         }
         if(matches) {
           monsters.push(mons);
-        }
-        // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
-        if(monsters.length >= maxResults) {
-          break;
         }
       }
       
@@ -269,10 +266,6 @@ app.get('/retrieveMonsters', function(req, res) {
         }
         if(matches) {
           monsters.push(mons);
-        }
-        // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
-        if(monsters.length >= maxResults) {
-          break;
         }
       }
     }
@@ -296,10 +289,6 @@ app.get('/retrieveMonsters', function(req, res) {
         if(matches) {
           monsters.push(mons);
         }
-        // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
-        if(monsters.length >= maxResults) {
-          break;
-        }
       }
     }
   }
@@ -311,10 +300,6 @@ app.get('/retrieveMonsters', function(req, res) {
       if(mons.leaderSkillDescription && mons.leaderSkillDescription.toLowerCase().includes(decodeURIComponent(leaderFilter).toLowerCase())) {
         monsters.push(mons);
       }
-      // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
-      if(monsters.length >= maxResults) {
-        break;
-      }
     }
   }
 
@@ -322,32 +307,35 @@ app.get('/retrieveMonsters', function(req, res) {
     let monsterArr = monsters.length > 0 ? monsters : monsterNameNumArr;
     monsters = [];
     for(let mons of monsterArr) {
-      if(mons.activeSkillDescription && mons.activeSkillDescription.toLowerCase().includes(decodeURIComponent(activeFilter).toLowerCase())) {
+      if(mons.activeSkillDescription && 
+          mons.activeSkillDescription.toLowerCase().includes(decodeURIComponent(activeFilter).toLowerCase())) {
         monsters.push(mons);
       }
-      // only return a max of 100 for now! For bandwidth and Perf., will need lazy loading and paging technique.
-      if(monsters.length >= maxResults) {
-        break;
-      }
     }
   }
 
-  //if filtered monsters return 
-  if(hasFilter) {
-    res.end(JSON.stringify(monsters));
-    return;
+  let monstersSet = hasFilter ? monsters : monsterNameNumArr;
+  let response = {
+    total: monstersSet.length
   }
 
-  //if no filters just return back top 100 monsters
-  for(let mons of monsterNameNumArr) {
-    monsters.push(mons);
-    if(monsters.length >= maxResults) {
-      break;
-    }
+  var monstersToReturn = [];
+  var min = page === 1 ? 0 : maxResults * (page - 1);
+  var max = maxResults * page;
+  if(monstersSet.length > maxResults) {
+    monstersToReturn = monstersSet.slice(min, max);
+  } else {
+    monstersToReturn = monstersSet;
   }
-  res.end(JSON.stringify(monsters));
+  response.monsters = monstersToReturn;
+
+  if(response.total > max) {
+    response.hasMore = true;
+  }
+
+  res.end(JSON.stringify(response));
   return;
-  
+
 });
 
 app.get('/retrieveUnreleasedMonsters', function(req, res) {
