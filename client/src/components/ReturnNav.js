@@ -78,6 +78,10 @@ class ReturnNav extends Component {
                             <Navbar.Text style={{marginLeft:"auto"}}>
                                 <Link to={'/profile'}>Profile</Link>
                                 &nbsp;|&nbsp;
+                                <Link to={'/projects'}>Projects</Link>
+                                &nbsp;|&nbsp;
+                                <Link to={'/contact'}>Contact</Link>
+                                &nbsp;|&nbsp;
                                 <Link to={'/monsterBook'}>Monster Book</Link>
                                 {/* <Link to={'/unreleasedMonsters'}>Unreleased Monsters</Link>
                                 <NavDropdown.Divider style={{width:"150px"}}/> */}

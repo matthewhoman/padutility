@@ -378,9 +378,9 @@ class MonsterBook extends Component {
             }
         }
         let prevButton = [];
-        if(this.state.page > 1 && this.state.page != 1) {
+        if(this.state.page > 1 && this.state.page !== 1) {
             prevButton.push(           
-                <div style={{display:"inline-block",width:"69px"}}>
+                <div key={this.state.page} style={{display:"inline-block",width:"69px"}}>
                     <Button 
                         className="w3-theme-dark w3-small" 
                         onClick={this.loadPrevMonsters}
@@ -392,14 +392,14 @@ class MonsterBook extends Component {
             ) 
         } else {
             prevButton.push(           
-                <div style={{display:"inline-block",width:"69px"}}>
+                <div key={this.state.page} style={{display:"inline-block",width:"69px"}}>
                 </div>
             ) 
         }
         let hasMoreButton = [];
         if(this.state.hasMore) {
             hasMoreButton.push(           
-                <div style={{display:"inline-block",width:"69px"}}>
+                <div key={this.state.page} style={{display:"inline-block",width:"69px"}}>
                     <Button 
                         className="w3-theme-dark w3-small" 
                         onClick={this.loadMoreMonsters}

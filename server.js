@@ -526,10 +526,8 @@ function scrapeImages(oldCards) {
     for(let i = 0; i < arr.length; i++) {
       let monster = arr[i];
       let imgExt = monster.id + ".png";
-      let serverPath = 'client/public/images/monsterIcons/' + imgExt;
       let isNewCard = await newCard(imgExt);
       if(isNewCard) {
-        //TODO: SAVE RECENT CARDS
         recentCards.push(monster);
         let url = baseURL + imgExt;
         const status = await page.open(url);
@@ -568,6 +566,12 @@ function scrapeImages(oldCards) {
             console.log("Done!");
           }).catch(err => {
             console.log("Failed to insert images in db " + err);
+          });
+      util.insertNewCardsJSON(recentCards)
+          .then(result => {
+            console.log(result);
+          }).catch(err => {
+            console.log("Failed to insert cards in db " + err);
           });
     }
     console.info("Done Scraping Images");
