@@ -74,15 +74,17 @@ class ReturnNav extends Component {
                         this.props.suppressSearch ? <div></div> : <PadMonsterSearch/>
                     }
                     <Navbar.Collapse>
-                        <Nav style={{whiteSpace:"nowrap",textAlign:"right",direction:"rtl"}}>
+                        <Nav style={{textAlign:"right"}}>
                             <Navbar.Text style={{marginLeft:"auto"}}>
-                                <Link to={'/profile'}>Profile</Link>
-                                &nbsp;|&nbsp;
-                                <Link to={'/projects'}>Projects</Link>
-                                &nbsp;|&nbsp;
-                                <Link to={'/contact'}>Contact</Link>
-                                &nbsp;|&nbsp;
-                                <Link to={'/monsterBook'}>Monster Book</Link>
+                                <div style={{display:"inline-block"}}><Link to={'/profile'}>Profile</Link>
+                                &nbsp;|&nbsp;</div>
+                                <div style={{display:"inline-block"}}><Link to={'/projects'}>Projects</Link>
+                                &nbsp;|&nbsp;</div>
+                                <div style={{display:"inline-block"}}><Link to={'/itunes'}>Music</Link>
+                                &nbsp;|&nbsp;</div>
+                                <div style={{display:"inline-block"}}><Link to={'/contact'}>Contact</Link>
+                                &nbsp;|&nbsp;</div>
+                                <div style={{display:"inline-block"}}><Link to={'/monsterBook'}>Monster Book</Link></div>
                                 {/* <Link to={'/unreleasedMonsters'}>Unreleased Monsters</Link>
                                 <NavDropdown.Divider style={{width:"150px"}}/> */}
                             </Navbar.Text>
