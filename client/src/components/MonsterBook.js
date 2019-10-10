@@ -117,7 +117,7 @@ class MonsterBook extends Component {
             leaderFilter : sessionStorage.getItem('leaderFilter') ? JSON.parse(sessionStorage.getItem('leaderFilter')) : '',
             activeFilter : sessionStorage.getItem('activeFilter') ? JSON.parse(sessionStorage.getItem('activeFilter')) : '',
             filterOpen : sessionStorage.getItem('filterOpen') !== 'undefined' ? JSON.parse(sessionStorage.getItem('filterOpen')) : false,
-            page: sessionStorage.getItem('page') ? JSON.parse(sessionStorage.getItem('page')) : ''
+            page: sessionStorage.getItem('page') ? JSON.parse(sessionStorage.getItem('page')) : 1
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
