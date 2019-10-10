@@ -101,7 +101,15 @@ var awokenMap = {
     enhanced10combo : '61',
     comboorbs : '62',
     voice : '63',
-    dungeonbonus : '64'
+    dungeonbonus : '64',
+    reducedhp : '65',
+    reducedattack : '66',
+    reducedrcv : '67',
+    resistanceblindplus : '68',
+    resistancejammerplus : '69',
+    resistancepoinsonplus : '70',
+    jammerblessing : '71',
+    poisonblessing : '72'
 }
 
 class MonsterBook extends Component {
