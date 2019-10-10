@@ -64,10 +64,16 @@ class ReturnNav extends Component {
                                    &nbsp;&nbsp;{headerComp}&nbsp;&nbsp;
                             </span>}
                     </Navbar.Brand>
+                    <Navbar.Text className="hide-desktop" style={{boxSizing: "border-box", textOverflow:"ellipsis", overflow:"hidden", marginLeft:"auto", paddingRight:"3px", paddingLeft:"10px", paddingTop: "3px"}}>
+                        {/* <div style={{verticalAlign:"sub"}} title={"Welcome, " + userName}
+                            fontSize={12} >Welcome, <Link to={"profile"}>{userName}</Link>&nbsp;&nbsp;
+                        </div> */}
+                        <Navbar.Toggle children={<FontAwesomeIcon icon={faBars} />} style={{border:"none", float:"right"}}/>
+                    </Navbar.Text>
                     {
                         this.props.suppressSearch ? <div></div> : <PadMonsterSearch/>
                     }
-                    <Navbar.Text style={{boxSizing: "border-box", textOverflow:"ellipsis", overflow:"hidden", marginLeft:"auto", paddingRight:"3px", paddingLeft:"10px", paddingTop: "3px"}}>
+                    <Navbar.Text className="hide-mobile" style={{boxSizing: "border-box", textOverflow:"ellipsis", overflow:"hidden", marginLeft:"auto", paddingRight:"3px", paddingLeft:"10px", paddingTop: "3px"}}>
                         {/* <div style={{verticalAlign:"sub"}} title={"Welcome, " + userName}
                             fontSize={12} >Welcome, <Link to={"profile"}>{userName}</Link>&nbsp;&nbsp;
                         </div> */}

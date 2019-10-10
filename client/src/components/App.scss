@@ -2,6 +2,18 @@
   box-sizing: border-box;
 }
 
+.hide-mobile {
+	@media (max-width: 647px) {
+	  display: none;
+	}
+}
+  
+.hide-desktop {
+	@media not all and (max-width: 647px) {
+	  display: none;
+	}
+}
+
 #mimage{
 	width:170px;
 }
