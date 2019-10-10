@@ -51,6 +51,7 @@ class ShowMonsterDetails extends Component {
     }
 
     render() {
+        window.scrollTo(0, 0);
         // const loading = (
         //     <div> <FontAwesomeIcon icon={faSpinner}/> loading ...</div>
         // )
