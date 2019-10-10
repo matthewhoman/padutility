@@ -128,7 +128,7 @@ class MonsterBook extends Component {
     }
 
     componentDidMount() {
-        this.getMonsters();
+        this.getMonsters(1);
     }
 
     setDefaultState() {
@@ -145,8 +145,7 @@ class MonsterBook extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.setState({page: 1});
-        this.getMonsters();
+        this.getMonsters(1);
     }
 
     handleChange(event) {
@@ -175,18 +174,20 @@ class MonsterBook extends Component {
     }
 
     loadPrevMonsters() {
-        this.setState({page: this.state.page--});
-        this.getMonsters();
+        let pageNo  = this.state.page - 1;
+        this.setState({page: pageNo});
+        this.getMonsters(pageNo);
     }
 
     loadMoreMonsters()  {
-        this.setState({page: this.state.page++});
-        this.getMonsters();
+        let pageNo  = this.state.page + 1;
+        this.setState({page: pageNo});
+        this.getMonsters(pageNo);
     }
 
-    getMonsters() {
+    getMonsters(pageNo) {
         let queryStr = '';
-        let page = this.state.page;
+        let page = pageNo ? pageNo : this.state.page;
 
         queryStr += "page=" + page;
         queryStr += "&"
@@ -226,6 +227,7 @@ class MonsterBook extends Component {
                     monstersFetched : true,
                     monsters : data.monsters, 
                     hasMore : data.hasMore,
+                    pageDisplay : data.monsters.length > 0 ? data.currentPage + "/" + Math.ceil(data.totalPages) : '',
                     page: page
                 }))
             }).catch(function(error) {
@@ -464,6 +466,9 @@ class MonsterBook extends Component {
                         <div style={{marginTop:"15px",marginLeft:"206px",maxWidth:"400px"}}>
                             {prevButton}
                             {hasMoreButton}
+                        </div>
+                        <div className="w3-theme-dark" style={{marginTop:"15px",marginLeft:"155px",maxWidth:"400px"}}>
+                            {this.state.pageDisplay}
                         </div>
                         </Col>
                     </Row>

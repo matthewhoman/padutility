@@ -385,6 +385,9 @@ app.get('/retrieveMonsters', function(req, res) {
   if(response.total > max) {
     response.hasMore = true;
   }
+  
+  response.currentPage =  page;
+  response.totalPages = monstersSet.length / maxResults;
 
   res.end(JSON.stringify(response));
   return;
