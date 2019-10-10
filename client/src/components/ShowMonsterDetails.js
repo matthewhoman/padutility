@@ -45,7 +45,6 @@ class ShowMonsterDetails extends Component {
                         monsterId : monsterId
                     }))
                 }
-                //document.getElementsByName("react-autosuggest__input")[0].value = data.name;
             }).catch(function(error) {
                 console.log('Request failed', error)
             });
@@ -58,7 +57,7 @@ class ShowMonsterDetails extends Component {
         let rarityStars = [];
         if(this.state.monsterData && this.state.monsterData.rarity) {
             for(let i = 0; i < this.state.monsterData.rarity; i++) {
-                rarityStars.push(<span key={i}><i className="fa fa-star" aria-hidden="true" style={{width:"5px",height:"5px"}}></i>&nbsp;&nbsp;</span>)
+                rarityStars.push(<span key={i}><i className="fa fa-star" aria-hidden="true" style={{width:"12px",height:"12px"}}></i>&nbsp;&nbsp;</span>)
             }
         }
 

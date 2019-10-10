@@ -11,6 +11,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from './Image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 var typeMap = {
     evolve : '0',
@@ -364,6 +366,33 @@ class MonsterBook extends Component {
                                                 })
                                             }
                                             </div>
+                                            <br />
+                                            <br />
+                                            <span className="w3-theme-dark w3-bold">
+                                                <b>Skill&nbsp;</b>
+                                            </span>
+                                            <span className="w3-theme-dark w3-small">
+                                                (lvl.&nbsp;1:&nbsp;Turn:&nbsp;{monster.turnMax}&nbsp;&nbsp;<FontAwesomeIcon icon={faArrowRight} />&nbsp;
+                                                                    Turn:&nbsp;{monster.turnMin})
+                                            </span>
+                                            <div className="w3-small" style={{color:"lightblue",width:"auto"}}>
+                                                &nbsp;&nbsp;{monster.activeSkill}:
+                                            </div>
+                                            <div className="w3-theme-dark w3-small">
+                                            <div style={{display:"inline-block",width:"2%"}}>&nbsp;</div>
+                                                <div style={{display:"inline-block", width:"98%"}}>{monster.activeSkillDescription}</div>
+                                            </div>
+                                            <br></br>
+                                            <div className="w3-theme-dark w3-bold">
+                                                <b>Leader Skill</b>
+                                            </div>
+                                            <div className="w3-small" style={{color:"lightgreen",width:"auto"}}>
+                                                &nbsp;&nbsp;{monster.leaderSkill}:
+                                            </div> 
+                                            <div className="w3-theme-dark w3-small">
+                                            <div style={{display:"inline-block",width:"2%"}}>&nbsp;</div>
+                                                <div style={{display:"inline-block", width:"98%"}}>{monster.leaderSkillDescription}</div>
+                                            </div> 
                                         </Popover>
                                     }
                                     >
