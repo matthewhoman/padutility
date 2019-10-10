@@ -115,7 +115,7 @@ class MonsterBook extends Component {
             leaderFilter : sessionStorage.getItem('leaderFilter') ? JSON.parse(sessionStorage.getItem('leaderFilter')) : '',
             activeFilter : sessionStorage.getItem('activeFilter') ? JSON.parse(sessionStorage.getItem('activeFilter')) : '',
             filterOpen : sessionStorage.getItem('filterOpen') !== 'undefined' ? JSON.parse(sessionStorage.getItem('filterOpen')) : false,
-            page: 1
+            page: sessionStorage.getItem('page') ? JSON.parse(sessionStorage.getItem('page')) : ''
         }
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -128,7 +128,7 @@ class MonsterBook extends Component {
     }
 
     componentDidMount() {
-        this.getMonsters(1);
+        this.getMonsters(this.state.page);
     }
 
     setDefaultState() {
@@ -217,6 +217,7 @@ class MonsterBook extends Component {
         sessionStorage.setItem('leaderFilter', JSON.stringify(this.state.leaderFilter));
         sessionStorage.setItem('elementFilter', JSON.stringify(this.state.elementFilter));
         sessionStorage.setItem('awokenFilter', JSON.stringify(this.state.awokenFilter));
+        sessionStorage.setItem('page', JSON.stringify(pageNo));
 
         queryStr = queryStr.substring(0, queryStr.length - 1);
         
