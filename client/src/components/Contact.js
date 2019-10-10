@@ -69,7 +69,7 @@ class Contact extends Component {
                 <br></br>
                 <div className="w3-theme-dark" style={{marginLeft: "20px", marginRight:"20px"}}>
                     <p><i className="fa fa-map-marker w3-xlarge"></i>&nbsp;&nbsp;&nbsp;Pennsylvania, US</p>
-                    <p><i className="fa fa-envelope-o w3-xlarge"></i>&nbsp;&nbsp;&nbsp;Matthew.h.homan@gmail.com</p>
+                    <p><i className="fa fa-envelope w3-xlarge"></i>&nbsp;&nbsp;&nbsp;Matthew.h.homan@gmail.com</p>
                     <form onSubmit={this.handleSubmit}>
                         <label style={{width:"100%", maxWidth:"500px"}}>Name
                             <input type="text" name="Name" onChange={this.handleChange}/>
