@@ -7,6 +7,8 @@ import Profile from './Profile';
 import Contact from './Contact';
 import Projects from './Projects';
 import Itunes from './Itunes';
+import Movies from './Movies';
+import Resume from './Resume';
 
 import './App.scss';
 import 'font-awesome/css/font-awesome.min.css';
@@ -51,9 +53,11 @@ class App extends Component {
               <ProtectedRoute exact={true} path='/profile' component={Profile} /> */}
               <Route exact={true} path='/' component={Profile}/>
               <Route exact={true} path='/profile' component={Profile}/>
+              <Route exact={true} path='/resume' component={Resume}/>
               <Route exact={true} path='/contact' component={Contact}/>
               <Route exact={true} path='/projects' component={Projects}/>
               <Route exact={true} path='/itunes' component={Itunes}/>
+              <Route exact={true} path='/movies' component={Movies}/>
               <Route exact={true} path='/showMonsterDetails' component={ShowMonsterDetails}/>
               <Route exact={true} path='/unreleasedMonsters' component={UnreleasedMonsters}/>
               <Route exact={true} path='/monsterBook' component={MonsterBook}/>

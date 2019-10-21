@@ -14,7 +14,7 @@ class Profile extends Component {
     render() {
         return (
             <div style={{paddingBottom:"50px"}}>
-                <ReturnNav history={this.props.history} header="" suppressBack suppressSearch/>
+                <ReturnNav history={this.props.history} header="Profile" suppressBack suppressSearch/>
                 <br></br>
                 <div className="w3-theme-dark" style={{marginLeft: "20px"}}>
                     <div>

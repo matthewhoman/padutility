@@ -25,7 +25,7 @@ class ShowMonsterDetails extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
         let urlParm = new URLSearchParams(nextProps.location.search).get("monsterId");
         let monsterId = urlParm;
 
@@ -121,7 +121,7 @@ class ShowMonsterDetails extends Component {
 
         return ( 
             <div>
-              <ReturnNav history={this.props.history} header="Monster Details"/>
+              <ReturnNav history={this.props.history} header="PAD Monster Details"/>
                 {
                 this.state.monsterData ?
                         <div>
@@ -164,7 +164,7 @@ class ShowMonsterDetails extends Component {
                                         {
                                             this.state.monsterData.types.map((value, index) => {                     
                                                 return (
-                                                        <span>
+                                                        <span key={index}>
                                                             {
                                                                 value !== '-1' 
                                                                 ?  
@@ -273,7 +273,7 @@ class ShowMonsterDetails extends Component {
                                             {
                                                 this.state.monsterData.sameActiveMonsters.map((value, index) => {                     
                                                     return (
-                                                            <div style={{display:"inline-block",marginBottom:"10px"}}>
+                                                            <div key={index} style={{display:"inline-block",marginBottom:"10px"}}>
                                                                 {
                                                                     value !== '-1' 
                                                                     ?  

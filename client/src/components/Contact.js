@@ -65,7 +65,7 @@ class Contact extends Component {
     render() {
         return (
             <div style={{paddingBottom:"50px"}}>
-                <ReturnNav history={this.props.history} header="" suppressBack suppressSearch/>
+                <ReturnNav history={this.props.history} header="Contact" suppressBack suppressSearch/>
                 <br></br>
                 <div className="w3-theme-dark" style={{marginLeft: "20px", marginRight:"20px"}}>
                     <p><i className="fa fa-map-marker w3-xlarge"></i>&nbsp;&nbsp;&nbsp;Pennsylvania, US</p>

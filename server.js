@@ -11,10 +11,7 @@ const fs = require('fs');
 const ENCODING = 'utf8';
 const phantom = require('phantom');
 
-const SONG_API = "http://api.musixmatch.com/ws/1.1/matcher.track.get";
-const musixKey = "a8bc8031bd2f703ac56092ba82edcbcd";
-const LYRIC_API = "http://api.musixmatch.com/ws/1.1/track.lyrics.get";
-
+const musicHelper = require('./musichelper.js');
 
 //PAD STUFF
 //var monsterListJSON = "https://www.padherder.com/api/monsters/"; //"https://storage.googleapis.com/mirubot/paddata/processed/na_cards.json";
@@ -65,50 +62,12 @@ app.get('/serverReady', function(req, res) {
 
 //retrieve music stuff
 app.get('/retrieveSong', function(req, res) { 
-  var url = SONG_API;
-  var params = URL.parse(req.url, true).query.params;
-  var fullUrl = url + '?apikey=' + musixKey + "&" + params;
-
-  var headers = {
-    'Content-Type': 'application/json'
-  };
-
-  var options = {
-    url: fullUrl,
-    method: 'GET',
-    headers: headers,
-  };
-
-  request(options, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      res.end(body);   
-    }
-  });
-
+  musicHelper.retrieveSong(req, res);
 });
 
 //retrieve lyrics
 app.get('/retrieveLyrics', function(req, res) {
-  var url = LYRIC_API;
-  var track = URL.parse(req.url, true).query.track;
-  var fullUrl = url + '?apikey=' + musixKey + "&" + track;
-
-  var headers = {
-    'Content-Type': 'application/json'
-  };
-
-  var options = {
-    url: fullUrl,
-    method: 'GET',
-    headers: headers,
-  };
-
-  request(options, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      res.end(body);   
-    }
-  });
-
+  musicHelper.retrieveLyrics(req, res);
 });
 
 function getMonsters() {

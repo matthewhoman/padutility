@@ -452,7 +452,7 @@ class MonsterBook extends Component {
         }
         return (
             <div>
-                <ReturnNav history={this.props.history} header="Monster Book"/>
+                <ReturnNav history={this.props.history} header="PAD Monster Book"/>
                 <Container fluid={true}>
                     <Row>
                         <Col sm={8} lg='auto'>

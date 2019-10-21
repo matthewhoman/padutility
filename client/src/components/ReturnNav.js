@@ -84,9 +84,13 @@ class ReturnNav extends Component {
                             <Navbar.Text style={{marginLeft:"auto"}}>
                                 <div style={{display:"inline-block"}}><Link to={'/profile'}>Profile</Link>
                                 &nbsp;|&nbsp;</div>
+                                <div style={{display:"inline-block"}}><Link to={'/resume'}>Resume</Link>
+                                &nbsp;|&nbsp;</div>
                                 <div style={{display:"inline-block"}}><Link to={'/projects'}>Projects</Link>
                                 &nbsp;|&nbsp;</div>
                                 <div style={{display:"inline-block"}}><Link to={'/itunes'}>Music</Link>
+                                &nbsp;|&nbsp;</div>
+                                <div style={{display:"inline-block"}}><Link to={'/movies'}>Movies</Link>
                                 &nbsp;|&nbsp;</div>
                                 <div style={{display:"inline-block"}}><Link to={'/contact'}>Contact</Link>
                                 &nbsp;|&nbsp;</div>
