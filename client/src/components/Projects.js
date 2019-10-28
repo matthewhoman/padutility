@@ -12,7 +12,7 @@ class Projects extends Component {
     render() {
         return (
             <div>
-                <ReturnNav history={this.props.history} header="Projects" suppressBack suppressSearch/>
+                <ReturnNav history={this.props.history} header="Matthew Homan" suppressBack suppressSearch/>
                 <div className="w3-container w3-padding-64 w3-theme-l3">
 			  <h2 style={{textAlign: "center"}}><b>Illusive Affinity (TD Game)</b></h2>
 			  <div className="w3-card-12" style={{width: "100%"}}>

@@ -498,15 +498,17 @@ class MonsterBook extends Component {
                             </div>
                         </Col>
                         <Col>
-                        <div style={{marginTop:"15px",maxWidth:"400px"}}>
+                        <div style={{marginTop:"15px"}}>
                             {monsters}  
                         </div>
-                        <div style={{marginTop:"15px",marginLeft:"206px",maxWidth:"400px"}}>
-                            {prevButton}
-                            {hasMoreButton}
-                        </div>
-                        <div className="w3-theme-dark" style={{marginTop:"15px",marginLeft:"155px",maxWidth:"400px"}}>
-                            {this.state.pageDisplay}
+                        <div>
+                            <div style={{marginTop:"15px"}}>
+                                {prevButton}
+                                {hasMoreButton}
+                            </div>
+                            <div className="w3-theme-dark" style={{marginTop:"15px",marginLeft:"40px"}}>
+                                {this.state.pageDisplay}
+                            </div>
                         </div>
                         </Col>
                     </Row>

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import UpdatedMessage from './UpdatedMessage';
 import PadMonsterSearch from './PadMonsterSearch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import Image from 'react-bootstrap/Image'
 
 class ReturnNav extends Component {
@@ -57,71 +56,48 @@ class ReturnNav extends Component {
 
         return (
             <div className="fixedHeader">
-                <Navbar expand="true" bg="dark" variant="dark" style={{padding:"10px"}}>
-                    <Navbar.Brand style={{textOverflow:"ellipsis", overflow:"hidden", whiteSpace:"normal", flexGrow:1}}>
+                <Navbar expand="lg" bg="dark" variant="dark">
+                    <Navbar.Brand>
                         {this.props.suppressBack ?  headerComp : 
                             <span><FontAwesomeIcon icon={faArrowLeft} onClick={this.handleButtonClick} /> 
                                    &nbsp;&nbsp;{headerComp}&nbsp;&nbsp;
                             </span>}
                     </Navbar.Brand>
-                    <Navbar.Text className="hide-desktop" style={{boxSizing: "border-box", textOverflow:"ellipsis", overflow:"hidden", marginLeft:"auto", paddingRight:"3px", paddingLeft:"10px", paddingTop: "3px"}}>
-                        {/* <div style={{verticalAlign:"sub"}} title={"Welcome, " + userName}
-                            fontSize={12} >Welcome, <Link to={"profile"}>{userName}</Link>&nbsp;&nbsp;
-                        </div> */}
-                        <Navbar.Toggle children={<FontAwesomeIcon icon={faBars} />} style={{border:"none", float:"right"}}/>
-                    </Navbar.Text>
-                    {
-                        this.props.suppressSearch ? <div></div> : <PadMonsterSearch/>
-                    }
-                    <Navbar.Text className="hide-mobile" style={{boxSizing: "border-box", textOverflow:"ellipsis", overflow:"hidden", marginLeft:"auto", paddingRight:"3px", paddingLeft:"10px", paddingTop: "3px"}}>
-                        {/* <div style={{verticalAlign:"sub"}} title={"Welcome, " + userName}
-                            fontSize={12} >Welcome, <Link to={"profile"}>{userName}</Link>&nbsp;&nbsp;
-                        </div> */}
-                        <Navbar.Toggle children={<FontAwesomeIcon icon={faBars} />} style={{border:"none", float:"right"}}/>
-                    </Navbar.Text>
-                    <Navbar.Collapse>
-                        <Nav style={{textAlign:"right"}}>
-                            <Navbar.Text style={{marginLeft:"auto"}}>
-                                <div style={{display:"inline-block"}}><Link to={'/profile'}>Profile</Link>
-                                &nbsp;|&nbsp;</div>
-                                <div style={{display:"inline-block"}}><Link to={'/resume'}>Resume</Link>
-                                &nbsp;|&nbsp;</div>
-                                <div style={{display:"inline-block"}}><Link to={'/projects'}>Projects</Link>
-                                &nbsp;|&nbsp;</div>
-                                <div style={{display:"inline-block"}}><Link to={'/itunes'}>Music</Link>
-                                &nbsp;|&nbsp;</div>
-                                <div style={{display:"inline-block"}}><Link to={'/movies'}>Movies</Link>
-                                &nbsp;|&nbsp;</div>
-                                <div style={{display:"inline-block"}}><Link to={'/contact'}>Contact</Link>
-                                &nbsp;|&nbsp;</div>
-                                <div style={{display:"inline-block"}}><Link to={'/monsterBook'}>Monster Book</Link></div>
-                                {/* <Link to={'/unreleasedMonsters'}>Unreleased Monsters</Link>
-                                <NavDropdown.Divider style={{width:"150px"}}/> */}
-                            </Navbar.Text>
-                            <Navbar.Text style={{marginLeft:"auto"}}>
-                                <a href="http://www.linkedin.com/pub/matthew-homan/4a/528/546" target="_blank" rel="noopener noreferrer">
-                                    <Image className="socialMediaIcon" src="/images/socialmedia/linkedin.svg" title='Linked In'></Image>
-                                </a>
-                                <a href="https://www.facebook.com/matthew.homan1" target="_blank" rel="noopener noreferrer">
-                                    <Image className="socialMediaIcon" src="/images/socialmedia/facebook.svg" title='Facebook'></Image>
-                                </a>
-                                <a href="http://instagram.com/m.h.h.11" target="_blank" rel="noopener noreferrer">
-                                    <Image className="socialMediaIcon" src="/images/socialmedia/instagram.svg" title='Instagram'></Image>
-                                </a>
-                                <a href="https://www.paypal.me/MatthewHoman" target="_blank" rel="noopener noreferrer">
-                                    <Image className="socialMediaIcon" src="/images/socialmedia/paypal.svg" title='PayPal'></Image>
-                                </a>
-                                <a href="https://www.twitch.tv/b34st3d" target="_blank" rel="noopener noreferrer">
-                                    <Image className="socialMediaIcon" src="/images/socialmedia/twitch.svg" title='Twitch'></Image>
-                                </a>
-                                <a href="http://steamcommunity.com/id/b34st3d" target="_blank" rel="noopener noreferrer">
-                                    <Image className="socialMediaIcon" src="/images/socialmedia/steam.svg" title='Steam'></Image>
-                                </a>
-                                <a href="http://matthewhoman.deviantart.com/" target="_blank" rel="noopener noreferrer">
-                                    <Image className="socialMediaIcon" src="/images/socialmedia/deviantart.svg" title='Deviant Art'></Image>
-                                </a>
-                            </Navbar.Text>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="mr-auto">
+                            <Nav.Link href="/profile">Profile</Nav.Link>
+                            <Nav.Link href="/resume">Resume</Nav.Link>
+                            <Nav.Link href="/projects">Projects</Nav.Link>
+                            <Nav.Link href="/itunes">Music</Nav.Link>
+                            <Nav.Link href="/movies">Movies</Nav.Link>
+                            <Nav.Link href="/contact">Contact</Nav.Link>
+                            <Nav.Link href="/monsterBook">Monster&nbsp;Book</Nav.Link>
                         </Nav>
+                        <a href="http://www.linkedin.com/pub/matthew-homan/4a/528/546" target="_blank" rel="noopener noreferrer">
+                            <Image className="socialMediaIcon" src="/images/socialmedia/linkedin.svg" title='Linked In'></Image>
+                        </a>
+                        <a href="https://www.facebook.com/matthew.homan1" target="_blank" rel="noopener noreferrer">
+                            <Image className="socialMediaIcon" src="/images/socialmedia/facebook.svg" title='Facebook'></Image>
+                        </a>
+                        <a href="http://instagram.com/m.h.h.11" target="_blank" rel="noopener noreferrer">
+                            <Image className="socialMediaIcon" src="/images/socialmedia/instagram.svg" title='Instagram'></Image>
+                        </a>
+                        <a href="https://www.paypal.me/MatthewHoman" target="_blank" rel="noopener noreferrer">
+                            <Image className="socialMediaIcon" src="/images/socialmedia/paypal.svg" title='PayPal'></Image>
+                        </a>
+                        <a href="https://www.twitch.tv/b34st3d" target="_blank" rel="noopener noreferrer">
+                            <Image className="socialMediaIcon" src="/images/socialmedia/twitch.svg" title='Twitch'></Image>
+                        </a>
+                        <a href="http://steamcommunity.com/id/b34st3d" target="_blank" rel="noopener noreferrer">
+                            <Image className="socialMediaIcon" src="/images/socialmedia/steam.svg" title='Steam'></Image>
+                        </a>
+                        <a href="http://matthewhoman.deviantart.com/" target="_blank" rel="noopener noreferrer">
+                            <Image className="socialMediaIcon" src="/images/socialmedia/deviantart.svg" title='Deviant Art'></Image>
+                        </a>
+                        {
+                            this.props.suppressSearch ? <div></div> : <PadMonsterSearch/>
+                        }
                     </Navbar.Collapse>
                 </Navbar>
                 <UpdatedMessage customMsg={this.props.customMsg} updated={this.props.updated} />
