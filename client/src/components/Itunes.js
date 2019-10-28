@@ -118,7 +118,7 @@ class Itunes extends Component {
                             </div>
                             <div id="mtext" style={{verticalAlign: "top", display: "inline-block", marginLeft: "10px", whiteSpace: "pre-line", width: "50%"}} 
                                 className="w3-margin-bottom">
-                                <a className="w3-hover-text-indigo" target="_blank" rel="noopener noreferrer" href={url}><b>{title}</b></a>
+                                <a className="w3-hover-text-indigo musicLink" target="_blank" rel="noopener noreferrer" href={url}><b>{title}</b></a>
                             </div>
                             <div className="w3-accordion w3-light-grey w3-margin-bottom" style={{width: "100%"}}>
                                 <button onClick={() => this.openblind(escape(song), artist, i)} className="w3-btn-block w3-left-align w3-theme">Lyrics&nbsp;
