@@ -157,7 +157,7 @@ class Itunes extends Component {
         }
         return (
             <div style={{paddingBottom:"50px"}}>
-                <ReturnNav history={this.props.history} header="Itunes Top Music" suppressBack suppressSearch/>
+                <ReturnNav history={this.props.history} header="Matthew&nbsp;Homan" suppressBack suppressSearch/>
                 <br></br>
                 <div className="w3-theme-dark" style={{marginLeft: "20px"}}>
                     {musicPanels}

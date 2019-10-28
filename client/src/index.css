@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+@font-face {
+  font-family: 'Gotham-Thin';
+  src: local('Gotham-Thin'), url(./fonts/Gotham-Thin.otf) format('truetype');
+}

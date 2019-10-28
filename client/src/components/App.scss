@@ -157,6 +157,34 @@ input[type=submit] {
 .lightblueText {
 	color:#66b3ff;
 }
+
+.headerTitle {
+	line-height: 0.5;
+	text-align: center;
+}
+
+.headerTitle span {
+	display: inline-block;
+	position: relative;
+}
+
+.headerTitle span::before, .headerTitle span::after {
+	content: "";
+	position: absolute;
+	height: 15px;
+	border-bottom: 1px solid white;
+	top: 0;
+	width: 50px;
+}
+
+.headerTitle span:before {
+	right: 100%;
+	margin-right: 15px;
+}
+.headerTitle span:after {
+	left: 100%;
+	margin-left: 15px;
+}
   
 //The content within the collaspable area
 .Collapsible__contentInner {
@@ -226,8 +254,7 @@ p {
 	color: black;
 }
 
-html,body,header,h1,h2,h3,h4,h5 {font-family: "Comic Sans MS", sans-serif}
-// html,body,header,h1,h2,h3,h4,h5 {font-family: "Montserrat", sans-serif}
+html,body,header,h1,h2,h3,h4,h5 {font-family: "Gotham-Thin"}
 .w3-theme-l5 {color:#333 !important; background-color:#000 !important; font-size: 14px}
 .w3-theme-l4 {color:#444 !important; background-color:#000 !important; font-size: 14px}
 .w3-theme-l3 {color:#555 !important; background-color:#000 !important; font-size: 14px}

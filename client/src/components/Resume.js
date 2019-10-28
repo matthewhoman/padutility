@@ -28,7 +28,7 @@ class Resume extends Component {
     
         return (
             <div className="w3-theme-dark" style={{paddingBottom:"50px"}}>
-                <ReturnNav history={this.props.history} header="Matthew Homan" suppressBack suppressSearch/>
+                <ReturnNav history={this.props.history} header="Matthew&nbsp;Homan" suppressBack suppressSearch/>
                 <Document
                     file="resume.pdf"
                     onLoadSuccess={this.onDocumentLoadSuccess}

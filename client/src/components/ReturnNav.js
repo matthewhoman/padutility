@@ -15,6 +15,7 @@ class ReturnNav extends Component {
         this.state = {
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
+        this.shouldHighlight = this.shouldHighlight.bind(this);
     }
 
     handleButtonClick() {
@@ -23,6 +24,11 @@ class ReturnNav extends Component {
 
     handleLogOut() {
         sessionStorage.clear();
+    }
+
+    shouldHighlight(tabName) {
+        return window.location.href.includes(tabName) ? 
+            {color: "white"} : {};
     }
 
     render() { 
@@ -52,27 +58,27 @@ class ReturnNav extends Component {
 
         sessionStorage.setItem('breadCrumbs', JSON.stringify(breadCrumbs));
     
-        let headerComp = <span fontSize={18}>{this.props.header}</span>;
+        let headerComp = <span>{this.props.header}</span>;
 
         return (
             <div className="fixedHeader">
                 <Navbar expand="lg" bg="dark" variant="dark">
-                    <Navbar.Brand>
+                    <Navbar.Brand style={{fontSize:"25px"}}>
                         {this.props.suppressBack ?  headerComp : 
                             <span><FontAwesomeIcon icon={faArrowLeft} onClick={this.handleButtonClick} /> 
                                    &nbsp;&nbsp;{headerComp}&nbsp;&nbsp;
                             </span>}
                     </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" children={<div>Menu</div>} style={{border:"none",outline:"none"}}/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/profile">Profile</Nav.Link>
-                            <Nav.Link href="/resume">Resume</Nav.Link>
-                            <Nav.Link href="/projects">Projects</Nav.Link>
-                            <Nav.Link href="/itunes">Music</Nav.Link>
-                            <Nav.Link href="/movies">Movies</Nav.Link>
-                            <Nav.Link href="/contact">Contact</Nav.Link>
-                            <Nav.Link href="/monsterBook">Monster&nbsp;Book</Nav.Link>
+                            <Nav.Link href="/profile" style={this.shouldHighlight("profile")}>Profile</Nav.Link>
+                            <Nav.Link href="/resume" style={this.shouldHighlight("resume")}>Resume</Nav.Link>
+                            <Nav.Link href="/projects" style={this.shouldHighlight("projects")}>Projects</Nav.Link>
+                            <Nav.Link href="/itunes" style={this.shouldHighlight("itunes")}>Music</Nav.Link>
+                            <Nav.Link href="/movies" style={this.shouldHighlight("movies")}>Movies</Nav.Link>
+                            <Nav.Link href="/contact" style={this.shouldHighlight("contact")}>Contact</Nav.Link>
+                            <Nav.Link href="/monsterBook" style={this.shouldHighlight("monsterBook")}>Monster&nbsp;Book</Nav.Link>
                         </Nav>
                         <a href="http://www.linkedin.com/pub/matthew-homan/4a/528/546" target="_blank" rel="noopener noreferrer">
                             <Image className="socialMediaIcon" src="/images/socialmedia/linkedin.svg" title='Linked In'></Image>

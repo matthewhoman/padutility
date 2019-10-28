@@ -14,7 +14,7 @@ class Movies extends Component {
     render() {
         return (
             <div style={{paddingBottom:"50px"}}>
-                <ReturnNav history={this.props.history} header="Matthew Homan" suppressBack suppressSearch/>
+                <ReturnNav history={this.props.history} header="Matthew&nbsp;Homan" suppressBack suppressSearch/>
                 
             </div>
         )

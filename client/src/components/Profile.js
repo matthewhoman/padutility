@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReturnNav from './ReturnNav';
+import LinedTitle from './LinedTitle';
 
 class Profile extends Component {
     constructor(props) {
@@ -14,23 +15,25 @@ class Profile extends Component {
     render() {
         return (
             <div style={{paddingBottom:"50px"}}>
-                <ReturnNav history={this.props.history} header="Matthew Homan" suppressBack suppressSearch/>
+                <ReturnNav history={this.props.history} header="Matthew&nbsp;Homan" suppressBack suppressSearch/>
                 <br></br>
-                <div className="w3-theme-dark" style={{marginLeft: "20px"}}>
-                    <div>
-                        <img src={"images/me.png"} alt=""/>
-                    </div>
+                <div className="w3-theme-dark" style={{marginLeft: "20px", marginRight: "20px"}}>
+                    <LinedTitle title="Matthew&nbsp;Homan"></LinedTitle>
+                    <h3 style={{textAlign:"center", color:"#9999"}}>Lead Software Engineer</h3>
                     <br></br>
-                    <h1><b>About</b></h1>
+                    <img src="../images/mebw.jpg" alt="" 
+                        style={{width:"100%", maxWidth:"200px", display:"block", marginLeft:"auto", marginRight:"auto"}} />
                     <br></br>
-                    <div>
-                                 Lead Software Engineer at Cerner. 
-                        <br></br>Specialize in creating web apps.
-                        <br></br>Technologies: Java, Spring, React, NodeJS, JQuery and many more.  
-                        <br></br>
-                        <br></br>From Johnstown, Pennsylvania. 
-                        <br></br>Graduated from Univerity of Pittsburgh Johnstown. 
-                        <br></br>Bachelors in Computer Science and a minor in Math. 
+                    <br></br>
+                    <div style={{display: "flex", justifyContent: "center"}}>    
+                        <ul>
+                            <li>Lead Software Engineer at Cerner.</li> 
+                            <li>Specialize in creating web apps.</li> 
+                            <li>Technologies: Java, Spring, React, NodeJS, JQuery and many more.</li> 
+                            <li>From Johnstown, Pennsylvania.</li> 
+                            <li>Graduated from Univerity of Pittsburgh Johnstown.</li> 
+                            <li>Bachelors in Computer Science and a minor in Math.</li> 
+                        </ul>
                     </div>
                 </div>
             </div>
