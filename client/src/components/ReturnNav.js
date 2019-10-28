@@ -13,9 +13,28 @@ class ReturnNav extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            tabs : [
+                { url : "profile", name : "Profile"},
+                { url : "resume", name : "Resume"},
+                { url : "projects", name : "Projects"},
+                { url : "itunes", name : "Music"},
+                { url : "movies", name : "Movies"},
+                { url : "contact", name : "Contact"},
+                { url : "monsterBook", name : "Monster Book"}
+            ],
+            socialIcons : [
+                { url : "http://www.linkedin.com/pub/matthew-homan/4a/528/546", title : "Linked In", icon : "linkedin.svg"},
+                { url : "https://www.facebook.com/matthew.homan1", title : "Facebook", icon : "facebook.svg"},
+                { url : "http://instagram.com/m.h.h.11", title : "Instagram", icon : "instagram.svg"},
+                { url : "https://www.paypal.me/MatthewHoman", title : "Paypal", icon : "paypal.svg"},
+                { url : "https://www.twitch.tv/beastedxx", title : "Twitch", icon : "twitch.svg"},
+                { url : "http://steamcommunity.com/id/b34st3d", title : "Steam", icon : "steam.svg"},
+                { url : "http://matthewhoman.deviantart.com/", title : "Deviant Art", icon : "deviantart.svg"}
+            ]
         };
         this.handleButtonClick = this.handleButtonClick.bind(this);
         this.shouldHighlight = this.shouldHighlight.bind(this);
+
     }
 
     handleButtonClick() {
@@ -72,44 +91,28 @@ class ReturnNav extends Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" children={<div>Menu</div>} style={{border:"none",outline:"none"}}/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="/profile" style={this.shouldHighlight("profile")}>Profile</Nav.Link>
-                            <Nav.Link href="/resume" style={this.shouldHighlight("resume")}>Resume</Nav.Link>
-                            <Nav.Link href="/projects" style={this.shouldHighlight("projects")}>Projects</Nav.Link>
-                            <Nav.Link href="/itunes" style={this.shouldHighlight("itunes")}>Music</Nav.Link>
-                            <Nav.Link href="/movies" style={this.shouldHighlight("movies")}>Movies</Nav.Link>
-                            <Nav.Link href="/contact" style={this.shouldHighlight("contact")}>Contact</Nav.Link>
-                            <Nav.Link href="/monsterBook" style={this.shouldHighlight("monsterBook")}>Monster&nbsp;Book</Nav.Link>
+                            {
+                                this.state.tabs.map(tab => {
+                                    return (<Nav.Link href={"/" + tab.url} style={this.shouldHighlight(tab.url)}>{tab.name}</Nav.Link>)
+                                })
+                            }
                         </Nav>
-                        <a href="http://www.linkedin.com/pub/matthew-homan/4a/528/546" target="_blank" rel="noopener noreferrer">
-                            <Image className="socialMediaIcon" src="/images/socialmedia/linkedin.svg" title='Linked In'></Image>
-                        </a>
-                        <a href="https://www.facebook.com/matthew.homan1" target="_blank" rel="noopener noreferrer">
-                            <Image className="socialMediaIcon" src="/images/socialmedia/facebook.svg" title='Facebook'></Image>
-                        </a>
-                        <a href="http://instagram.com/m.h.h.11" target="_blank" rel="noopener noreferrer">
-                            <Image className="socialMediaIcon" src="/images/socialmedia/instagram.svg" title='Instagram'></Image>
-                        </a>
-                        <a href="https://www.paypal.me/MatthewHoman" target="_blank" rel="noopener noreferrer">
-                            <Image className="socialMediaIcon" src="/images/socialmedia/paypal.svg" title='PayPal'></Image>
-                        </a>
-                        <a href="https://www.twitch.tv/b34st3d" target="_blank" rel="noopener noreferrer">
-                            <Image className="socialMediaIcon" src="/images/socialmedia/twitch.svg" title='Twitch'></Image>
-                        </a>
-                        <a href="http://steamcommunity.com/id/b34st3d" target="_blank" rel="noopener noreferrer">
-                            <Image className="socialMediaIcon" src="/images/socialmedia/steam.svg" title='Steam'></Image>
-                        </a>
-                        <a href="http://matthewhoman.deviantart.com/" target="_blank" rel="noopener noreferrer">
-                            <Image className="socialMediaIcon" src="/images/socialmedia/deviantart.svg" title='Deviant Art'></Image>
-                        </a>
+                        {
+                            this.state.socialIcons.map(icon => {
+                                return(
+                                <a href={icon.url} target="_blank" rel="noopener noreferrer">
+                                    <Image className="socialMediaIcon" src={"/images/socialmedia/" + icon.icon} title={icon.title}></Image>
+                                </a>)
+                            })
+                        }
+                        
+
                         {
                             this.props.suppressSearch ? <div></div> : <PadMonsterSearch/>
                         }
                     </Navbar.Collapse>
                 </Navbar>
                 <UpdatedMessage customMsg={this.props.customMsg} updated={this.props.updated} />
-                {/* <Breadcrumb>
-                    {breadCrumbComponents}
-                </Breadcrumb>   */}
             </div>
         )
     }
