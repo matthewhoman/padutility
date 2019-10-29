@@ -7,6 +7,7 @@ import PadMonsterSearch from './PadMonsterSearch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import Image from 'react-bootstrap/Image'
+import NavbarCollapse from 'react-bootstrap/NavbarCollapse';
 
 class ReturnNav extends Component {
 
@@ -79,7 +80,7 @@ class ReturnNav extends Component {
         sessionStorage.setItem('breadCrumbs', JSON.stringify(breadCrumbs));
     
         let headerComp = <span>{this.props.header}</span>;
-
+    
         return (
             <div className="fixedHeader">
                 <Navbar expand="lg" bg="dark" variant="dark">
@@ -94,7 +95,10 @@ class ReturnNav extends Component {
                         <Nav className="mr-auto">
                             {
                                 this.state.tabs.map(tab => {
-                                    return (<Nav.Link href={"/" + tab.url} style={this.shouldHighlight(tab.url)}>{tab.name}</Nav.Link>)
+                                    let tabNameLeft = tab.name.includes(" ") ? tab.name.substring(0, tab.name.indexOf(" ")) : tab.name;
+                                    let tabNameRight = tab.name.includes(" ") ? tab.name.substring(tab.name.indexOf(" ") + 1, tab.name.length) : "";
+                                    return (<Nav.Link href={"/" + tab.url} style={this.shouldHighlight(tab.url)}>
+                                            {tabNameLeft}&nbsp;{tabNameRight}</Nav.Link>)
                                 })
                             }
                         </Nav>

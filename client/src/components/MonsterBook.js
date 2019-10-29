@@ -452,10 +452,10 @@ class MonsterBook extends Component {
         }
         return (
             <div>
-                <ReturnNav history={this.props.history} header="PAD Monster Book"/>
+                <ReturnNav history={this.props.history} header="PAD Monster Book" suppressBack/>
                 <Container fluid={true}>
-                    <Row>
-                        <Col sm={8} lg='auto'>
+                    <Row style={{marginLeft: "0px", marginRight: "0px"}}>
+                        <Col sm={8} md='auto'>
                         <div style={{marginTop:"15px"}}>
                             <div style={{marginBottom:"12px",maxWidth:"347px"}}>
                                 <Collapsible 

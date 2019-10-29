@@ -19,10 +19,6 @@ input {
 	font-size: 14px;
 }
 
-audio {
-	background : white;
-}
-
 html, body {
 	height:100%;
 	background: black;
@@ -100,6 +96,7 @@ input[type=submit] {
 	width: 35px;
 	height: 35px;
 	padding-right: 7px;
+	cursor: pointer;
 }
 
 .evoImageBig {
