@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReturnNav from './ReturnNav';
+import Base from './Base';
+import LinedTitle from './LinedTitle';
 
 class Itunes extends Component {
     constructor(props) {
@@ -110,18 +111,20 @@ class Itunes extends Component {
                 let previewType = entry.link[1].attributes.type;
                 let previewUrl = entry.link[1].attributes.href;
                 musicPanels.push(
-                    <div key={i + "musicPanel"} className="w3-container w3-margin-bottom"> 
-                        <div style={{whiteSpace: "nowrap"}} className="w3-card2 w3-theme-l3">
+                    <div key={i + "musicPanel"} className="w3-container w3-margin-bottom w3-third"> 
+                        <div style={{whiteSpace: "nowrap"}} className="w3-theme-l3">
                             <div id="mimage" 
                                 style={{height: "170px", backgroundSize: "contain", backgroundPosition: "0%0%",
                                     backgroundRepeat: "no-repeat", backgroundImage: "url('" + imagesrc + "')", display: "inline-block"}}>
                             </div>
-                            <div id="mtext" style={{verticalAlign: "top", display: "inline-block", marginLeft: "10px", whiteSpace: "pre-line", width: "50%"}} 
-                                className="w3-margin-bottom">
+                            <div id="mtext" style={{verticalAlign: "top", display: "inline-block", 
+                                    marginLeft: "10px", whiteSpace: "pre-line", width: "50%", color: "rgba(153, 153, 153, 0.6)"}} 
+                                        className="w3-margin-bottom">
                                 <a className="w3-hover-text-indigo musicLink" target="_blank" rel="noopener noreferrer" href={url}><b>{title}</b></a>
                             </div>
-                            <div className="w3-accordion w3-light-grey w3-margin-bottom" style={{width: "100%"}}>
-                                <button onClick={() => this.openblind(escape(song), artist, i)} className="w3-btn-block w3-left-align w3-theme">Lyrics&nbsp;
+                            <div className="w3-accordion w3-light-grey" style={{width: "100%"}}>
+                                <button onClick={() => this.openblind(escape(song), artist, i)} 
+                                    style={{outline: "0px"}} className="w3-btn-block w3-left-align w3-theme">Lyrics&nbsp;
                                     <i className="fa fa-caret-down"></i>
                                 </button>
                                 {
@@ -156,13 +159,15 @@ class Itunes extends Component {
             }
         }
         return (
-            <div style={{paddingBottom:"50px"}}>
-                <ReturnNav history={this.props.history} header="Matthew&nbsp;Homan" suppressBack suppressSearch/>
-                <br></br>
-                <div className="w3-theme-dark" style={{marginLeft: "20px"}}>
-                    {musicPanels}
-                </div>
-            </div>
+            <Base header="Matthew&nbsp;Homan" 
+                childComponent={
+                    <div>
+                        <LinedTitle title="Itunes&nbsp;Top&nbsp;Music"></LinedTitle>
+                        <div style={{marginBottom:"100px"}}></div>
+                        {musicPanels}
+                    </div>
+                }>
+            </Base>
         )
     }
 }

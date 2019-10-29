@@ -18,11 +18,12 @@ class ReturnNav extends Component {
                 { url : "resume", name : "Resume"},
                 { url : "projects", name : "Projects"},
                 { url : "itunes", name : "Music"},
-                { url : "movies", name : "Movies"},
+                // { url : "movies", name : "Movies"},
                 { url : "contact", name : "Contact"},
                 { url : "monsterBook", name : "Monster Book"}
             ],
             socialIcons : [
+                { url : "https://github.com/matthewhoman", title : "Git Hub", icon : "github.svg"},
                 { url : "http://www.linkedin.com/pub/matthew-homan/4a/528/546", title : "Linked In", icon : "linkedin.svg"},
                 { url : "https://www.facebook.com/matthew.homan1", title : "Facebook", icon : "facebook.svg"},
                 { url : "http://instagram.com/m.h.h.11", title : "Instagram", icon : "instagram.svg"},

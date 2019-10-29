@@ -11,12 +11,16 @@
 
 .musicLink {
 	cursor: pointer;
-	color: white;
-	font-size: 30px;
+	font-size: 18px;
+	color: rgba(153, 153, 153, 0.6)
 }
 
 input {
 	font-size: 14px;
+}
+
+audio {
+	background : white;
 }
 
 html, body {
@@ -167,6 +171,7 @@ input[type=submit] {
 .headerTitle {
 	line-height: 0.5;
 	text-align: center;
+	color: white;
 }
 
 .headerTitle span {
