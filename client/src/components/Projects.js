@@ -72,8 +72,7 @@ class Projects extends Component {
             <Base header="Matthew&nbsp;Homan" 
                 childComponent={
                     <div>
-                        <LinedTitle title="Projects"></LinedTitle>
-                        <div style={{marginBottom:"100px"}}></div>
+                        <LinedTitle title="Projects" margBottom></LinedTitle>
                         {
                             this.state.projects.map(project => {
                                 return (

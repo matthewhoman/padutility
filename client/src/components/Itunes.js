@@ -118,7 +118,7 @@ class Itunes extends Component {
                                     backgroundRepeat: "no-repeat", backgroundImage: "url('" + imagesrc + "')", display: "inline-block"}}>
                             </div>
                             <div id="mtext" style={{verticalAlign: "top", display: "inline-block", 
-                                    marginLeft: "10px", whiteSpace: "pre-line", width: "50%", color: "rgba(153, 153, 153, 0.6)"}} 
+                                    marginLeft: "10px", whiteSpace: "pre-line", width: "50%"}} 
                                         className="w3-margin-bottom">
                                 <a className="w3-hover-text-indigo musicLink" target="_blank" rel="noopener noreferrer" href={url}><b>{title}</b></a>
                             </div>
@@ -162,8 +162,7 @@ class Itunes extends Component {
             <Base header="Matthew&nbsp;Homan" 
                 childComponent={
                     <div>
-                        <LinedTitle title="Itunes&nbsp;Top&nbsp;Music"></LinedTitle>
-                        <div style={{marginBottom:"100px"}}></div>
+                        <LinedTitle title="Itunes&nbsp;Top&nbsp;Music" margBottom></LinedTitle>
                         {musicPanels}
                     </div>
                 }>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-
-import ReturnNav from './ReturnNav';
+import LinedTitle from './LinedTitle';
+import Base from './Base';
 
 class Contact extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,39 +25,12 @@ class Contact extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        var subject = escape(this.state.Subject);
-        var name = escape(this.state.Name);
-        var message = escape(this.state.Message);
-        var fail = false;
+        let subject = escape(this.state.Subject).trim();
+        let name = escape(this.state.Name).trim();
+        let message = escape(this.state.Message).trim();
         
-        if(!name){
-            //$("#Name").css("background","red");
-            //$("#Name").attr("title","Name is required");
-            fail = true;
-        } else {
-            //$("#Name").css("background","");
-        }
-
-        if(!subject){
-            //$("#Subject").css("background","red");
-            //$("#Subject").attr("title","Subject is required");
-            fail = true;
-        } else {
-            //$("#Subject").css("background","");
-        }
-        
-        if(!message){
-            //$("#Message").css("background","red");
-            //$("#Message").attr("title","Message is required");
-            fail = true;
-        } else {
-            //$("#Message").css("background","");
-        }
-        
-        if(fail){return;}
-        
-        var link = "mailto:matthew.h.homan@gmail.com"
-                    + "?subject=" + subject + " - " + name + " - (PS)"
+        let link = "mailto:matthew.h.homan@gmail.com"
+                    + "?subject=" + subject + " - " + name + " - (From PS Contact)"
                     + "&body=" +  message;
     
         window.location.href = link;
@@ -64,30 +38,30 @@ class Contact extends Component {
     
     render() {
         return (
-            <div style={{paddingBottom:"50px"}}>
-                <ReturnNav history={this.props.history} header="Matthew Homan" suppressBack suppressSearch/>
-                <br></br>
-                <div className="w3-theme-dark" style={{marginLeft: "20px", marginRight:"20px"}}>
-                    <p><i className="fa fa-map-marker w3-xlarge"></i>&nbsp;&nbsp;&nbsp;Pennsylvania, US</p>
-                    <p><i className="fa fa-envelope w3-xlarge"></i>&nbsp;&nbsp;&nbsp;Matthew.h.homan@gmail.com</p>
-                    <form onSubmit={this.handleSubmit}>
-                        <label style={{width:"100%", maxWidth:"500px"}}>Name
-                            <input type="text" name="Name" onChange={this.handleChange}/>
-                        </label>
-                        <br />
-                        <label style={{width:"100%", maxWidth:"500px"}}>Subject
-                            <input type="text" name="Subject" onChange={this.handleChange}/>
-                        </label>
-                        <br />
-                        <label style={{width:"100%", maxWidth:"500px"}}>Message
-                            <input type="text" name="Message" onChange={this.handleChange}/>
-                        </label>
-                        <br />
-                        <br />
-                        <input type="submit" value="Submit" />
-                    </form>
-                </div>
-            </div>
+            <Base header="Matthew&nbsp;Homan" 
+                childComponent={
+                    <div>
+                        <LinedTitle title="Contact" margBottom></LinedTitle>
+                        <form onSubmit={this.handleSubmit} 
+                                style={{width:"100%",maxWidth:"500px",marginLeft:"auto",marginRight:"auto"}}>
+                            <label>Name*</label>
+                            <input type="text" name="Name" placeHolder="Name" required onChange={this.handleChange}/>
+                            <br/>
+                            <br/>
+                            <label>Subject*</label>
+                            <input type="text" name="Subject" placeHolder="Subject" required onChange={this.handleChange}/>
+                            <br/>
+                            <br/>
+                            <label>Message*</label>
+                            <textarea type="text" name="Message" placeHolder="Message" required onChange={this.handleChange}
+                                    style={{height:"200px", width:"100%"}}/>
+                            <br/>
+                            <br/>
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
+                }>
+            </Base>
         )
     }
 }

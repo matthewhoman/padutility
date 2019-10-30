@@ -6,8 +6,6 @@ import UpdatedMessage from './UpdatedMessage';
 import PadMonsterSearch from './PadMonsterSearch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
-import Image from 'react-bootstrap/Image'
-import NavbarCollapse from 'react-bootstrap/NavbarCollapse';
 
 class ReturnNav extends Component {
 
@@ -106,7 +104,8 @@ class ReturnNav extends Component {
                             this.state.socialIcons.map(icon => {
                                 return(
                                 <a href={icon.url} target="_blank" rel="noopener noreferrer">
-                                    <Image className="socialMediaIcon" src={"/images/socialmedia/" + icon.icon} title={icon.title}></Image>
+                                    <img className="socialMediaIcon" src={"/images/socialmedia/" + icon.icon} 
+                                        title={icon.title} alt={icon.title}></img>
                                 </a>)
                             })
                         }

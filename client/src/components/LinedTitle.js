@@ -9,8 +9,9 @@ class LinedTitle extends Component {
     }
 
     render() {
+        let margBottom = this.props.margBottom ? {marginBottom:"100px"} : {}
         return (
-            <h1 className="headerTitle"><span>{this.props.title}</span></h1>
+            <h1 className="headerTitle" style={margBottom}><span>{this.props.title}</span></h1>
         )
     }
 }

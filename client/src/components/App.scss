@@ -29,6 +29,11 @@ html, body {
 	position: relative;
 	width: 100%;
 }
+
+.Height100 {
+	height: 100%;
+}
+
 input {
 	border: 1px solid transparent;
 	background-color: #f1f1f1;
@@ -97,6 +102,11 @@ input[type=submit] {
 	height: 35px;
 	padding-right: 7px;
 	cursor: pointer;
+	filter : opacity(0.6)
+}
+
+.socialMediaIcon:hover {	
+	filter : invert(.5)
 }
 
 .evoImageBig {
@@ -170,6 +180,10 @@ input[type=submit] {
 	text-align: center;
 	color: white;
 }
+
+.triangle-topleft {
+	background: linear-gradient(320deg, rgba(72,72,72,1) 79.49%, rgba(0,155,255,1) 79.49%);
+  }
 
 .headerTitle span {
 	display: inline-block;
@@ -262,7 +276,7 @@ p {
 	color: black;
 }
 
-html,body,header,h1,h2,h3,h4,h5 {font-family: "Gotham-Thin"}
+html,body,header,h1,h2,h3,h4,h5 {font-family: "Gotham-Thin" !important}
 .w3-theme-l5 {color:#333 !important; background-color:#000 !important; font-size: 14px}
 .w3-theme-l4 {color:#444 !important; background-color:#000 !important; font-size: 14px}
 .w3-theme-l3 {color:#555 !important; background-color:#000 !important; font-size: 14px}
