@@ -119,7 +119,7 @@ class Resume extends Component {
     render() {
         return (
             <div className="w3-row" style={{width:"100%",height:"100%",background: "#282828", display:"flex", flexWrap:"wrap"}}>
-                <div className="w3-center" style={{height:"50%", width:"18%",minWidth: "300px", flexGrow:1,
+                <div className="w3-center" style={{height:"400px", width:"18%",minWidth: "300px", flexGrow:1, flexShrink:0,
                         background: "#282828"}}>
                     <div style={{marginTop:"20px"}}>
                         <h2 className="name">
@@ -132,10 +132,10 @@ class Resume extends Component {
                                 {this.state.extraDetail.title}
                             </h5>
                             <div style={{color:"white"}}>WebSite:&nbsp;&nbsp;
-                                <a href={this.state.extraDetail.website}>MatthewHoman.com</a>
+                                <a className="webLink" href={this.state.extraDetail.website}>MatthewHoman.com</a>
                             </div>
                             <div style={{color:"white"}}>Github:&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a href={this.state.extraDetail.github}>Github</a>
+                                <a className="webLink" href={this.state.extraDetail.github}>Github</a>
                             </div>                  
                         </div>
                         {/* <ul>
@@ -149,7 +149,7 @@ class Resume extends Component {
                         </ul> */}
                      </div>
                 </div>
-                <div className="w3-container" style={{height:"100%", minWidth:"500px", width:"50%", background:"white", flexGrow: 1}}>
+                <div className="w3-container" style={{display:"table", height:"100%", minWidth:"300px", width:"50%", background:"white", flexGrow: 1, flexShrink:0}}>
                 <h3 style={{marginTop:"25px"}}><b>Experience</b></h3>
                 {
                     this.state.experience.map((item, index) => {
@@ -186,8 +186,8 @@ class Resume extends Component {
                     </div>
                 }
                 </div>
-                <div className="w3-container" style={{height:"100%", minWidth:"200px", width: "30%", background:"white", flexGrow: 1}}>
-                    <div style={{marginTop:"25px"}}>
+                <div className="w3-container" style={{height:"100%", minWidth:"300px", width: "30%", background:"white", flexGrow: 1, flexShrink:0}}>
+                    <div style={{marginTop:"25px", maxWidth:"300px", display:"table", marginLeft:"auto",marginRight:"auto"}}>
                         <h3><b>Technical Experience</b></h3>
                         {
                             this.state.techSkills.languages.map((item, index) => {
