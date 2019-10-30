@@ -120,7 +120,7 @@ class Resume extends Component {
     render() {
         return (
             <div className="w3-row" style={{width:"100%",height:"100%",background: "#282828", display:"flex", flexWrap:"wrap"}}>
-                <div className="w3-center" style={{height:"400px", minWidth: "300px", flex: 1,
+                <div className="w3-center" style={{height:"400px", minWidth: "300px", flex: "200 1 0px",
                         background: "#282828"}}>
                     <div style={{marginTop:"20px"}}>
                         <img src={this.state.extraDetail.image} style={{borderRadius: "50%", 
@@ -146,7 +146,7 @@ class Resume extends Component {
                         </div>
                      </div>
                 </div>
-                <div className="w3-container" style={{display:"table", height:"100%", minWidth:"300px", background:"white", flex: 3, flexGrow: 6}}>
+                <div className="w3-container" style={{display:"table", height:"100%", minWidth:"300px", background:"white", flex: "500 1 0px"}}>
                 <h3 style={{marginTop:"25px"}}><b>Experience</b></h3>
                 {
                     this.state.experience.map((item, index) => {
@@ -183,8 +183,8 @@ class Resume extends Component {
                     </div>
                 }
                 </div>
-                <div className="w3-container" style={{height:"100%", minWidth:"300px", background:"white", flexGrow: 1}}>
-                    <div style={{marginTop:"25px", display:"table", marginLeft:"auto",marginRight:"auto"}}>
+                <div className="w3-container" style={{height:"100%", display:"table", minWidth:"300px", background:"white", flex: "300 1 0px"}}>
+                    <div style={{marginTop:"25px", marginLeft:"auto", marginRight:"auto"}}>
                         <h3><b>Technical Experience</b></h3>
                         {
                             this.state.techSkills.languages.map((item, index) => {
