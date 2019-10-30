@@ -6,7 +6,8 @@ class Resume extends Component {
         super(props);
         this.state = {
             extraDetail : {
-                name : `Matthew Homan`,
+                firstname : `Matthew`,
+                lastname: `Homan`,
                 title : `Lead Software Engineer at Cerner`,
                 website : `https:\\matthewhoman.com`,
                 github : `https://github.com/matthewhoman`,
@@ -119,14 +120,19 @@ class Resume extends Component {
     render() {
         return (
             <div className="w3-row" style={{width:"100%",height:"100%",background: "#282828", display:"flex", flexWrap:"wrap"}}>
-                <div className="w3-center" style={{height:"400px", width:"18%",minWidth: "300px", flexGrow:1, flexShrink:0,
+                <div className="w3-center" style={{height:"400px", minWidth: "300px", flex: 1,
                         background: "#282828"}}>
                     <div style={{marginTop:"20px"}}>
-                        <h2 className="name">
-                            {this.state.extraDetail.name}
-                        </h2>
                         <img src={this.state.extraDetail.image} style={{borderRadius: "50%", 
                             border: "3px solid white", marginBottom: "10px"}} alt= "profileImage"></img>
+                        <div>
+                            <h2 className="name" style={{display:"inline-block"}}>
+                                {this.state.extraDetail.firstname}
+                            </h2>
+                            <h2 className="name" style={{color: "dodgerblue", display:"inline-block"}}>
+                                &nbsp;{this.state.extraDetail.lastname}
+                            </h2>
+                        </div>
                         <div style={{textAlign:"left", display:"table", marginLeft:"auto", marginRight:"auto"}}>
                             <h5 className="name" style={{marginBottom:"30px"}}>
                                 {this.state.extraDetail.title}
@@ -138,18 +144,9 @@ class Resume extends Component {
                                 <a className="webLink" href={this.state.extraDetail.github}>Github</a>
                             </div>                  
                         </div>
-                        {/* <ul>
-                            {
-                                this.state.introPoints.map((point, index) => {
-                                    return (
-                                    <li key={index}>{point}</li>  
-                                    )
-                                })
-                            }
-                        </ul> */}
                      </div>
                 </div>
-                <div className="w3-container" style={{display:"table", height:"100%", minWidth:"300px", width:"50%", background:"white", flexGrow: 1, flexShrink:0}}>
+                <div className="w3-container" style={{display:"table", height:"100%", minWidth:"300px", background:"white", flex: 3, flexGrow: 6}}>
                 <h3 style={{marginTop:"25px"}}><b>Experience</b></h3>
                 {
                     this.state.experience.map((item, index) => {
@@ -186,8 +183,8 @@ class Resume extends Component {
                     </div>
                 }
                 </div>
-                <div className="w3-container" style={{height:"100%", minWidth:"300px", width: "30%", background:"white", flexGrow: 1, flexShrink:0}}>
-                    <div style={{marginTop:"25px", maxWidth:"300px", display:"table", marginLeft:"auto",marginRight:"auto"}}>
+                <div className="w3-container" style={{height:"100%", minWidth:"300px", background:"white", flexGrow: 1}}>
+                    <div style={{marginTop:"25px", display:"table", marginLeft:"auto",marginRight:"auto"}}>
                         <h3><b>Technical Experience</b></h3>
                         {
                             this.state.techSkills.languages.map((item, index) => {
