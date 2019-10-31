@@ -8,3 +8,8 @@ body {
   font-family: 'Gotham-Thin';
   src: local('Gotham-Thin'), url(./fonts/Gotham-Thin.otf) format('truetype');
 }
+
+@font-face {
+  font-family: 'Gotham-Light';
+  src: local('Gotham-Light'), url(./fonts/Gotham-Light.otf) format('truetype');
+}
