@@ -144,7 +144,7 @@ class Resume extends Component {
                                 {this.state.extraDetail.title}
                             </h5>
                             <div style={{textAlign:"left", display:"table", marginLeft:"auto", marginRight:"auto"}}>
-                                <div style={{color:"white", marginBottom:"10px"}}>
+                                {/* <div style={{color:"white", marginBottom:"10px"}}>
                                     <div style={{display:"inline-block", verticalAlign:"top"}}>
                                         <FontAwesomeIcon icon={faMapMarker}/>&nbsp;&nbsp;&nbsp;&nbsp;
                                     </div>
@@ -155,7 +155,7 @@ class Resume extends Component {
                                             })
                                         }
                                     </div>
-                                </div> 
+                                </div>  */}
                                 <div style={{color:"white", marginBottom:"10px"}}><FontAwesomeIcon icon={faPhone}/>&nbsp;&nbsp;{this.state.extraDetail.phone}
                                 </div> 
                                 <div style={{color:"white", marginBottom:"30px"}}><FontAwesomeIcon icon={faEnvelope}/>&nbsp;&nbsp;{this.state.extraDetail.email}
