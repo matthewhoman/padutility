@@ -78,8 +78,8 @@ class Resume extends Component {
                         , 
                         `Working across multiple teams / with offshore associates to coordinate effort and deliver solutions.`
                         ,
-                        `Worked on full stack solutions including migrating legacy backends to Spring and re-working UI's 
-                            to use more modern frameworks such as JQuery, Handlebars and advanced CSS.`
+                        `Worked on full stack solutions including migrating legacy backends to Spring and re-working UI's to 
+                            use more modern frameworks such as JQuery, Handlebars and advanced CSS.`
                         ,
                         `Evaluated / Setup Jasmine testing into our automated build pipeline in Jenkins.`
                         ,
