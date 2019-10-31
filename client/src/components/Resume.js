@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone, faMapMarker, faEnvelope, fa } from '@fortawesome/free-solid-svg-icons';
 import './Resume.scss';
 
 class Resume extends Component {
@@ -11,7 +13,11 @@ class Resume extends Component {
                 title : `Lead Software Engineer at Cerner`,
                 website : `https:\\matthewhoman.com`,
                 github : `https://github.com/matthewhoman`,
-                image : `../images/mefacebw.jpg`
+                image : `../images/mefacebw.jpg`,
+                email: `Matthew.h.homan@gmail.com`,
+                phone: `(814) 242-5819`,
+                address: `398 Lynetree Dr\n 
+                          West Chester, Pa 19380`
             },
             introPoints : [
                 `7+ years of experience with proven ability to leverage full-stack knowledge and 
@@ -119,8 +125,8 @@ class Resume extends Component {
     
     render() {
         return (
-            <div className="w3-row" style={{width:"100%", background: "#282828", display:"flex", flexWrap:"wrap"}}>
-                <div className="w3-center" style={{height:"400px", minWidth: "300px", width:"100%", flex: "1 1 0px",
+            <div className="w3-row" style={{width:"100%", display:"flex", flexWrap:"wrap"}}>
+                <div className="w3-center" style={{minWidth: "320px", width:"100%", flex: "1 1 0px",
                         background: "#282828"}}>
                     <div style={{marginTop:"20px"}}>
                         <img src={this.state.extraDetail.image} style={{borderRadius: "50%", 
@@ -137,12 +143,30 @@ class Resume extends Component {
                             <h5 className="name" style={{marginBottom:"30px"}}>
                                 {this.state.extraDetail.title}
                             </h5>
-                            <div style={{color:"white"}}>WebSite:&nbsp;&nbsp;
-                                <a className="webLink" href={this.state.extraDetail.website}>MatthewHoman.com</a>
-                            </div>
-                            <div style={{color:"white"}}>Github:&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a className="webLink" href={this.state.extraDetail.github}>Github</a>
-                            </div>                  
+                            <div style={{textAlign:"left", display:"table", marginLeft:"auto", marginRight:"auto"}}>
+                                <div style={{color:"white", marginBottom:"10px"}}>
+                                    <div style={{display:"inline-block", verticalAlign:"top"}}>
+                                        <FontAwesomeIcon icon={faMapMarker}/>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                    <div style={{display:"inline-block"}}>
+                                        {
+                                            this.state.extraDetail.address.split('\n').map((item, key) => {
+                                                    return <div key={key}>{item}</div>
+                                            })
+                                        }
+                                    </div>
+                                </div> 
+                                <div style={{color:"white", marginBottom:"10px"}}><FontAwesomeIcon icon={faPhone}/>&nbsp;&nbsp;{this.state.extraDetail.phone}
+                                </div> 
+                                <div style={{color:"white", marginBottom:"30px"}}><FontAwesomeIcon icon={faEnvelope}/>&nbsp;&nbsp;{this.state.extraDetail.email}
+                                </div> 
+                                <div style={{color:"white"}}>WebSite:&nbsp;&nbsp;
+                                    <a className="webLink" href={this.state.extraDetail.website}>MatthewHoman.com</a>
+                                </div>
+                                <div style={{color:"white",marginBottom:"30px"}}>Github:&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a className="webLink" href={this.state.extraDetail.github}>Github</a>
+                                </div>      
+                            </div>            
                         </div>
                      </div>
                 </div>
