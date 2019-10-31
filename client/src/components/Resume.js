@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faMapMarker, faEnvelope, fa } from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faMapMarker, faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import './Resume.scss';
 
 class Resume extends Component {
@@ -125,7 +125,7 @@ class Resume extends Component {
     
     render() {
         return (
-            <div className="w3-row" style={{width:"100%", display:"flex", flexWrap:"wrap"}}>
+            <div className="w3-row" style={{width:"100%", height:"100%", display:"flex", flexWrap:"wrap"}}>
                 <div className="w3-center" style={{minWidth: "320px", width:"100%", flex: "1 1 0px",
                         background: "#282828"}}>
                     <div style={{marginTop:"20px"}}>
@@ -163,7 +163,7 @@ class Resume extends Component {
                                 <div style={{color:"white"}}>WebSite:&nbsp;&nbsp;
                                     <a className="webLink" href={this.state.extraDetail.website}>MatthewHoman.com</a>
                                 </div>
-                                <div style={{color:"white",marginBottom:"30px"}}>Github:&nbsp;&nbsp;&nbsp;&nbsp;
+                                <div style={{color:"white",marginBottom:"30px"}}>Github:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <a className="webLink" href={this.state.extraDetail.github}>Github</a>
                                 </div>      
                             </div>            
