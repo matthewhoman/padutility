@@ -7,6 +7,9 @@
   },
   "license": "MIT",
   "scripts": {
+    "install:rimraf": "npm install rimraf",
+    "clean:all": " npm run install:rimraf && rimraf ./client/node_modules && rimraf ./node_modules",
+    "clean:install": "npm run clean:all && cd client && npm install && cd .. && npm install",
     "client": "cd client && npm run start",
     "server": "node server.js",
     "THISWILLAUTOREFRESHSERVERIFCHANGEDTOserverabove": "nodemon server.js",
@@ -27,6 +30,7 @@
     "phantom": "^6.3.0",
     "pkg": "^4.4.0",
     "request": "^2.88.0",
+    "rimraf": "^3.0.0",
     "webpack": "4.19.1",
     "webpage": "^0.3.0"
   },
