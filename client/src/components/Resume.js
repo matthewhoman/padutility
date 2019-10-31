@@ -119,8 +119,8 @@ class Resume extends Component {
     
     render() {
         return (
-            <div className="w3-row" style={{width:"100%",height:"100%",background: "#282828", display:"flex", flexWrap:"wrap"}}>
-                <div className="w3-center" style={{height:"400px", minWidth: "300px", flex: "200 1 0px",
+            <div className="w3-row" style={{width:"100%", background: "#282828", display:"flex", flexWrap:"wrap"}}>
+                <div className="w3-center" style={{height:"400px", minWidth: "300px", width:"100%", flex: "1 1 0px",
                         background: "#282828"}}>
                     <div style={{marginTop:"20px"}}>
                         <img src={this.state.extraDetail.image} style={{borderRadius: "50%", 
@@ -146,45 +146,45 @@ class Resume extends Component {
                         </div>
                      </div>
                 </div>
-                <div className="w3-container" style={{display:"table", height:"100%", minWidth:"300px", background:"white", flex: "500 1 0px"}}>
-                <h3 style={{marginTop:"25px"}}><b>Experience</b></h3>
-                {
-                    this.state.experience.map((item, index) => {
-                        return (
-                            <div style={{marginTop:"20px"}}>
-                                <div style={{fontWeight: "boldest", color: "black"}}>
-                                    <b>{item.title}</b>
+                <div className="w3-container" style={{minWidth:"300px", background:"white", flex: "2 1 0px"}}>
+                    <h3 style={{marginTop:"25px"}}><b>Experience</b></h3>
+                    {
+                        this.state.experience.map((item, index) => {
+                            return (
+                                <div style={{marginTop:"20px"}}>
+                                    <div style={{fontWeight: "boldest", color: "black"}}>
+                                        <b>{item.title}</b>
+                                    </div>
+                                    <div>
+                                        <b>({item.date})</b>
+                                    </div>
+                                    <ul>
+                                    {
+                                        item.points.map((point, index2) => {
+                                            return (
+                                                <li className="name" key={index2}><b>{point}</b></li>  
+                                            )
+                                        })
+                                    }
+                                    </ul>
                                 </div>
-                                <div>
-                                    <b>({item.date})</b>
-                                </div>
-                                <ul>
-                                {
-                                    item.points.map((point, index2) => {
-                                        return (
-                                            <li className="name" key={index2}><b>{point}</b></li>  
-                                        )
-                                    })
-                                }
-                                </ul>
+                            )
+                        })
+                    }
+                    {
+                        <div style={{marginTop:"50px", marginBottom:"50px"}}>
+                            <h3><b>Education</b></h3>
+                            <div>
+                                <b>{this.state.education.title}</b>
                             </div>
-                        )
-                    })
-                }
-                {
-                    <div style={{marginTop:"50px"}}>
-                        <h3><b>Education</b></h3>
-                        <div>
-                            <b>{this.state.education.title}</b>
+                            <div>
+                                <b>({this.state.education.date})</b>
+                            </div>
                         </div>
-                        <div>
-                            <b>({this.state.education.date})</b>
-                        </div>
-                    </div>
-                }
+                    }
                 </div>
-                <div className="w3-container" style={{height:"100%", display:"table", minWidth:"300px", background:"white", flex: "300 1 0px"}}>
-                    <div style={{marginTop:"25px", marginLeft:"auto", marginRight:"auto"}}>
+                <div className="w3-container" style={{minWidth:"300px",background:"white", flex: "1 1 0px"}}>
+                    <div style={{marginTop:"25px", marginLeft:"auto", marginBottom:"50px", marginRight:"auto"}}>
                         <h3><b>Technical Experience</b></h3>
                         {
                             this.state.techSkills.languages.map((item, index) => {
