@@ -127,7 +127,8 @@ class Resume extends Component {
         return (
             <div className="w3-row" style={{width:"100%", height:"100%", display:"flex", flexWrap:"wrap"}}>
                 <div className="w3-center" style={{minWidth: "320px", width:"100%", flex: "1 1 0px",
-                        background: "#282828"}}>
+                        background: "#282828", backgroundImage: "url('../images/triangle.svg')", 
+                        backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "0%0%"}}>
                     <div style={{marginTop:"20px"}}>
                         <img src={this.state.extraDetail.image} style={{borderRadius: "50%", 
                             border: "3px solid white", marginBottom: "10px"}} alt= "profileImage"></img>
