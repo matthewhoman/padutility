@@ -125,7 +125,7 @@ class Resume extends Component {
     
     render() {
         return (
-            <div className="w3-row" style={{width:"100%", height:"100%", display:"flex", flexWrap:"wrap"}}>
+            <div className="w3-row" style={{width:"100%", height:"100%", display:"flex", flexWrap:"wrap", position: "fixed"}}>
                 <div className="w3-center" style={{minWidth: "320px", width:"100%", flex: "1 1 0px",
                         background: "#282828", backgroundImage: "url('../images/triangle.svg')", 
                         backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "0%0%"}}>
