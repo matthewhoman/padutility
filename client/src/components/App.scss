@@ -28,6 +28,7 @@ input {
 html, body {
 	height:100%;
 	background: black;
+	overflow-x: hidden;
 }
   
 .autocomplete, .react-autosuggest__suggestions-container--open {
