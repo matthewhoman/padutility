@@ -20,7 +20,7 @@ class Profile extends Component {
                         <LinedTitle title="Matthew&nbsp;Homan"></LinedTitle>
                         <h3 style={{textAlign:"center", color:"#9999"}}>Lead Software Engineer</h3>
                         <br></br>
-                        <img src="../images/mebw.jpg" alt="" 
+                        <img src="../images/mesuit.jpg" alt="" 
                             style={{width:"100%", maxWidth:"200px", display:"block", marginLeft:"auto", marginRight:"auto"}} />
                         <br></br>
                         <br></br>

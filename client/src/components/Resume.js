@@ -13,7 +13,7 @@ class Resume extends Component {
                 title : `Lead Software Engineer at Cerner`,
                 website : `https:\\matthewhoman.com`,
                 github : `https://github.com/matthewhoman`,
-                image : `../images/mefacebw.jpg`,
+                image : `../images/mesuitface.jpg`,
                 email: `Matthew.h.homan@gmail.com`,
                 phone: `(814) 242-5819`,
                 address: `398 Lynetree Dr\n 
@@ -131,7 +131,7 @@ class Resume extends Component {
                         backgroundRepeat: "no-repeat", backgroundSize: "contain", backgroundPosition: "0%0%"}}>
                     <div style={{marginTop:"20px"}}>
                         <img src={this.state.extraDetail.image} style={{borderRadius: "50%", 
-                            border: "3px solid white", marginBottom: "10px"}} alt= "profileImage"></img>
+                            border: "3px solid white", marginBottom: "10px", width: "160px", height:"160px"}} alt= "profileImage"></img>
                         <div>
                             <h2 className="name" style={{display:"inline-block"}}>
                                 {this.state.extraDetail.firstname}
