@@ -9,6 +9,7 @@ import Projects from './Projects';
 import Itunes from './Itunes';
 import Movies from './Movies';
 import Resume from './Resume';
+import News from './News';
 
 import './App.scss';
 import 'font-awesome/css/font-awesome.min.css';
@@ -58,6 +59,7 @@ class App extends Component {
               <Route exact={true} path='/projects' component={Projects}/>
               <Route exact={true} path='/itunes' component={Itunes}/>
               <Route exact={true} path='/movies' component={Movies}/>
+              <Route exact={true} path='/news' component={News}/>
               <Route exact={true} path='/showMonsterDetails' component={ShowMonsterDetails}/>
               <Route exact={true} path='/unreleasedMonsters' component={UnreleasedMonsters}/>
               <Route exact={true} path='/monsterBook' component={MonsterBook}/>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPhone, faMapMarker, faEnvelope} from '@fortawesome/free-solid-svg-icons';
+import { faPhone, faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import './Resume.scss';
 
 class Resume extends Component {

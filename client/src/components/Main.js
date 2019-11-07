@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ReturnNav from './ReturnNav';
+import Base from './Base';
+import LinedTitle from './LinedTitle';
 
 class Main extends Component {
     constructor(props) {
@@ -11,9 +12,13 @@ class Main extends Component {
 
     render() {
         return (
-            <div>
-                <ReturnNav history={this.props.history} header="" suppressBack/>
-            </div>
+            <Base header="" 
+                childComponent={
+                    <div>
+                        <LinedTitle title="" margBottom></LinedTitle>
+                    </div>
+                }>
+            </Base>
         )
     }
 }

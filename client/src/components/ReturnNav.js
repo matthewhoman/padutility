@@ -16,6 +16,7 @@ class ReturnNav extends Component {
                 { url : "profile", name : "Profile"},
                 { url : "resume", name : "Resume"},
                 { url : "projects", name : "Projects"},
+                { url : "news", name : "News"},
                 { url : "itunes", name : "Music"},
                 // { url : "movies", name : "Movies"},
                 { url : "contact", name : "Contact"},
