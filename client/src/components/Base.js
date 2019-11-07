@@ -19,7 +19,7 @@ class Base extends Component {
                     {this.props.childComponent}
                 </div>
                 <br></br>
-                <ScrollToTopBtn scrollStepInPx="50" delayInMs="16.66"/>
+                <ScrollToTopBtn scrollStepInPx="50" delayInMs=".01"/>
             </div>
         )
     }
