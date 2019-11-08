@@ -17,7 +17,9 @@ class Board extends Component {
           gameStatus: gameStatus,
           mineCount: 10,
           selectedMines: 10,
-          difficulties: difficulties
+          difficulties: difficulties,
+          win: "You Won.",
+          lost: "You Lost."
         }
         this.changeDifficulty = this.changeDifficulty.bind(this);
         this.handleButtonPress = this.handleButtonPress.bind(this)
@@ -247,7 +249,7 @@ class Board extends Component {
 
         // check if mine. game over if true
         if (this.state.boardData[x][y].isMine) {
-            this.setState({gameStatus: "You Lost."});
+            this.setState({gameStatus: this.state.lost});
             this.revealBoard();
         }
 
@@ -260,7 +262,7 @@ class Board extends Component {
         }
 
         if (this.getHidden(updatedData).length === this.state.mineCount) {
-            this.setState({mineCount: 0, gameStatus: "You Win."});
+            this.setState({mineCount: 0, gameStatus: this.state.win});
             this.revealBoard();
         }
 
@@ -294,7 +296,7 @@ class Board extends Component {
             const mineArray = this.getMines(updatedData);
             const FlagArray = this.getFlags(updatedData);
             if (JSON.stringify(mineArray) === JSON.stringify(FlagArray)) {
-                this.setState({mineCount: 0, gameStatus: "You Win."});
+                this.setState({mineCount: 0, gameStatus: this.state.win});
                 this.revealBoard();
             }
         }
@@ -335,10 +337,13 @@ class Board extends Component {
     }
 
   render() {
+        let gameStatusStyle = 
+          this.state.gameStatus === this.state.win ? {color:"green"} : 
+            this.state.gameStatus === this.state.lost ? {color:"red"} : {}
         return (
             <div className="board">
                 <div className="game-info">
-                    <h1 className="info">{this.state.gameStatus}</h1>
+                    <h1 className="info" style={gameStatusStyle}>{this.state.gameStatus}</h1>
                     <h3 style={{display:"inline-block"}}>Difficulty:&nbsp;&nbsp;</h3>
                     <select onChange={this.changeDifficulty} style={{height:"22px", verticalAlign:"text-bottom"}}>
                     { 
