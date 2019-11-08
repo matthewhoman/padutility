@@ -10,10 +10,10 @@ class Cell extends Component {
       if (value.isMine) {
         return "💣";
       }
-      if (value.neighbour === 0) {
+      if (value.neighbor === 0) {
         return null;
       }
-      return value.neighbour;
+      return value.neighbor;
     }
   
     render() {

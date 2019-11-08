@@ -112,7 +112,7 @@ class Board extends Component {
                     x: i,
                     y: j,
                     isMine: false,
-                    neighbour: 0,
+                    neighbor: 0,
                     isRevealed: false,
                     isEmpty: false,
                     isFlagged: false,
@@ -138,7 +138,7 @@ class Board extends Component {
         return (data);
     }
 
-    // get number of neighbouring mines for each board cell
+    // get number of neighboring mines for each board cell
     getNeighbors(data, height, width) {
         let updatedData = data;
 
@@ -155,7 +155,7 @@ class Board extends Component {
                     if (mine === 0) {
                         updatedData[i][j].isEmpty = true;
                     }
-                    updatedData[i][j].neighbour = mine;
+                    updatedData[i][j].neighbor = mine;
                 }
             }
         }
@@ -266,7 +266,7 @@ class Board extends Component {
 
         this.setState({
             boardData: updatedData,
-            mineCount: this.state.mineCount - this.getFlags(updatedData).length,
+            mineCount: this.state.selectedMines - this.getFlags(updatedData).length,
         });
     }
 
@@ -280,10 +280,10 @@ class Board extends Component {
 
         if (updatedData[x][y].isFlagged) {
             updatedData[x][y].isFlagged = false;
-            mines++;
+            mines = mines + 1;
         } else {
             updatedData[x][y].isFlagged = true;
-            mines--;
+            mines = mines - 1;
         }
 
         if (mines === 0) {
