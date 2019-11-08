@@ -15,6 +15,7 @@ class ReturnNav extends Component {
             tabs : [
                 { url : "profile", name : "Profile"},
                 { url : "resume", name : "Resume"},
+                { url : "game", name : "Games"},
                 { url : "projects", name : "Projects"},
                 { url : "news", name : "News"},
                 { url : "itunes", name : "Music"},

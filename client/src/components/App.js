@@ -10,6 +10,7 @@ import Itunes from './Itunes';
 import Movies from './Movies';
 import Resume from './Resume';
 import News from './News';
+import Game from './minesweeper/Game';
 
 import './App.scss';
 import 'font-awesome/css/font-awesome.min.css';
@@ -59,6 +60,7 @@ class App extends Component {
               <Route exact={true} path='/projects' component={Projects}/>
               <Route exact={true} path='/itunes' component={Itunes}/>
               <Route exact={true} path='/movies' component={Movies}/>
+              <Route exact={true} path='/game' component={Game}/>
               <Route exact={true} path='/news' component={News}/>
               <Route exact={true} path='/showMonsterDetails' component={ShowMonsterDetails}/>
               <Route exact={true} path='/unreleasedMonsters' component={UnreleasedMonsters}/>
