@@ -16,6 +16,7 @@ class Board extends Component {
           boardData: this.initBoardData(this.props.height, this.props.width, 10),
           gameStatus: gameStatus,
           mineCount: 10,
+          selectedMines: 10,
           difficulties: difficulties
         }
         this.changeDifficulty = this.changeDifficulty.bind(this);
@@ -26,7 +27,8 @@ class Board extends Component {
     changeDifficulty(event) {
       let numberOfMines = event.target.value;
       this.setState({
-        mineCount : numberOfMines
+        mineCount : numberOfMines,
+        selectedMines : numberOfMines
       })
       this.reset(numberOfMines);
     }
@@ -34,9 +36,9 @@ class Board extends Component {
     reset(mines) {
       this.setState({
         boardData: this.initBoardData(this.props.height, 
-                      this.props.width, mines ? mines : this.state.mineCount),
+                      this.props.width, mines ? mines : this.state.selectedMines),
         gameStatus: gameStatus,
-        mineCount: mines ? mines : this.state.mineCount,
+        mineCount: mines ? mines : this.state.selectedMines,
         difficulties: difficulties
       })
     }
