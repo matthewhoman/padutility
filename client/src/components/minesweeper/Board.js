@@ -19,6 +19,8 @@ class Board extends Component {
           difficulties: difficulties
         }
         this.changeDifficulty = this.changeDifficulty.bind(this);
+        this.handleButtonPress = this.handleButtonPress.bind(this)
+        this.handleButtonRelease = this.handleButtonRelease.bind(this)
     }
 
     changeDifficulty(event) {
@@ -297,6 +299,14 @@ class Board extends Component {
         });
     }
 
+    handleButtonPress (e, x, y) {
+      this.buttonPressTimer = setTimeout(() => this._handleContextMenu(e, x, y), 500);
+    }
+  
+    handleButtonRelease () {
+      clearTimeout(this.buttonPressTimer);
+    }
+
     renderBoard(data) {
         return data.map((datarow) => {
             return datarow.map((dataitem) => {
@@ -305,6 +315,8 @@ class Board extends Component {
                         <Cell
                             onClick={() => this._handleCellClick(dataitem.x, dataitem.y)}
                             cMenu={(e) => this._handleContextMenu(e, dataitem.x, dataitem.y)}
+                            onTouchStart={(e) => this.handleButtonPress(e, dataitem.x, dataitem.y)} 
+                            onTouchEnd={this.handleButtonRelease} 
                             value={dataitem}
                         />
                         {(datarow[datarow.length - 1] === dataitem) ? <div className="clear" /> : ""}
@@ -328,11 +340,11 @@ class Board extends Component {
                     </select>
                     <span className="info">Mines remaining: {this.state.mineCount}</span>
                 </div>
+                <div className="cells">
                 {
                     this.renderBoard(this.state.boardData)
                 }
-                <div>
-                    <button onClick={() => this.reset()}>Restart</button>
+                <button onClick={() => this.reset()}>Restart</button>
                 </div>
             </div>
         );

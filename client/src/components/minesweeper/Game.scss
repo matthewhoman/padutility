@@ -1,8 +1,19 @@
 .game {
-	max-width: 400px;
-	padding: 20px;
+    max-width: 380px;
+    min-width: 380px;
     background: #333333;
     margin: 0 auto;
+
+    .board {
+        padding-bottom: 20px;
+    }
+
+    .cells {
+        max-width: 350px;
+        min-width: 350px;
+        margin-left: auto;
+        display: block;
+    }
   
 	.game-info {
 	  margin-bottom: 20px;
@@ -28,9 +39,9 @@
 	  border-radius: 4px;
 	  float: left;
 	  line-height: 45px;
-	  height: 45px;
+	  height: 40px;
 	  text-align: center;
-	  width: 45px;
+	  width: 40px;
 	  cursor: pointer;
 	  color: #333333;
 	  font-weight: 600;

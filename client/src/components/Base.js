@@ -11,11 +11,14 @@ class Base extends Component {
     }
 
     render() {
+        let style = this.props.suppressMargins ? {} : {
+            marginLeft: "20px", marginRight: "20px"
+        }
         return (
             <div style={{paddingBottom:"50px"}}>
                 <ReturnNav history={this.props.history} header={this.props.header} suppressBack suppressSearch/>
                 <br></br>
-                <div className="w3-theme-dark" style={{marginLeft: "20px", marginRight: "20px"}}>
+                <div className="w3-theme-dark" style={style}>
                     {this.props.childComponent}
                 </div>
                 <br></br>

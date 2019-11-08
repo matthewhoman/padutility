@@ -23,7 +23,7 @@ class Game extends Component {
         } = this.state;
 
         return (
-            <Base header="Matthew&nbsp;Homan" 
+            <Base suppressMargins header="Matthew&nbsp;Homan" 
                 childComponent={
                     <div>
                         <LinedTitle title="Mine&nbsp;Sweeper" margBottom></LinedTitle>

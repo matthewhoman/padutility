@@ -17,7 +17,8 @@ class Cell extends Component {
     }
   
     render() {
-      const {value, onClick, cMenu} = this.props;
+      const {value, onClick, cMenu, 
+        onTouchStart, onTouchEnd} = this.props;
       let className =
         "cell" +
         (value.isRevealed ? "" : " hidden") +
@@ -29,6 +30,8 @@ class Cell extends Component {
           onClick={onClick}
           className={className}
           onContextMenu={cMenu}
+          onTouchStart={onTouchStart} 
+          onTouchEnd={onTouchEnd}
         >
           {this.getValue()}
         </div>
