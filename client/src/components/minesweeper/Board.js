@@ -272,6 +272,10 @@ class Board extends Component {
 
     _handleContextMenu(e, x, y) {
         e.preventDefault();
+        e.stopPropagation();
+        e.cancelBubble = true;
+        e.returnValue = false;
+
         let updatedData = this.state.boardData;
         let mines = this.state.mineCount;
 
@@ -299,6 +303,8 @@ class Board extends Component {
             boardData: updatedData,
             mineCount: mines,
         });
+
+        return false;
     }
 
     handleButtonPress (e, x, y) {
