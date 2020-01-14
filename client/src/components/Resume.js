@@ -40,7 +40,10 @@ class Resume extends Component {
                         name: "React", lvl: 60
                     },
                     {
-                        name: "CSS", lvl: 90
+                        name: "Docker", lvl: 80
+                    },
+                    {
+                        name: "Spring Boot", lvl: 80
                     },
                     {
                         name: "NodeJS", lvl: 90
@@ -64,6 +67,9 @@ class Resume extends Component {
                         name: "Junit", lvl: 90
                     },
                     {
+                        name: "CSS", lvl: 90
+                    },
+                    {
                         name: "GWT", lvl: 95
                     },
                     {
@@ -79,6 +85,9 @@ class Resume extends Component {
                     title : `Associate Lead Software Engineer (Architecture Team), Cerner`,
                     date : `02/2015 – present`,
                     points : [
+                        `Latest project is converting our existing Architecture to use Spring Boot
+                            running in containers (Docker, Kubernetes)`
+                        ,
                         `Worked primarily on porting our legacy monolithic app to HTML5 standards. 
                             This required creating a transpiler (with NodeJS) and extensive changes across 2000+ files.`
                         , 
@@ -216,9 +225,9 @@ class Resume extends Component {
                                 return(
                                     <div> 
                                         <div><b>{item.name}</b></div>
-                                        <div key={index} style={{backgroundColor: "#ddd", width: "100%", height:"20px"}}>
+                                        {/* <div key={index} style={{backgroundColor: "#ddd", width: "100%", height:"20px"}}>
                                            <div style={{width: item.lvl + "%", backgroundColor: "dodgerblue", height: "20px"}}></div>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 )
                             })
