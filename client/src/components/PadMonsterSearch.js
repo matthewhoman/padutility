@@ -107,9 +107,11 @@ class PadMonsterSearch extends Component {
 
     // Autosuggest will call this function every time you need to clear suggestions.
     onSuggestionsClearRequested = () => {
-        this.setState({
-            suggestions: []
-        });
+        if(this.state.value.trim() === '') {
+            this.setState({
+                suggestions: []
+            });
+        }
     };
 
     render() {
@@ -142,6 +144,7 @@ class PadMonsterSearch extends Component {
                     renderSuggestion={this.renderSuggestion}
                     renderInputComponent={inputComponent}
                     inputProps={inputProps}
+                    alwaysRenderSuggestions
                 />
 			  
 		    </div>
