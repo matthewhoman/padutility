@@ -145,6 +145,7 @@ class PadMonsterSearch extends Component {
                     renderInputComponent={inputComponent}
                     inputProps={inputProps}
                     alwaysRenderSuggestions
+                    focusInputOnSuggestionClick={false}
                 />
 			  
 		    </div>
