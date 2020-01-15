@@ -34,6 +34,9 @@ class Resume extends Component {
                         name: "Java", lvl: 80
                     },
                     {
+                        name: "J2EE", lvl: 90
+                    },
+                    {
                         name: "Javascript", lvl: 80
                     },
                     {

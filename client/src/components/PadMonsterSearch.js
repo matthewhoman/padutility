@@ -131,7 +131,8 @@ class PadMonsterSearch extends Component {
         //     <div style={{color:"white"}}> <FontAwesomeIcon icon={faSpinner}/> loading ...</div>
         // )
         return (
-            <div className="mr-sm-2" style={{id:"PadSearchBar", width: "100%", maxWidth: "400px", marginTop: "6px"}}>
+            <div className="mr-sm-2" style={{id:"PadSearchBar", width: "100%", maxWidth: "400px", marginTop: "10px",
+                marginBottom: "5px", paddingLeft: "5px", paddingRight: "5px", marginLeft: "auto"}}>
               
                 <Autosuggest
                     suggestions={suggestions}

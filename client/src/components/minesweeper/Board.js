@@ -49,8 +49,8 @@ class Board extends Component {
     getMines(data) {
         let mineArray = [];
 
-        data.map(datarow => {
-            datarow.map((dataitem) => {
+        data.forEach(datarow => {
+            datarow.forEach((dataitem) => {
                 if (dataitem.isMine) {
                     mineArray.push(dataitem);
                 }
@@ -64,8 +64,8 @@ class Board extends Component {
     getFlags(data) {
         let mineArray = [];
 
-        data.map(datarow => {
-            datarow.map((dataitem) => {
+        data.forEach(datarow => {
+            datarow.forEach((dataitem) => {
                 if (dataitem.isFlagged) {
                     mineArray.push(dataitem);
                 }
@@ -79,8 +79,8 @@ class Board extends Component {
     getHidden(data) {
         let mineArray = [];
 
-        data.map(datarow => {
-            datarow.map((dataitem) => {
+        data.forEach(datarow => {
+            datarow.forEach((dataitem) => {
                 if (!dataitem.isRevealed) {
                     mineArray.push(dataitem);
                 }
@@ -149,7 +149,7 @@ class Board extends Component {
                 if (data[i][j].isMine !== true) {
                     let mine = 0;
                     const area = this.traverseBoard(data[i][j].x, data[i][j].y, data);
-                    area.map(value => {
+                    area.forEach(value => {
                         if (value.isMine) {
                             mine++;
                         }
@@ -215,8 +215,8 @@ class Board extends Component {
     // reveals the whole board
     revealBoard() {
         let updatedData = this.state.boardData;
-        updatedData.map((datarow) => {
-            datarow.map((dataitem) => {
+        updatedData.forEach((datarow) => {
+            datarow.forEach((dataitem) => {
                 dataitem.isRevealed = true;
             });
         });
@@ -228,7 +228,7 @@ class Board extends Component {
     /* reveal logic for empty cell */
     revealEmpty(x, y, data) {
         let area = this.traverseBoard(x, y, data);
-        area.map(value => {
+        area.forEach(value => {
             if (!value.isFlagged && !value.isRevealed && (value.isEmpty || !value.isMine)) {
                 data[value.x][value.y].isRevealed = true;
                 if (value.isEmpty) {

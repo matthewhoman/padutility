@@ -111,13 +111,11 @@ class ReturnNav extends Component {
                                 </a>)
                             })
                         }
-                        
-
-                        {
-                            this.props.suppressSearch ? <div></div> : <PadMonsterSearch/>
-                        }
                     </Navbar.Collapse>
                 </Navbar>
+                {
+                    this.props.suppressSearch ? <div></div> : <PadMonsterSearch/>
+                }
                 <UpdatedMessage customMsg={this.props.customMsg} updated={this.props.updated} />
             </div>
         )

@@ -306,10 +306,16 @@ app.get('/retrieveMonsters', function(req, res) {
   }
 
   if(leaderFilter) {
+    let leaderF = ""; 
+    try {
+      leaderF = decodeURIComponent(leaderFilter);
+    } catch(e) {
+      leaderF = leaderFilter;
+    }
     let monsterArr = monsters.length > 0 ? monsters : monsterNameNumArr;
     monsters = [];
     for(let mons of monsterArr) {
-      if(mons.leaderSkillDescription && mons.leaderSkillDescription.toLowerCase().includes(decodeURIComponent(leaderFilter).toLowerCase())) {
+      if(mons.leaderSkillDescription && mons.leaderSkillDescription.toLowerCase().includes(leaderF.toLowerCase())) {
         monsters.push(mons);
       }
     }
@@ -317,10 +323,16 @@ app.get('/retrieveMonsters', function(req, res) {
 
   if(activeFilter) {
     let monsterArr = monsters.length > 0 ? monsters : monsterNameNumArr;
+    let activeF = ""; 
+    try {
+      activeF = decodeURIComponent(activeFilter);
+    } catch(e) {
+      activeF = activeFilter;
+    }
     monsters = [];
     for(let mons of monsterArr) {
       if(mons.activeSkillDescription && 
-          mons.activeSkillDescription.toLowerCase().includes(decodeURIComponent(activeFilter).toLowerCase())) {
+          mons.activeSkillDescription.toLowerCase().includes(activeF.toLowerCase())) {
         monsters.push(mons);
       }
     }

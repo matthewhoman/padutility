@@ -220,6 +220,7 @@ class MonsterBook extends Component {
         }
         if(this.state.activeFilter.length > 0) {
             queryStr += "activeFilter=" + encodeURIComponent(this.state.activeFilter)
+            queryStr += "&"
         }
 
         sessionStorage.setItem('typeFilter', JSON.stringify(this.state.typeFilter));
@@ -453,7 +454,7 @@ class MonsterBook extends Component {
         return (
             <div>
                 <ReturnNav history={this.props.history} header="PAD Monster Book" suppressBack/>
-                <Container fluid={true}>
+                <Container fluid={true} style={{paddingLeft: "0px", paddingRight: "0px"}}>
                     <Row style={{marginLeft: "0px", marginRight: "0px"}}>
                         <Col sm={8} md='auto'>
                         <div style={{marginTop:"15px"}}>

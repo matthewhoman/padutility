@@ -10,16 +10,14 @@ class Game extends Component {
         super(props);
         this.state = {
             height: 8,
-            width: 8,
-            mines: 10
+            width: 8
         }
     }
 
     render() {
         const { 
             height, 
-            width, 
-            mines
+            width
         } = this.state;
 
         return (

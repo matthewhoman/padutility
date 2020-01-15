@@ -12,7 +12,7 @@ class Base extends Component {
 
     render() {
         let style = this.props.suppressMargins ? {} : {
-            marginLeft: "20px", marginRight: "20px"
+            marginLeft: "15px", marginRight: "15px"
         }
         return (
             <div style={{paddingBottom:"50px"}}>
