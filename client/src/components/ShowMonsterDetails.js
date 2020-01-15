@@ -121,7 +121,7 @@ class ShowMonsterDetails extends Component {
 
         return ( 
             <div>
-              <ReturnNav history={this.props.history} header="PAD Monster Details"/>
+              <ReturnNav history={this.props.history} header="PAD Monster Details" clearMonsterSuggest/>
                 {
                 this.state.monsterData ?
                         <div>

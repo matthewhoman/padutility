@@ -114,7 +114,7 @@ class ReturnNav extends Component {
                     </Navbar.Collapse>
                 </Navbar>
                 {
-                    this.props.suppressSearch ? <div></div> : <PadMonsterSearch/>
+                    this.props.suppressSearch ? <div></div> : <PadMonsterSearch clearMonsterSuggest={this.props.clearMonsterSuggest}/>
                 }
                 <UpdatedMessage customMsg={this.props.customMsg} updated={this.props.updated} />
             </div>

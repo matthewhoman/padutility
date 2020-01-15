@@ -13,7 +13,8 @@ class PadMonsterSearch extends Component {
         this.state = { 
             monstersFetched : false,
             suggestions: [],
-            value: ''
+            value: '',
+            clearMonsterSuggest : this.props.clearMonsterSuggest
         };
     }
 
@@ -83,7 +84,8 @@ class PadMonsterSearch extends Component {
 
     onChange = (event, { newValue }) => {
         this.setState({
-            value: newValue
+            value: newValue,
+            clearMonsterSuggest: false
         });
     };
 
@@ -107,7 +109,8 @@ class PadMonsterSearch extends Component {
 
     // Autosuggest will call this function every time you need to clear suggestions.
     onSuggestionsClearRequested = () => {
-        if(this.state.value.trim() === '') {
+        if(this.state.value.trim() === '' ||
+            this.state.clearMonsterSuggest) {
             this.setState({
                 suggestions: []
             });
