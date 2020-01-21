@@ -75,7 +75,7 @@ class News extends Component {
                 var news = this.state.newsData[i];
 		        var multimedia = news.multimedia;
                 //if no multimedia dont show 
-                if(multimedia.length === 0){
+                if(!multimedia || multimedia.length === 0){
                     continue;
                 }
                 //default content
