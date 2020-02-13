@@ -20,27 +20,41 @@ class Resume extends Component {
                           West Chester, Pa 19380`
             },
             introPoints : [
-                `7+ years of experience with proven ability to leverage full-stack knowledge and 
-                    experience to develop software per the client needs, quickly and accurately from start to end.`
+                `8+ years of experience with proven ability to leverage full-stack knowledge 
+                    and experience to develop software per the client needs, quickly and 
+                    accurately from start to end.`
                 ,
-                `Leadership experience to guide and mentor team members including new hires out of college.`
+                `Pationate UI developer utilizing React, ES6 Javascript, HTML and CSS. 
+                    Hands on collaboration with UX to create new UIs (full stack), 
+                    enhance existing UIs and migrate legacy UIs to more modern layouts.`
                 ,
-                `Understanding present errors and rectifying them for a hassle-free running of the software. 
-                    Fixing problems such as performance and poor UI designs`
+                `Leadership experience to guide and mentor new team members and drive solutions to completion`
             ],
             techSkills : {
                 languages : [
                     {
-                        name: "Java", lvl: 80
-                    },
-                    {
-                        name: "J2EE", lvl: 90
+                        name: "React", lvl: 60
                     },
                     {
                         name: "Javascript", lvl: 80
                     },
                     {
-                        name: "React", lvl: 60
+                        name: "HTML5", lvl: 90
+                    },
+                    {
+                        name: "CSS", lvl: 90
+                    },
+                    {
+                        name: "NodeJS", lvl: 90
+                    },
+                    {
+                        name: "REST", lvl: 80
+                    },
+                    {
+                        name: "Java", lvl: 80
+                    },
+                    {
+                        name: "J2EE", lvl: 90
                     },
                     {
                         name: "Docker", lvl: 80
@@ -49,28 +63,16 @@ class Resume extends Component {
                         name: "Spring Boot", lvl: 80
                     },
                     {
-                        name: "NodeJS", lvl: 90
-                    },
-                    {
-                        name: "HTML", lvl: 90
-                    },
-                    {
                         name: "Spring", lvl: 75
                     },
                     {
                         name: "Microsoft SQL Server", lvl: 80
                     },
                     {
-                        name: "REST", lvl: 80
-                    },
-                    {
                         name: "Jasmine", lvl: 90
                     },
                     {
                         name: "Junit", lvl: 90
-                    },
-                    {
-                        name: "CSS", lvl: 90
                     },
                     {
                         name: "GWT", lvl: 95
@@ -88,18 +90,26 @@ class Resume extends Component {
                     title : `Associate Lead Software Engineer (Architecture Team), Cerner`,
                     date : `02/2015 – present`,
                     points : [
-                        `Latest project is converting our existing Architecture to use Spring Boot
-                            running in containers (Docker, Kubernetes)`
+                        `Leading development of migrating legacy JSPs to React on Rails for Cloud deployment on Kubernetes
+                            while collaborating directly with UX.`
                         ,
-                        `Worked primarily on porting our legacy monolithic app to HTML5 standards. 
-                            This required creating a transpiler (with NodeJS) and extensive changes across 2000+ files.`
-                        , 
-                        `Working across multiple teams / with offshore associates to coordinate effort and deliver solutions.`
+                        `Lead development of a React app to consume FHIR apis with Oauth from our Clinical product. The stack
+                            included React, Nodejs, mongoDB, rabbitMq, and redis. `
+                        ,
+                        `Experience standing up an application in Heroku using nodeJS, React, MongoDb and Github.`
                         ,
                         `Worked on full stack solutions including migrating legacy backends to Spring and re-working UI's to 
                             use more modern frameworks such as JQuery, Handlebars and advanced CSS.`
                         ,
+                        `Worked primarily on porting our legacy monolithic app to HTML5 standards. 
+                            This required creating a transpiler (with NodeJS) and extensive changes across 2000+ files.`
+                        , 
+                        `Latest project is converting our existing Architecture to use Spring Boot
+                            running in containers (Docker, Kubernetes)`
+                        ,
                         `Evaluated / Setup Jasmine testing into our automated build pipeline in Jenkins.`
+                        ,
+                        `Working across multiple teams / with offshore associates to coordinate effort and deliver solutions.`
                         ,
                         `Developed REST API's for integration across multiple solutions.`
                         ,
@@ -109,8 +119,6 @@ class Resume extends Component {
                         ,
                         `Monitoring and reviewing program execution for expected performance, using browser debugging (F12), 
                             and Microsoft SQL Server profiling.`
-                        ,
-                        `Experience standing up an application in Heroku using nodeJS, React, MongoDb and Github.`
                         ,
                         `Excelled in rapid application development and management of technological issues for assigned projects.`
                     ]
@@ -151,12 +159,25 @@ class Resume extends Component {
                             <h2 className="name" style={{color: "dodgerblue", display:"inline-block"}}>
                                 &nbsp;{this.state.extraDetail.lastname}
                             </h2>
-                        </div>
-                        <div style={{textAlign:"left", display:"table", marginLeft:"auto", marginRight:"auto"}}>
                             <h5 className="name" style={{marginBottom:"30px"}}>
                                 {this.state.extraDetail.title}
                             </h5>
+                        </div>
+                        <div style={{textAlign:"left", display:"table", marginLeft:"auto", 
+                                marginRight:"auto", marginBottom: "10px"}}>
+                            <ul style={{paddingRight:"15px"}}>
+                            {
+                                this.state.introPoints.map((item, index) => {
+                                    return (
+                                        <li className="name" key={index}><b>{item}</b></li>  
+                                    )
+                                })
+                            }
+                            </ul>
+                        </div>
+                        <div style={{textAlign:"left", display:"table", marginLeft:"auto", marginRight:"auto"}}>
                             <div style={{textAlign:"left", display:"table", marginLeft:"auto", marginRight:"auto"}}>
+                                
                                 {/* <div style={{color:"white", marginBottom:"10px"}}>
                                     <div style={{display:"inline-block", verticalAlign:"top"}}>
                                         <FontAwesomeIcon icon={faMapMarker}/>&nbsp;&nbsp;&nbsp;&nbsp;
