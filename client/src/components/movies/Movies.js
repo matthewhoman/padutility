@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReturnNav from './ReturnNav';
+import ReturnNav from '../navigation/ReturnNav';
 
 class Movies extends Component {
     constructor(props) {

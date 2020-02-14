@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReturnNav from './ReturnNav';
+import ReturnNav from '../navigation/ReturnNav';
 import ScrollToTopBtn from './ScrollToTopBtn';
 
 class Base extends Component {

@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import UpdatedMessage from './UpdatedMessage';
-import PadMonsterSearch from './PadMonsterSearch';
+import PadMonsterSearch from '../puzzlesanddragons/PadMonsterSearch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 
@@ -114,7 +114,7 @@ class ReturnNav extends Component {
                     </Navbar.Collapse>
                 </Navbar>
                 {
-                    this.props.suppressSearch ? <div></div> : <PadMonsterSearch clearMonsterSuggest={this.props.clearMonsterSuggest}/>
+                    this.props.suppressSearch || <PadMonsterSearch clearMonsterSuggest={this.props.clearMonsterSuggest}/>
                 }
                 <UpdatedMessage customMsg={this.props.customMsg} updated={this.props.updated} />
             </div>

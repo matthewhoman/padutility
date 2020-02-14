@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Board from './Board';
-import LinedTitle from '../LinedTitle';
-import Base from '../Base';
+import LinedTitle from '../common/LinedTitle';
+import Base from '../common/Base';
 
 import './Game.scss';
 

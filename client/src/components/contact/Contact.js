@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import LinedTitle from './LinedTitle';
-import Base from './Base';
+import LinedTitle from '../common/LinedTitle';
+import Base from '../common/Base';
 
 class Contact extends Component {
     constructor(props) {

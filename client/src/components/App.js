@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import ShowMonsterDetails from './ShowMonsterDetails';
-import UnreleasedMonsters from './UnreleasedMonsters';
-import MonsterBook from './MonsterBook';
-import Profile from './Profile';
-import Contact from './Contact';
-import Projects from './Projects';
-import Itunes from './Itunes';
-import Movies from './Movies';
-import Resume from './Resume';
-import News from './News';
+import ShowMonsterDetails from './puzzlesanddragons/ShowMonsterDetails';
+import UnreleasedMonsters from './puzzlesanddragons/UnreleasedMonsters';
+import MonsterBook from './puzzlesanddragons/MonsterBook';
+import Profile from './profile/Profile';
+import Contact from './contact/Contact';
+import Projects from './projects/Projects';
+import Itunes from './itunes/Itunes';
+import Movies from './movies/Movies';
+import Resume from './resume/Resume';
+import News from './news/News';
 import Game from './minesweeper/Game';
 
 import './App.scss';
