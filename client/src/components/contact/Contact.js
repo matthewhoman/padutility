@@ -13,6 +13,10 @@ const Contact = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
+        if(!formValues.Subject) {
+            return;
+        }
+
         let subject = escape(formValues.Subject).trim();
         let name = escape(formValues.Name).trim();
         let message = escape(formValues.Message).trim();
@@ -21,32 +25,35 @@ const Contact = () => {
                     + "?subject=" + subject + " - " + name + " - (From PS Contact)"
                     + "&body=" +  message;
     
-        window.location.href = link;
+        window.location.assign(link);
     }
     
     return (
         <Base header="Matthew&nbsp;Homan" 
             childComponent={
-                <div>
+                <>
                     <LinedTitle title="Contact" margBottom></LinedTitle>
                     <form onSubmit={handleSubmit} 
-                            style={{width:"100%",maxWidth:"500px",marginLeft:"auto",marginRight:"auto"}}>
+                            style={{width:"100%",maxWidth:"500px",marginLeft:"auto",marginRight:"auto"}}
+                                data-test='form'>
                         <label>Name*</label>
-                        <input type="text" name="Name" placeHolder="Name" required onChange={handleChange}/>
+                        <input type="text" name="Name" placeholder="Name" required onChange={handleChange} 
+                            data-test="nameInput"/>
                         <br/>
                         <br/>
                         <label>Subject*</label>
-                        <input type="text" name="Subject" placeHolder="Subject" required onChange={handleChange}/>
+                        <input type="text" name="Subject" placeholder="Subject" required onChange={handleChange}
+                            data-test="subjectInput"/>
                         <br/>
                         <br/>
                         <label>Message*</label>
-                        <textarea type="text" name="Message" placeHolder="Message" required onChange={handleChange}
-                                style={{height:"200px", width:"100%"}}/>
+                        <textarea type="text" name="Message" placeholder="Message" required onChange={handleChange}
+                                style={{height:"200px", width:"100%"}} data-test="messageTextArea"/>
                         <br/>
                         <br/>
-                        <input type="submit" value="Submit" />
+                        <input type="submit" value="Submit" data-test="submit" />
                     </form>
-                </div>
+                </>
             }>
         </Base>
     )

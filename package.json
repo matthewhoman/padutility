@@ -17,7 +17,8 @@
     "dev:server": "cd client && npm build && cd .. && npm run start",
     "start-server": "node server.js",
     "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "test": "cd client && npm test"
   },
   "dependencies": {
     "base-64": "^0.1.0",

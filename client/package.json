@@ -11,20 +11,22 @@
     "base-64": "^0.1.0",
     "font-awesome": "^4.7.0",
     "node-sass": "^4.13.1",
-    "react": "^16.12.0",
+    "react": "^16.13.0",
     "react-autosuggest": "^9.4.3",
     "react-bootstrap": "^1.0.0-beta.16",
-    "react-collapsible": "^2.6.2",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^4.3.1",
+    "react-collapsible": "^2.7.0",
+    "react-dom": "^16.13.0",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "2.0.5",
     "react-simple-infinite-scroll": "0.0.1",
+    "react-test-renderer": "^16.13.0",
     "webpack": "4.19.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --setupFiles ./src/components/setupTests.js",
+    "coverage": "npm test -- --coverage",
     "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:1337",
@@ -33,5 +35,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2"
+  }
 }

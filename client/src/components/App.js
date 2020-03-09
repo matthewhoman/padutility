@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ShowMonsterDetails from './puzzlesanddragons/ShowMonsterDetails';
 import UnreleasedMonsters from './puzzlesanddragons/UnreleasedMonsters';
 import MonsterBook from './puzzlesanddragons/MonsterBook';
+//import Base from './common/Base';
 import Profile from './profile/Profile';
 import Contact from './contact/Contact';
 import Projects from './projects/Projects';
@@ -15,31 +16,8 @@ import Game from './minesweeper/Game';
 import './App.scss';
 import 'font-awesome/css/font-awesome.min.css';
 
-// class ProtectedRoute extends Component {
-//   render() {
-//     const { component: Component, ...props } = this.props
+const App = () => {
 
-//     return (
-//       <Route 
-//         {...props} 
-//         render={props => (
-//           true ?
-//             <Component {...props} /> :
-//             <Redirect to='/signin' />
-//         )} 
-//       />
-//     )
-//   }
-// }
-
-class App extends Component {
-
-  constructor(props){
-    super(props);
-    this.state = {};
-  }
-
-  render() {
     const NoMatch = ({ location }) => (
       <div>
         <h3>No match for <code>{location.pathname}</code></h3>
@@ -70,7 +48,6 @@ class App extends Component {
         </div>
       </BrowserRouter>
     );
-  }
-}
+};
 
 export default App;

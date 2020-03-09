@@ -97,7 +97,7 @@ class ReturnNav extends Component {
                                 this.state.tabs.map(tab => {
                                     let tabNameLeft = tab.name.includes(" ") ? tab.name.substring(0, tab.name.indexOf(" ")) : tab.name;
                                     let tabNameRight = tab.name.includes(" ") ? tab.name.substring(tab.name.indexOf(" ") + 1, tab.name.length) : "";
-                                    return (<Nav.Link href={"/" + tab.url} style={this.shouldHighlight(tab.url)}>
+                                    return (<Nav.Link key={tab.name} href={"/" + tab.url} style={this.shouldHighlight(tab.url)}>
                                             {tabNameLeft}&nbsp;{tabNameRight}</Nav.Link>)
                                 })
                             }
@@ -105,7 +105,7 @@ class ReturnNav extends Component {
                         {
                             this.state.socialIcons.map(icon => {
                                 return(
-                                <a href={icon.url} target="_blank" rel="noopener noreferrer">
+                                <a key={icon.title} href={icon.url} target="_blank" rel="noopener noreferrer">
                                     <img className="socialMediaIcon" src={"/images/socialmedia/" + icon.icon} 
                                         title={icon.title} alt={icon.title}></img>
                                 </a>)

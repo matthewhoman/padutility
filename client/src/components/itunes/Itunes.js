@@ -141,14 +141,14 @@ const Itunes = props => {
         }
     }
     return (
-        <Base header="Matthew&nbsp;Homan" 
-            childComponent={
-                <div>
-                    <LinedTitle title="Itunes&nbsp;Top&nbsp;Music" margBottom></LinedTitle>
-                    {musicPanels}
-                </div>
-            }>
-        </Base>
-    );
+            <Base header="Matthew&nbsp;Homan" 
+                childComponent={
+                    <div>
+                        <LinedTitle title="Itunes&nbsp;Top&nbsp;Music" margBottom></LinedTitle>
+                        {musicPanels}
+                    </div>
+                }>
+            </Base>
+        );
 }
 export default Itunes;
